@@ -1,124 +1,122 @@
 # BRIDGE and TCH-Net
 
-**Heterogeneous Benchmark and Multi-Branch Baseline for Cross-Domain IoT Botnet Detection**
+**A Benchmark and Gated Baseline for IoT Intrusion Detection**
 
-[![arXiv](https://img.shields.io/badge/arXiv-2604.11324-b31b1b.svg)](https://arxiv.org/abs/2604.11324)
-[![HF Model](https://img.shields.io/badge/🤗%20Model-Ammar--ss/BRIDGE__and__TCH--Net-yellow)](https://huggingface.co/Ammar-ss/BRIDGE_and_TCH-Net)
-[![HF Dataset](https://img.shields.io/badge/🤗%20Dataset-Ammar--ss/BRIDGE-blue)](https://huggingface.co/datasets/Ammar-ss/BRIDGE)
+<!-- Badges: update or remove before publishing.
+     NOTE: the current arXiv preprint is an EARLIER (three-branch, five-dataset)
+     version and does NOT match the numbers below. Do not point readers at it as
+     if it were this work. Either post the matching version or omit the arXiv badge. -->
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 
-> Submitted to *Journal of Network and Computer Applications*
+> Under review at *Journal of Network and Systems Management* (Springer).
 
-**Authors:** Ammar Bhilwarawala, Likhamba Rongmei, Harsh Sharma, Arya Jena, Kaushal Singh, Jayashree Piri, Raghunath Dey  
-**Affiliation:** School of Computer Engineering, KIIT University, Bhubaneswar, India
+> ℹ️ **Version note — please read.** This repository reflects **version 2** of the paper (four audited datasets, two-branch TCH-Net), the version currently under review at JNSM. An earlier **arXiv preprint links to this same repository** but describes the **previous version** — a three-branch model over five datasets, with a different design and different numbers. If you arrived here from that preprint, note that its results do not match the ones below: this repository and the JNSM version are the current work. The arXiv preprint will not be updated while the paper is under review.
+
+**Authors:** Ammar Bhilwarawala, Likhamba Rongmei, Harsh Sharma, Arya Jena, Kaushal Singh, Jayashree Piri, Raghunath Dey
+**Affiliation:** School of Computer Engineering, Kalinga Institute of Industrial Technology (KIIT), Bhubaneswar, Odisha, India
 
 ---
 
 ## Overview
 
-The IoT botnet detection field has a quiet problem that's been building for years. Almost every published system trains on one dataset, reports numbers in the high 90s, and treats that as evidence of a solved problem. But models trained in one environment fall apart when you point them at a different one — different capture tools, different devices, different attack toolkits. The benchmark looked easy because it was a closed world.
+IoT intrusion-detection models are almost always validated on a single dataset, where they report scores in the high 0.90s. Those numbers rarely survive a change of environment — different capture tools, different devices, different attack toolkits. The benchmark looked easy because it was a closed world.
 
-This paper makes two contributions toward fixing that.
+This work makes two connected contributions.
 
-**BRIDGE** (Benchmark Reference for IoT Domain Generalisation Evaluation) is the first formally specified heterogeneous multi-dataset benchmark for IoT intrusion detection. It unifies five structurally distinct public datasets through a 46-feature semantic canonical vocabulary, with genuine-equivalence-only feature mapping, explicit zero-filling for absent features, and full coverage disclosure for every dataset. The leave-one-dataset-out (LODO) evaluation protocol establishes, for the first time with a formally reproducible methodology, just how large the cross-dataset generalisation gap is: all five evaluated deep learning architectures achieve LODO F1 between 0.39–0.47, and TCH-Net achieves the highest at 0.5577 — the first formally quantified community generalisation baseline in heterogeneous IoT intrusion detection.
+**BRIDGE** (Benchmark Reference for IoT Domain Generalisation Evaluation) is a heterogeneous multi-dataset benchmark for IoT intrusion detection. It unifies **four independently audited datasets drawn from three structurally distinct feature-extraction toolchains** under a single 46-feature canonical vocabulary, with genuine-equivalence-only feature mapping, explicit zero-filling for absent features, and full per-dataset coverage disclosure (30%–91%). It ships with a documented **dataset-quality audit** (candidates with broken or label-leaking schemas are rejected, with reasons published), a leakage-verification suite, and a **leave-one-dataset-out (LODO)** protocol paired with a **diagnosis-and-repair methodology** applied identically to every model.
 
-**TCH-Net** is a multi-branch neural architecture proposed as a strong and well-characterised baseline for BRIDGE. It integrates three parallel branches — a three-path Temporal branch with residual convolutional-BiGRU, stride-downsampled BiGRU, and full-resolution pre-LayerNorm Transformer; a provenance-conditioned Contextual branch; and an aggregate Statistical branch — fused via Cross-Branch Gated Attention Fusion (CB-GAF) with learnable per-branch sigmoid vector gates. Evaluated across five independent seeds on BRIDGE, TCH-Net achieves **F1 = 0.8296 ± 0.0028**, **AUC = 0.9380 ± 0.0025**, and **MCC = 0.6972 ± 0.0056**, outperforming all 12 baseline models with statistical significance (p < 0.05).
+The central, deliberately honest finding: under LODO, naive zero-shot transfer collapses to a mean **F1 = 0.1788**. Unsupervised test-time BatchNorm adaptation recovers it to **0.5231**, and small-sample threshold calibration to **0.6275**. But the repair is **conditional** — on 6 of 12 seed–fold runs it genuinely restores detection (mean 0.6513), while on the other 6 the "recovered" score is just an all-attack classifier wearing a calibrated threshold (0.6037 against a trivial 0.6028). Under identical repair, **no evaluated architecture — ours included — sits more than ~0.06 above that trivial predictor.** The take-away is measurement-first: for cross-dataset transfer, normalisation and thresholding matter an order of magnitude more than the choice of architecture.
+
+**TCH-Net v2** is a gated two-branch neural baseline for BRIDGE — a Temporal branch and a Statistical branch, fused by Cross-Branch Gated Attention Fusion (CB-GAF) with per-expert deep supervision and held-out gate recalibration. It is offered as a **characterised reference baseline, not a leaderboard winner** (the strongest transformer baseline stays ahead in-distribution, and a standalone statistical MLP beats the fused model in-distribution under an equal budget — both reported openly).
 
 ---
 
 ## Results
 
-### Main Comparison (5 seeds: 42, 123, 456, 789, 2024)
+### Main comparison, in-distribution (TCH-Net: 5 seeds; baselines: 3 seeds)
 
-| Model | F1 | ROC-AUC | MCC | PR-AUC |
-|-------|-----|---------|-----|--------|
-| **TCH-Net (Ours)** | **0.8296 ± 0.0028** | **0.9380** | **0.6972** | **0.8912** |
-| Transformer-IDS | 0.7958 ± 0.0030 | 0.9147 | 0.6255 | 0.8699 |
-| 1D-CNN-IDS | 0.7932 ± 0.0076 | 0.9076 | 0.6213 | 0.8601 |
-| CNN-LSTM | 0.7919 ± 0.0137 | 0.9056 | 0.6208 | 0.8578 |
-| BiLSTM-IDS | 0.7805 ± 0.0010 | 0.8975 | 0.5972 | 0.8441 |
-| BiGRU-IDS | 0.7805 ± 0.0011 | 0.8962 | 0.5987 | 0.8438 |
-| DeepDefense | 0.7627 ± 0.0011 | 0.8776 | 0.5638 | 0.8192 |
-| XGBoost | 0.7265 ± 0.0014 | 0.8704 | 0.5542 | 0.7989 |
-| GraphSAGE-Approx | 0.7097 ± 0.0004 | 0.8259 | 0.4465 | 0.7403 |
-| Kitsune-AE | 0.7045 ± 0.0007 | 0.8200 | 0.4362 | 0.7348 |
-| MLP-IDS | 0.7039 ± 0.0008 | 0.8152 | 0.4348 | 0.7311 |
-| IoT-DNN | 0.7009 ± 0.0002 | 0.8146 | 0.4278 | 0.7286 |
-| Random Forest | 0.4323 ± 0.0082 | 0.8005 | 0.3557 | 0.6214 |
+| Model | F1 | ROC-AUC | MCC |
+|-------|-----|---------|-----|
+| Transformer-IDS | **0.8938 ± 0.0017** | **0.9747** | **0.8121** |
+| **TCH-Net v2 (Ours)** | 0.8834 ± 0.0029 | 0.9685 | 0.7953 |
+| BiLSTM-IDS | 0.8536 ± 0.0034 | 0.9551 | 0.7372 |
+| BiGRU-IDS | 0.8518 ± 0.0052 | 0.9528 | 0.7351 |
+| CNN-LSTM | 0.8424 ± 0.0019 | 0.9441 | 0.7190 |
+| 1D-CNN-IDS | 0.8401 ± 0.0013 | 0.9434 | 0.7145 |
+| DeepDefense | 0.8171 ± 0.0004 | 0.9275 | 0.6698 |
+| GraphSAGE-Approx | 0.7885 ± 0.0010 | 0.9094 | 0.6136 |
+| XGBoost | 0.7869 ± 0.0018 | 0.9146 | 0.6420 |
+| Kitsune-AE | 0.7710 ± 0.0105 | 0.8897 | 0.5780 |
+| IoT-DNN | 0.7549 ± 0.0004 | 0.8699 | 0.5499 |
+| MLP-IDS | 0.7473 ± 0.0004 | 0.8621 | 0.5408 |
+| Random Forest | 0.6404 ± 0.0019 | 0.8686 | 0.5128 |
 
-### BRIDGE LODO Generalisation Benchmark
+TCH-Net v2 beats 11 of 12 baselines in raw F1 (9 significant after Bonferroni correction). It does **not** beat the strongest transformer in-distribution (−0.0105, not significant after correction). This is reported, not hidden — the value of the model is the characterised, honestly ablated design and its role as the BRIDGE reference baseline, not an in-distribution win.
 
-| Held-Out Dataset | TCH-Net LODO F1 | Best Baseline LODO F1 |
-|-----------------|----------------|----------------------|
-| CICIDS-2017 | 0.3128 | 0.19 (BiGRU-IDS) |
-| CIC-IoT-2023 | 0.6013 | 0.47 (CNN-LSTM) |
-| Bot-IoT | 0.5934 | 0.50 (CNN-LSTM) |
-| Edge-IIoTset | 0.6791 | 0.56 (CNN-LSTM) |
-| N-BaIoT | 0.6021 | 0.47 (BiGRU-IDS) |
-| **Mean** | **0.5577** | **0.4297** |
+### BRIDGE LODO generalisation (calibrated head-to-head)
 
-Generalisation gap (in-distribution vs LODO): **+0.2719**. This is not a TCH-Net failure — all architectures show the same structural gap. The 0.5577 LODO mean is the first formally specified community baseline for cross-dataset IoT intrusion detection.
+Every repair stage (test-time BN adaptation + disjoint-slice threshold calibration) is applied **identically to every model**. Trivial all-attack predictor = 0.6028.
 
----
+| Model | CICIDS | BCCC | CICIoMT | UNSW | Mean |
+|-------|--------|------|---------|------|------|
+| Transformer-IDS | **0.6971** | **0.7347** | 0.6016 | **0.6191** | **0.6631** |
+| 1D-CNN-IDS | 0.6662 | 0.7331 | **0.6252** | 0.6100 | 0.6586 |
+| CNN-LSTM | 0.6172 | 0.6968 | 0.5978 | 0.6036 | 0.6289 |
+| BiGRU-IDS | 0.6060 | 0.6933 | 0.5967 | 0.6172 | 0.6283 |
+| MLP-IDS | 0.6012 | 0.7036 | 0.6014 | 0.6046 | 0.6277 |
+| **TCH-Net v2 (Ours)** | 0.6654 | 0.6147 | 0.6121 | 0.6179 | 0.6275 |
+| H-branch only (control) | 0.6575 | 0.6138 | 0.5992 | 0.6034 | 0.6185 |
 
-## Repository Structure
+All six full models land inside a 0.036 band, within +0.016 to +0.060 of the trivial predictor. **No architecture dominates cross-extractor transfer.** The stage decomposition: +0.344 mean F1 from unsupervised BN adaptation, +0.104 from threshold calibration — both larger than the entire spread between architectures.
 
-```
-TCH-Net/
-│
-├── BRIDGE.csv                              # Unified 549 MB benchmark dataset
-│
-├── BRIDGE and TCH-Net (FULL PAPER).ipynb  # Complete experimental notebook
-│                                           # All 12 baselines, branch ablation,
-│                                           # novelty ablation, LODO, temporal split,
-│                                           # adversarial robustness, HP sensitivity
-│
-├── bridge-and-tch-net.ipynb               # Clean training-only notebook
-│                                           # TCH-Net, 5 seeds, saves checkpoints
-│
-├── checkpoints/
-│   ├── tch_net_best.pth                   # Best checkpoint (highest F1)
-│   ├── tch_net_seed_42.pth
-│   ├── tch_net_seed_123.pth
-│   ├── tch_net_seed_456.pth
-│   ├── tch_net_seed_789.pth
-│   ├── tch_net_seed_2024.pth
-│   ├── scaler.pkl                         # RobustScaler — required for inference
-│   └── manifest.json                      # Config, metrics, feature names
-│
-└── README.md
-```
+**The repair is conditional (read per seed–fold, not as a mean):**
+
+| Regime | Runs | Post-adaptation AUC | Calibrated F1 | vs. trivial (0.6028) |
+|--------|------|--------------------|--------------|----------------------|
+| Ranking restored | 6/12 | 0.7198 | 0.6513 | +0.0485 |
+| Ranking inverted | 6/12 | 0.4478 | 0.6037 | +0.0009 (i.e. trivial) |
+
+Calibrated generalisation gap (in-distribution − calibrated LODO): **0.8834 − 0.6275 = +0.2559.** Cross-extractor transfer is repaired where adaptation restores the ranking, and remains unsolved where it does not.
 
 ---
 
 ## BRIDGE Dataset
 
-### What it is
+BRIDGE maps four public IoT/network-security datasets into a shared 46-feature canonical vocabulary based on CICFlowMeter nomenclature. Features absent from a given dataset are zero-filled explicitly — nothing is fabricated, and coverage is fully disclosed and empirically verified to carry no label shortcut.
 
-BRIDGE maps five publicly available IoT network security datasets into a single shared 46-feature canonical vocabulary based on CICFlowMeter nomenclature. Features that don't exist in a given dataset are zero-filled explicitly — nothing is fabricated, and coverage is fully disclosed.
+### Source datasets (three distinct extractor families)
 
-### Source Datasets
+| Dataset | Capture tool | Year | Coverage | Role |
+|---------|-------------|------|----------|------|
+| CICIDS-2017 | CICFlowMeter | 2017 | 91% (42/46) | Vocabulary anchor |
+| CIC-BCCC-NRC-TabularIoTAttacks-2024 (BCCC-2024) | CICFlowMeter (BCCC re-extraction) | 2024 | 91% (42/46) | Primary IoT-attack data |
+| CICIoMT-2024 | Custom CIC sliding-window extractor | 2024 | 35% (16/46 effective) | Distinct extractor family |
+| UNSW-NB15 | Argus + Bro/Zeek | 2015 | 30% (14/46) | Non-CIC extractor anchor |
 
-| Dataset | Capture Tool | Year | Coverage | Role | Official | Kaggle |
-|---------|-------------|------|----------|------|----------|--------|
-| CICIDS-2017 | CICFlowMeter | 2017 | 93% (43/46) | Primary | [UNB CIC](https://www.unb.ca/cic/datasets/ids-2017.html) | [Kaggle](https://www.kaggle.com/datasets/dhoogla/cicids2017) |
-| CIC-IoT-2023 | CICFlowMeter | 2023 | 87% (40/46) | Primary | [UNB CIC](https://www.unb.ca/cic/datasets/iotdataset-2023.html) | [Kaggle](https://www.kaggle.com/datasets/raqeeb24/ciciot-2023-stratified-dataset) |
-| Bot-IoT | Argus | 2019 | 39% (18/46) | Primary | [UNSW](https://research.unsw.edu.au/projects/bot-iot-dataset) | [Kaggle](https://www.kaggle.com/datasets/vigneshvenkateswaran/bot-iot-5-data) |
-| Edge-IIoTset | Wireshark | 2022 | 22% (10/46) | Supplementary | [IEEE DataPort](https://ieee-dataport.org/documents/edge-iiotset-new-comprehensive-realistic-cyber-security-dataset-iot-and-iiot-applications) | [Kaggle](https://www.kaggle.com/datasets/mohamedamineferrag/edgeiiotset-cyber-security-dataset-of-iot-iiot) |
-| N-BaIoT | Kitsune | 2018 | 15% (7/46) | Supplementary | [UCI](https://archive.ics.uci.edu/ml/datasets/detection_of_IoT_botnet_attacks_N_BaIoT) | [Kaggle](https://www.kaggle.com/datasets/mkashifn/nbaiot-dataset) |
+### Datasets audited and rejected (published as part of the methodology)
 
-### Post-Balancing Record Counts
+Direct label/schema inspection is treated as part of dataset selection. Rejected candidates and reasons:
 
-| Dataset | Benign | Attack | Total | Atk% |
-|---------|--------|--------|-------|------|
-| CICIDS-2017 | 19,321 | 14,350 | 33,671 | 42.6% |
-| CIC-IoT-2023 | 3,964 | 3,001 | 6,965 | 43.1% |
-| Bot-IoT | 22 | 16 | 38 | 42.1% |
-| Edge-IIoTset | 30,951 | 23,435 | 54,386 | 43.1% |
-| N-BaIoT | 13,557 | 10,055 | 23,612 | 42.6% |
-| **Combined** | **67,815** | **50,857** | **118,672** | **42.9%** |
+- **Bot-IoT** (public mirror) — 100% attack rows, no benign traffic in the inspected shards; supervised benign-vs-attack evaluation impossible.
+- **Edge-IIoTset** — application-layer schema (near-zero canonical flow coverage) and, more seriously, raw attack payload strings stored verbatim in a feature column (`http.request.uri.query`): a ready-made label-leakage shortcut.
+- **N-BaIoT-style exports** — resolve at most 7/46 canonical slots, below the usefulness threshold for a flow-statistic fold.
+- Two earlier candidates with a literal placeholder label string, and with no label column at all, respectively.
 
-### The 46 Canonical Features
+> ⚠️ These rejections are a core part of the paper. Do not add these datasets to the benchmark — they are excluded on purpose.
+
+### Post-balancing record counts (1:1 per dataset, before windowing)
+
+| Dataset | Benign | Attack | Total |
+|---------|--------|--------|-------|
+| CICIDS-2017 | 123,195 | 123,195 | 246,390 |
+| BCCC-2024 | 28,907 | 28,907 | 57,814 |
+| CICIoMT-2024 | 78,812 | 78,812 | 157,624 |
+| UNSW-NB15 | 93,000 | 93,000 | 186,000 |
+| **Combined** | **323,914** | **323,914** | **647,828** |
+
+After sliding-window construction (W=32, S=4, majority-vote label), the balance shifts to ~57:43 benign:attack. Training sequences: 129,536 (43.1% attack). Test sequences: 32,362 (42.7% attack).
+
+### The 46 canonical features
 
 | Group | Category | Indices | Count |
 |-------|----------|---------|-------|
@@ -127,174 +125,83 @@ BRIDGE maps five publicly available IoT network security datasets into a single 
 | 3 | TCP flag indicators | 38–43 | 6 |
 | 4 | Header length & window size | 44–45 | 2 |
 
-Full feature list: `flow_duration`, `pkt_count_fwd`, `pkt_count_bwd`, `byte_count_fwd`, `byte_count_bwd`, `pkt_rate`, `byte_rate`, `fwd_pkt_rate`, `bwd_pkt_rate`, `fwd_byte_rate`, `bwd_byte_rate`, `pkt_count_total`, `byte_count_total`, `fwd_pkt_len_total`, `bwd_pkt_len_total`, `subflow_fwd_pkts`, `subflow_bwd_pkts`, `pkt_len_min`, `pkt_len_max`, `pkt_len_mean`, `pkt_len_std`, `pkt_len_var`, `fwd_pkt_len_min`, `fwd_pkt_len_max`, `fwd_pkt_len_mean`, `fwd_pkt_len_std`, `bwd_pkt_len_min`, `bwd_pkt_len_max`, `bwd_pkt_len_mean`, `bwd_pkt_len_std`, `iat_mean`, `iat_std`, `iat_max`, `iat_min`, `fwd_iat_mean`, `fwd_iat_std`, `bwd_iat_mean`, `bwd_iat_std`, `flag_syn`, `flag_ack`, `flag_fin`, `flag_rst`, `flag_psh`, `flag_urg`, `fwd_header_len`, `init_win_fwd`
-
-### Loading the Data
-
-```python
-import pandas as pd
-
-df = pd.read_csv("BRIDGE.csv")
-# Columns: 46 canonical features + 'label' (0=benign, 1=attack)
-#          + 'dataset_source' (which of the 5 datasets each row came from)
-```
-
-Or via Hugging Face:
-
-```python
-from datasets import load_dataset
-dataset = load_dataset("Ammar-ss/BRIDGE")
-```
+Full alias-mapping tables (per dataset, with rejected mappings and reasons) are provided in this repository.
 
 ---
 
-## TCH-Net Architecture
+## TCH-Net v2 Architecture
 
-Three branches process a (B, 32, 46) sequence window in parallel, fused through CB-GAF.
+Two branches process a (B, 32, 46) window in parallel, fused by CB-GAF at the logit level.
 
 ```
 Input: (B, 32, 46)  — batch × 32-step window × 46 canonical features
 
-Shared Feature Projection (residual):
-  Linear(46→92) → LayerNorm → GELU → Dropout
-  → Linear(92→46) → LayerNorm    [X̃ = X + f_proj(X)]
+Shared residual feature projection:
+  Linear(46→92) → LayerNorm → GELU → Dropout(δ/2)
+  → Linear(92→46) → LayerNorm        [X̃ = X + f_proj(X)]
 
-T-Branch (Temporal) — 512d:
-  Path 1: ResConvSE×3 + MaxPool → BiGRU(128/dir, 2L)         → 8×256
-  Path 2: StrideConv(s=2) → BiGRU(64/dir, 1L) → AvgPool(8)   → 8×128
+T-Branch (Temporal, MSTE) — 512d:
+  Path 1: ResConvSE×3 + MaxPool → BiGRU(128/dir, 2L)          → 8×256
+  Path 2: StrideConv(s=2) → BiGRU(64/dir, 1L) → AvgPool(8)    → 8×128
   Path 3: Linear(46→128) + LearnablePE
-           → TransformerEncoder(Pre-LN, 2L, 8H) → AvgPool(8)  → 8×128
-  Merge:  concat → LayerNorm(512) → MHA(8H) → mean pool        → 512d
+          → TransformerEncoder(Pre-LN, 2L, 8H) → AvgPool(8)   → 8×128
+  Merge:  concat(8×512) → LayerNorm → MHA(8H) → mean-pool      → 512d
 
-H-Branch (Statistical) — 64d:
-  mean(X̃, time) → MLP(46→128→64, BN+GELU+Dropout)             → 64d
+H-Branch (Statistical) — 128d:
+  mean(X̃, time) → [ MLP(46→…→64, BN+GELU+Dropout) ‖ GELU(W_r·mean) ] → 128d
 
-C-Branch (Contextual) — 64d:
-  Embed_dataset(5,32) ‖ Embed_device(6,32)                      → 64d
+CB-GAF (Cross-Branch Gated Attention Fusion, logit-level MoE):
+  each branch → own expert head (2-layer MLP) → per-expert logits ℓ^b ∈ R²
+  softmax gate over both branch reps mixes logits:  ℓ = a_T·ℓ^T + a_H·ℓ^H
+  per-expert deep supervision trains each expert to stand alone (anti gate-collapse)
+  held-out gate recalibration (α*) applied post hoc
 
-CB-GAF (Cross-Branch Gated Attention Fusion):
-  Each branch → Linear projection → 128d
-  Each branch queries both others via cross-attention
-  Per-branch vector gate g^i ∈ (0,1)^128 (feature-wise, not scalar)
-  x_fused = g^i ⊙ x_self + (1 − g^i) ⊙ x_cross
-  concat(T, C, H fused) → LayerNorm                             → 384d
-
-Classifier (residual head):
-  raw_proj(mean X̃) → 64d
-  concat(384d, 64d) → Linear(448→256) → Linear(256→128) + skip
-  → Linear(128→2) → softmax
-
-Aux Decoder (training only, λ=0.05):
-  MLP(384→64→46) — prevents information collapse in CB-GAF
+Training-only:
+  auxiliary reconstruction decoder on the gated feature mixture (λ_aux)
+  CORAL source-domain alignment across dataset identities (λ_coral)
 ```
 
-**2,692,696 trainable parameters.** Single-sample inference latency: **6.43 ± 0.18ms** on NVIDIA Tesla T4.
+> **Note on the name.** The original design had three branches — Temporal (T), Contextual (C), Statistical (H). **The Contextual branch is removed in v2** for a structural reason: no trained identity embedding exists for an unseen domain, so provenance conditioning cannot transfer. Its functions are reassigned to CORAL (training) and test-time BatchNorm adaptation (evaluation). The "C" in the name now stands for CB-GAF, the central fusion mechanism, not a branch.
+
+**~2.386M trainable parameters.** Single-sample inference latency: **8.902 ms** on NVIDIA Tesla T4.
 
 ---
 
-## Quickstart
+## Ablations (equal budget, single architecture, 3 seeds; every row retrained)
 
-### Requirements
-
-```bash
-pip install torch numpy pandas scikit-learn huggingface_hub tqdm
-```
-
-### Training TCH-Net from scratch
-
-Open `bridge-and-tch-net.ipynb` on Kaggle (GPU recommended). Update the dataset paths in Cell 3:
-
-```python
-class Config:
-    CICIDS_PATH  = "/kaggle/input/datasets/dhoogla/cicids2017"
-    CICIOT_PATH  = "/kaggle/input/datasets/raqeeb24/ciciot-2023-stratified-dataset"
-    BOTIOT_PATH  = "/kaggle/input/datasets/vigneshvenkateswaran/bot-iot-5-data"
-    EDGE_PATH    = "/kaggle/input/datasets/mohamedamineferrag/edgeiiotset-cyber-security-dataset-of-iot-iiot"
-    NBAIOT_PATH  = "/kaggle/input/datasets/mkashifn/nbaiot-dataset"
-```
-
-Run all cells. Checkpoints save automatically to `tch_net_results/checkpoints/`.
-
-### Running inference with a pretrained checkpoint
-
-```python
-import torch
-import pickle
-import numpy as np
-import torch.nn.functional as F
-from huggingface_hub import hf_hub_download
-
-# Download pretrained weights and scaler
-ckpt_path   = hf_hub_download("Ammar-ss/BRIDGE_and_TCH-Net", "tch_net_best.pth")
-scaler_path = hf_hub_download("Ammar-ss/BRIDGE_and_TCH-Net", "scaler.pkl")
-
-# Load scaler
-with open(scaler_path, 'rb') as f:
-    scaler = pickle.load(f)
-
-# Load checkpoint
-ckpt   = torch.load(ckpt_path, map_location='cpu')
-config = ckpt['config']
-
-# Instantiate model (copy TCHNet class from bridge-and-tch-net.ipynb)
-model = TCHNet(
-    nf=config['n_features'],   # 46
-    ws=config['window_size'],  # 32
-    nc=config['n_classes'],    # 2
-)
-model.load_state_dict(ckpt['state_dict'])
-model.eval()
-
-# Preprocess: scale raw features
-# X_raw: np.ndarray of shape (N, 46)
-X_scaled = np.clip(scaler.transform(X_raw), -10, 10).astype(np.float32)
-
-# Inference
-# x:   FloatTensor (B, 32, 46)  — sliding window sequences
-# ctx: LongTensor  (B, 2)       — [dataset_source_id, device_category_id]
-#
-# dataset_source_id:  0=CICIDS-2017  1=CIC-IoT-2023  2=Bot-IoT
-#                     3=Edge-IIoTset  4=N-BaIoT
-# device_category_id: 0=sensor  1=camera  2=appliance  3=IIoT  4=server  5=unknown
-#
-# If unknown, pass ctx = torch.zeros(B, 2, dtype=torch.long)
-# (contextual branch has no independent predictive power — degrades gracefully)
-
-with torch.no_grad():
-    logits, _ = model(x, ctx)
-    probs = F.softmax(logits, dim=-1)
-    preds = logits.argmax(dim=-1)  # 0=benign, 1=attack
-```
-
----
-
-## Ablation Results
-
-### Branch Ablation (2 seeds, CB-GAF replaced with concat)
+### Branch ablation
 
 | Variant | F1 | ΔF1 |
 |---------|-----|-----|
-| **T+C+H Full** | **0.8296** | — |
-| T+H | 0.7756 | −0.054 |
-| T+C | 0.7752 | −0.054 |
-| T only | 0.7753 | −0.054 |
-| H only | 0.7054 | −0.124 |
-| C+H | 0.7061 | −0.124 |
-| C only | 0.6000 | −0.230 |
+| T + H (Full) | 0.8840 | — |
+| T only | 0.8827 | −0.0013 |
+| **H only** | **0.9017** | **+0.0177** |
 
-C-branch alone = near-random (AUC ≈ 0.50). Its role is fusion conditioning, not independent prediction.
+The strongest in-distribution model of the study is the standalone Statistical branch (an MLP over window-mean features, <0.2M params). This is reported openly and explained: windowed flow records carry little genuine temporal structure, and the shared trunk costs the internal H expert ~0.020 F1 via gradient interference. Under LODO, however, the same standalone H-branch is the **worst** transfer performer (0.6185) — the temporal capacity that costs F1 in-distribution earns it back cross-domain.
 
-### Novelty Component Ablation (2 seeds)
+### Novelty-component ablation (positive ΔF1 = removing it helps)
 
 | Variant | F1 | ΔF1 |
 |---------|-----|-----|
-| **Full TCH-Net** | **0.8296** | — |
-| w/o CB-GAF | 0.7759 | −0.054 |
-| w/o MSTE (Three-Path) | 0.7760 | −0.054 |
-| w/o Aux Loss | 0.7755 | −0.054 |
-| w/o All (v2) | 0.7752 | −0.054 |
+| Full model | 0.8840 | — |
+| w/o MSTE (multi-scale temporal) | 0.8681 | −0.0159 |
+| w/o CB-GAF (→ plain concat) | 0.8842 | +0.0002 |
+| w/o Aux loss | 0.8821 | −0.0020 |
+| w/o CORAL | 0.8835 | −0.0005 |
+| w/o all (≈ v1 core) | 0.8691 | −0.0150 |
 
-Removing any single novel component costs ~0.054 F1.
+The one unambiguously positive component is **MSTE**. CB-GAF is in-distribution-neutral by F1; its justification is the verified fusion properties below, not raw score.
+
+### Gate recalibration (seed-42 model; all rows calibrated on the same 20% slice, F1 on disjoint 80%)
+
+| Predictor | Eval F1 |
+|-----------|---------|
+| T expert (inside full model) | 0.8872 |
+| H expert (inside full model) | 0.8819 |
+| Full model, learned gate | 0.8874 |
+| Full model, recalibrated (α*=0.70) | **0.8927** |
+
+Gated late fusion with deep supervision matches the best internal expert; held-out recalibration lifts the fused model above both, repairing the mixture-collapse pathology.
 
 ---
 
@@ -304,56 +211,97 @@ Removing any single novel component costs ~0.054 F1.
 |---------------|-------|
 | Optimizer | AdamW |
 | Learning rate | 5×10⁻⁴ |
-| Weight decay | 5×10⁻⁵ |
-| Scheduler | Cosine annealing, 2-epoch warmup |
-| Loss | Focal (γ=2.0, α-weighted, ε=0.05) + Aux (λ=0.05) |
+| Weight decay | 1×10⁻⁴ |
+| Scheduler | Cosine annealing, 3-epoch warmup |
+| Loss | Focal (γ=2.5, α-weighted, ε=0.01) + deep-sup (λ_ds=0.3) + aux (λ_aux=0.05) + CORAL (λ_coral=0.5) |
 | Batch size | 512 |
-| Max epochs / patience | 30 / 5 |
+| Max epochs / patience | 30 / 7 |
 | Window size / stride | 32 / 4 |
-| Max train sequences | 800,000 |
-| Max test sequences | 200,000 |
-| Dropout | 0.15 |
+| Dropout | 0.20 |
 | Augmentation | Gaussian noise (σ=0.01, p=0.30, train only) |
-| AMP | fp16 on CUDA |
 | Hardware | NVIDIA Tesla T4 (Kaggle) |
+
+Seeds: TCH-Net 5 seeds {42, 123, 456, 789, 2024}; baselines and ablations 3 seeds {42, 123, 456}; LODO 3 seeds per fold with bootstrap CIs.
 
 ---
 
 ## Computational Efficiency (NVIDIA Tesla T4)
 
-| Model | Params | Latency | Throughput | Memory | F1 |
-|-------|--------|---------|-----------|--------|-----|
-| **TCH-Net** | 2.692M | 6.43±0.18ms | 20.5k sps | 10.27MB | **0.8296** |
-| Transformer-IDS | 0.618M | 1.22±0.03ms | 36.8k sps | 2.36MB | 0.7958 |
-| BiLSTM-IDS | 0.609M | 0.74±0.02ms | 34.2k sps | 2.32MB | 0.7805 |
-| 1D-CNN-IDS | 0.068M | 0.69±0.03ms | 406.9k sps | 0.26MB | 0.7932 |
-| CNN-LSTM | 0.142M | 0.88±0.05ms | 273.5k sps | 0.54MB | 0.7919 |
+| Model | Params (M) | Latency (ms) | F1 |
+|-------|-----------|-------------|-----|
+| **TCH-Net v2 (Ours)** | 2.386 | 8.902 | 0.8834 |
+| Transformer-IDS | 0.618 | 1.786 | 0.8938 |
+| BiLSTM-IDS | 0.609 | 1.995 | 0.8536 |
+| BiGRU-IDS | 0.465 | 1.175 | 0.8518 |
+| CNN-LSTM | 0.142 | 1.199 | 0.8424 |
+| 1D-CNN-IDS | 0.068 | 0.943 | 0.8401 |
+| MLP-IDS | 0.920 | 0.640 | 0.7473 |
+
+---
+
+## Repository Structure
+
+<!-- PLACEHOLDER: replace with your actual v2 files. Only you know the real
+     notebook/checkpoint/data filenames. Do NOT ship the old five-dataset
+     BRIDGE.csv or the three-branch checkpoints — they contradict this paper. -->
+
+```
+TCH-Net/
+├── data/                     # BRIDGE unified benchmark (4 datasets) + alias tables
+├── audit/                    # dataset-quality audit docs + rejection reasons
+├── vocabulary/               # 46-feature canonical vocabulary spec + per-dataset maps
+├── notebooks/                # experimental notebook(s): baselines, ablations,
+│                             #   LODO + diagnosis-and-repair (TTBN + calibration)
+├── checkpoints/              # TCH-Net v2 weights (5 seeds) + RobustScaler + manifest
+└── README.md
+```
+
+> The submitted manuscript's Data Availability statement promises: the canonical
+> vocabulary spec, alias-mapping tables, dataset-audit documentation, preprocessing
+> pipeline, **calibration methodology**, and complete experimental code. Make sure
+> each of these is actually present and current before a reviewer looks.
+
+---
+
+## Quickstart
+
+```bash
+pip install torch numpy pandas scikit-learn tqdm
+```
+
+Open the experimental notebook (GPU recommended), point the dataset paths at the four
+BRIDGE sources (all publicly available on Kaggle), and run all cells. Checkpoints and
+the fitted `RobustScaler` save automatically. Inference requires the saved scaler:
+raw features are scaled and clipped to [−10, 10] before windowing.
+
+<!-- If you keep pretrained checkpoints on Hugging Face, add the load snippet here.
+     Ensure any HF model/dataset mirror hosts the v2 (four-dataset, two-branch)
+     artifacts — not the old ones. -->
 
 ---
 
 ## Limitations
 
-**Cross-dataset generalisation.** The LODO mean F1 of 0.5577 confirms TCH-Net doesn't generalise robustly to entirely unseen network environments in its current form. This isn't a TCH-Net-specific failure — all 12 evaluated baselines show the same structural gap. Deployment in a new environment requires fine-tuning on local traffic or domain adaptation components not present in the current architecture.
-
-**Testbed data.** All five source datasets were collected in controlled environments, not live operational networks.
-
-**Binary classification only.** TCH-Net is evaluated as a binary detector (benign vs. attack). Multi-class attack type identification is a natural extension not covered here.
-
-**Edge deployment.** The 10.27MB footprint and 6.43ms latency are fine for NVIDIA Jetson hardware. For microcontroller-class endpoints (Cortex-M, ESP32), quantisation or knowledge distillation would be needed.
+- **Residual cross-dataset gap.** Even after both repair stages, a genuine +0.2559 F1 gap remains, and on half the seed–fold runs the repaired model does not measurably beat the all-attack predictor. Normalisation and threshold placement are recovered; transferable signal that was never learned is not manufactured.
+- **In-distribution position.** Transformer-IDS stays ahead of TCH-Net in-distribution (+0.0105, not significant after correction) and leads the calibrated LODO head-to-head. TCH-Net is a characterised baseline, not the leaderboard winner.
+- **Testbed data.** All four datasets are controlled-testbed or aggregated research captures; two (CICIDS-2017, UNSW-NB15) are enterprise rather than IoT-specific, retained as vocabulary/extractor-family anchors.
+- **Binary scope.** Evaluated as a binary detector; multi-class attack typing is future work.
+- **Edge deployment.** Memory/throughput on edge hardware were not measured; distillation, pruning, and INT8 quantisation are the obvious compression routes.
 
 ---
 
 ## Citation
 
-If you use BRIDGE, TCH-Net, or the canonical vocabulary in your work, please cite:
+<!-- Update once a DOI is issued. The current arXiv preprint is an EARLIER version
+     with different results; cite it only if you post a matching version. -->
 
 ```bibtex
 @article{bhilwarawala2026bridge,
-  title   = {{BRIDGE} and {TCH-Net}: Heterogeneous Benchmark and Multi-Branch
-             Baseline for Cross-Domain {IoT} Botnet Detection},
+  title   = {{BRIDGE} and {TCH-Net}: A Benchmark and Gated Baseline for
+             {IoT} Intrusion Detection},
   author  = {Bhilwarawala, Ammar and Rongmei, Likhamba and Sharma, Harsh
              and Jena, Arya and Singh, Kaushal and Piri, Jayashree and Dey, Raghunath},
-  journal = {arXiv preprint arXiv:2604.11324},
+  note    = {Under review, Journal of Network and Systems Management},
   year    = {2026}
 }
 ```
@@ -362,12 +310,8 @@ If you use BRIDGE, TCH-Net, or the canonical vocabulary in your work, please cit
 
 ## License
 
-This repository is released under the [Apache 2.0 License](LICENSE).
-
-The five source datasets (CICIDS-2017, CIC-IoT-2023, Bot-IoT, Edge-IIoTset, N-BaIoT) are subject to their own respective licenses. Please consult each dataset's original source before commercial or derivative use.
-
----
+Released under the [Apache 2.0 License](LICENSE). The four source datasets are subject to their own respective licenses; consult each original source before commercial or derivative use.
 
 ## Acknowledgements
 
-We thank the creators of CICIDS-2017, CIC-IoT-2023, Bot-IoT, Edge-IIoTset, and N-BaIoT for making their datasets publicly available. Experiments were conducted on Kaggle with NVIDIA Tesla T4 GPU instances.
+We thank the creators of the constituent datasets for making them publicly available. Experiments were conducted on Kaggle with NVIDIA Tesla T4 GPU instances.
