@@ -2,10 +2,6 @@
 
 **A Benchmark and Gated Baseline for IoT Intrusion Detection**
 
-<!-- Badges: update or remove before publishing.
-     NOTE: the current arXiv preprint is an EARLIER (three-branch, five-dataset)
-     version and does NOT match the numbers below. Do not point readers at it as
-     if it were this work. Either post the matching version or omit the arXiv badge. -->
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 
 > Under review at *Journal of Network and Systems Management* (Springer).
@@ -143,7 +139,7 @@ Each dataset is split by original row order into train / validation / test = 70 
 | 3 | TCP flag indicators | 38–43 | 6 |
 | 4 | Header length & window size | 44–45 | 2 |
 
-Full alias-mapping tables (per dataset, with rejected mappings and reasons) are provided in this repository.
+The full alias-mapping tables are defined in the canonical-vocabulary cell of the notebook (`ALIAS_FLOWMETER`, `ALIAS_IOMT`, `ALIAS_UNSW`). They cover each dataset, and rejected mappings are documented inline with their reasons.
 
 ---
 
@@ -260,42 +256,42 @@ Seeds: TCH-Net and all 12 baselines 5 seeds {42, 123, 456, 789, 2024}, paired by
 
 ## Repository Structure
 
-<!-- PLACEHOLDER: replace with your actual v2 files. Only you know the real
-     notebook/checkpoint/data filenames. Do NOT ship the old five-dataset
-     BRIDGE.csv or the three-branch checkpoints — they contradict this paper. -->
-
 ```
 TCH-Net/
-├── data/                     # BRIDGE unified benchmark (4 datasets) + alias tables
-├── audit/                    # dataset-quality audit docs + rejection reasons
-├── vocabulary/               # 46-feature canonical vocabulary spec + per-dataset maps
-├── notebooks/                # experimental notebook(s): baselines, ablations,
-│                             #   LODO + diagnosis-and-repair (TTBN + calibration)
-├── checkpoints/              # TCH-Net v2 weights (5 seeds) + RobustScaler + manifest
+├── Revised_Version_of_BRIDGE_and_TCH_Net.ipynb   # current version: every result in this README
+├── Paper_Version_of_BRIDGE_and_TCH_Net.ipynb     # code as originally submitted to JNSM (superseded)
+├── Old_Arxiv_Version_of_Bridge_and_TCH_Net       # earlier arXiv preprint (three-branch, five-dataset) notebook
+├── LICENSE
 └── README.md
 ```
 
-> The submitted manuscript's Data Availability statement promises: the canonical
-> vocabulary spec, alias-mapping tables, dataset-audit documentation, preprocessing
-> pipeline, **calibration methodology**, and complete experimental code. Make sure
-> each of these is actually present and current before a reviewer looks.
+The revised notebook is self-contained. It includes the 46-feature canonical vocabulary and alias-mapping tables, dataset loaders and audit checks, preprocessing and windowing, all models, the statistical tests, the LODO protocol, and the calibration methodology. It is committed **with its outputs** from the Kaggle run, so every number above can be traced to a cell. Its first cell lists what changed from the submitted version.
+
+The submitted-version notebook is kept for transparency only. It selected checkpoints on the test set, which the revised version corrects, so its numbers should not be used.
 
 ---
 
 ## Quickstart
 
+The notebook is written for Kaggle (NVIDIA T4 GPU).
+
+1. Import `Revised_Version_of_BRIDGE_and_TCH_Net.ipynb` into a new Kaggle notebook.
+2. Attach the four source datasets:
+   - [bertvankeulen/cicids-2017](https://www.kaggle.com/datasets/bertvankeulen/cicids-2017)
+   - [kabeleswarpe/cic-bccc-nrc-tabulariotattacks-2024](https://www.kaggle.com/datasets/kabeleswarpe/cic-bccc-nrc-tabulariotattacks-2024)
+   - [sinfdosh1990/ciciomt2024](https://www.kaggle.com/datasets/sinfdosh1990/ciciomt2024)
+   - [mrwellsdavid/unsw-nb15](https://www.kaggle.com/datasets/mrwellsdavid/unsw-nb15)
+
+   The paths are set in `Config` at the top of the notebook.
+3. Select the GPU T4 accelerator and run all cells. A full run trains 13 models × 5 seeds plus ablations and LODO, so use *Save & Run All* to run it in the background.
+
+Result tables are written as CSV files to `tch_net_v2_results/` (for example `stat_tests.csv`, `lodo_calibrated_head_to_head.csv`, `lodo_repair_decomposition_mean.csv` and `bn_coverage.csv`). Model weights are not saved. Raw features are scaled with a RobustScaler fitted on training rows only, then clipped to [−10, 10] before windowing.
+
+To run outside Kaggle, point the paths in `Config` at local copies of the four datasets and install the dependencies:
+
 ```bash
-pip install torch numpy pandas scikit-learn tqdm
+pip install torch numpy pandas scikit-learn scipy xgboost seaborn tqdm
 ```
-
-Open the experimental notebook (GPU recommended), point the dataset paths at the four
-BRIDGE sources (all publicly available on Kaggle), and run all cells. Checkpoints and
-the fitted `RobustScaler` save automatically. Inference requires the saved scaler:
-raw features are scaled and clipped to [−10, 10] before windowing.
-
-<!-- If you keep pretrained checkpoints on Hugging Face, add the load snippet here.
-     Ensure any HF model/dataset mirror hosts the v2 (four-dataset, two-branch)
-     artifacts — not the old ones. -->
 
 ---
 
@@ -312,8 +308,7 @@ raw features are scaled and clipped to [−10, 10] before windowing.
 
 ## Citation
 
-<!-- Update once a DOI is issued. The current arXiv preprint is an EARLIER version
-     with different results; cite it only if you post a matching version. -->
+The paper is under review, so no DOI has been issued yet. Please cite as follows. The earlier arXiv preprint describes a previous version with different results.
 
 ```bibtex
 @article{bhilwarawala2026bridge,
