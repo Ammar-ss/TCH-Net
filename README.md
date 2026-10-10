@@ -23,7 +23,7 @@ This work makes two connected contributions.
 
 **BRIDGE** (Benchmark Reference for IoT Domain Generalisation Evaluation) is a heterogeneous multi-dataset benchmark for IoT intrusion detection. It unifies **four independently audited datasets drawn from three structurally distinct feature-extraction toolchains** under a single 46-feature canonical vocabulary, with genuine-equivalence-only feature mapping, explicit zero-filling for absent features, and full per-dataset coverage disclosure (30%–91%). It ships with a documented **dataset-quality audit** (candidates with broken or label-leaking schemas are rejected, with reasons published), a leakage-verification suite, and a **leave-one-dataset-out (LODO)** protocol paired with a **diagnosis-and-repair methodology** applied identically to every model.
 
-The central, deliberately honest finding: under LODO, naive zero-shot transfer collapses to a mean **F1 = 0.0724** for TCH-Net. Small-sample threshold calibration alone recovers it to **0.6366**. Unsupervised test-time BatchNorm adaptation lifts the default-threshold F1 to 0.5157, but once the threshold is calibrated it adds nothing, for TCH-Net or any other model. The repair is also **conditional**. On 9 of 12 seed–fold runs, adaptation restores the score ranking, but the calibrated F1 is only 0.6290 against a trivial 0.6040. On the other 3 runs, the "recovered" score is just an all-attack classifier wearing a calibrated threshold (0.6000 against 0.5994). Under identical repair, **no evaluated architecture — ours included — sits more than ~0.06 above that trivial predictor.** The take-away is measurement-first: for cross-dataset transfer, thresholding matters far more than the choice of architecture.
+The central, deliberately honest finding: under LODO, naive zero-shot transfer collapses to a mean **F1 = 0.0724** for TCH-Net. Small-sample threshold calibration alone recovers it to **0.6366**. Unsupervised test-time BatchNorm adaptation lifts the default-threshold F1 to 0.5157, but once the threshold is calibrated it adds nothing, for TCH-Net or any other model. The repair is also **conditional**. On 6 of 12 seed–fold runs, adaptation restores the score ranking (post-adaptation AUC > 0.60), and calibration then genuinely helps: mean F1 0.6432 against a trivial 0.6037. On the other 6, the "recovered" score is just an all-attack classifier wearing a calibrated threshold (0.6003 against 0.6020). Under identical repair, **no evaluated architecture — ours included — sits more than ~0.06 above that trivial predictor.** The take-away is measurement-first: for cross-dataset transfer, thresholding matters far more than the choice of architecture.
 
 **TCH-Net v2** is a gated two-branch neural baseline for BRIDGE — a Temporal branch and a Statistical branch, fused by Cross-Branch Gated Attention Fusion (CB-GAF) with per-expert deep supervision and held-out gate recalibration. It is offered as a **characterised reference baseline, not a leaderboard winner** (the strongest transformer baseline stays ahead in-distribution, and a standalone statistical MLP beats the fused model in-distribution under an equal budget — both reported openly).
 
@@ -87,10 +87,10 @@ Test-time BN adaptation re-estimates `BatchNorm1d` statistics only, so it does n
 
 | Regime | Runs | Post-adaptation AUC | Calibrated F1 | vs. trivial on the same folds |
 |--------|------|--------------------|--------------|-------------------------------|
-| Ranking restored | 9/12 | 0.6566 | 0.6290 | ≈ +0.025 |
-| Ranking inverted | 3/12 | 0.3530 | 0.6000 | ≈ +0.0005 (i.e. trivial) |
+| Ranking restored (AUC > 0.60) | 6/12 | 0.7007 | 0.6432 | +0.0395 |
+| Ranking not restored | 6/12 | 0.4607 | 0.6003 | −0.0017 (i.e. trivial) |
 
-Only 6 of the 12 runs beat the trivial predictor by more than 0.005. Calibrated generalisation gap (in-distribution − calibrated LODO): **0.8807 − 0.6218 = +0.2589.** Cross-extractor transfer is not solved by any model or repair stage evaluated here.
+No run falls between a post-adaptation AUC of 0.582 and 0.646, so the two regimes are cleanly separated. Calibrated generalisation gap (in-distribution − calibrated LODO): **0.8807 − 0.6218 = +0.2589.** Cross-extractor transfer is not solved by any model or repair stage evaluated here.
 
 ---
 
