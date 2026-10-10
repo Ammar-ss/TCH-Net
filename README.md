@@ -11,6 +11,8 @@
 > Under review at *Journal of Network and Systems Management* (Springer).
 
 > ℹ️ **Version note — please read.** This repository reflects **version 2** of the paper (four audited datasets, two-branch TCH-Net), the version currently under review at JNSM. An earlier **arXiv preprint links to this same repository** but describes the **previous version** — a three-branch model over five datasets, with a different design and different numbers. If you arrived here from that preprint, note that its results do not match the ones below: this repository and the JNSM version are the current work. The arXiv preprint will not be updated while the paper is under review.
+>
+> **Revision update.** The results below come from the revised evaluation protocol prepared for the JNSM revision. Checkpoints are selected on a dedicated validation split, never the test set, and baselines use the same 5 seeds as TCH-Net. These numbers supersede those in the originally submitted manuscript.
 
 **Authors:** Ammar Bhilwarawala, Likhamba Rongmei, Harsh Sharma, Arya Jena, Kaushal Singh, Jayashree Piri, Raghunath Dey
 **Affiliation:** School of Computer Engineering, Kalinga Institute of Industrial Technology (KIIT), Bhubaneswar, Odisha, India
@@ -25,7 +27,7 @@ This work makes two connected contributions.
 
 **BRIDGE** (Benchmark Reference for IoT Domain Generalisation Evaluation) is a heterogeneous multi-dataset benchmark for IoT intrusion detection. It unifies **four independently audited datasets drawn from three structurally distinct feature-extraction toolchains** under a single 46-feature canonical vocabulary, with genuine-equivalence-only feature mapping, explicit zero-filling for absent features, and full per-dataset coverage disclosure (30%–91%). It ships with a documented **dataset-quality audit** (candidates with broken or label-leaking schemas are rejected, with reasons published), a leakage-verification suite, and a **leave-one-dataset-out (LODO)** protocol paired with a **diagnosis-and-repair methodology** applied identically to every model.
 
-The central, deliberately honest finding: under LODO, naive zero-shot transfer collapses to a mean **F1 = 0.1788**. Unsupervised test-time BatchNorm adaptation recovers it to **0.5231**, and small-sample threshold calibration to **0.6275**. But the repair is **conditional** — on 6 of 12 seed–fold runs it genuinely restores detection (mean 0.6513), while on the other 6 the "recovered" score is just an all-attack classifier wearing a calibrated threshold (0.6037 against a trivial 0.6028). Under identical repair, **no evaluated architecture — ours included — sits more than ~0.06 above that trivial predictor.** The take-away is measurement-first: for cross-dataset transfer, normalisation and thresholding matter an order of magnitude more than the choice of architecture.
+The central, deliberately honest finding: under LODO, naive zero-shot transfer collapses to a mean **F1 = 0.0724** for TCH-Net. Small-sample threshold calibration alone recovers it to **0.6366**. Unsupervised test-time BatchNorm adaptation lifts the default-threshold F1 to 0.5157, but once the threshold is calibrated it adds nothing, for TCH-Net or any other model. The repair is also **conditional**. On 9 of 12 seed–fold runs, adaptation restores the score ranking, but the calibrated F1 is only 0.6290 against a trivial 0.6040. On the other 3 runs, the "recovered" score is just an all-attack classifier wearing a calibrated threshold (0.6000 against 0.5994). Under identical repair, **no evaluated architecture — ours included — sits more than ~0.06 above that trivial predictor.** The take-away is measurement-first: for cross-dataset transfer, thresholding matters far more than the choice of architecture.
 
 **TCH-Net v2** is a gated two-branch neural baseline for BRIDGE — a Temporal branch and a Statistical branch, fused by Cross-Branch Gated Attention Fusion (CB-GAF) with per-expert deep supervision and held-out gate recalibration. It is offered as a **characterised reference baseline, not a leaderboard winner** (the strongest transformer baseline stays ahead in-distribution, and a standalone statistical MLP beats the fused model in-distribution under an equal budget — both reported openly).
 
@@ -33,50 +35,66 @@ The central, deliberately honest finding: under LODO, naive zero-shot transfer c
 
 ## Results
 
-### Main comparison, in-distribution (TCH-Net: 5 seeds; baselines: 3 seeds)
+### Main comparison, in-distribution (all models: same 5 seeds)
+
+Checkpoints are selected on a held-out validation split and never on the test set. ± is the sample SD over seeds {42, 123, 456, 789, 2024}.
 
 | Model | F1 | ROC-AUC | MCC |
 |-------|-----|---------|-----|
-| Transformer-IDS | **0.8938 ± 0.0017** | **0.9747** | **0.8121** |
-| **TCH-Net v2 (Ours)** | 0.8834 ± 0.0029 | 0.9685 | 0.7953 |
-| BiLSTM-IDS | 0.8536 ± 0.0034 | 0.9551 | 0.7372 |
-| BiGRU-IDS | 0.8518 ± 0.0052 | 0.9528 | 0.7351 |
-| CNN-LSTM | 0.8424 ± 0.0019 | 0.9441 | 0.7190 |
-| 1D-CNN-IDS | 0.8401 ± 0.0013 | 0.9434 | 0.7145 |
-| DeepDefense | 0.8171 ± 0.0004 | 0.9275 | 0.6698 |
-| GraphSAGE-Approx | 0.7885 ± 0.0010 | 0.9094 | 0.6136 |
-| XGBoost | 0.7869 ± 0.0018 | 0.9146 | 0.6420 |
-| Kitsune-AE | 0.7710 ± 0.0105 | 0.8897 | 0.5780 |
-| IoT-DNN | 0.7549 ± 0.0004 | 0.8699 | 0.5499 |
-| MLP-IDS | 0.7473 ± 0.0004 | 0.8621 | 0.5408 |
-| Random Forest | 0.6404 ± 0.0019 | 0.8686 | 0.5128 |
+| Transformer-IDS | **0.8878 ± 0.0038** | **0.9725** | **0.8008** |
+| **TCH-Net v2 (Ours)** | 0.8807 ± 0.0032 | 0.9656 | 0.7903 |
+| BiGRU-IDS | 0.8495 ± 0.0022 | 0.9526 | 0.7294 |
+| BiLSTM-IDS | 0.8483 ± 0.0026 | 0.9515 | 0.7273 |
+| 1D-CNN-IDS | 0.8360 ± 0.0034 | 0.9409 | 0.7076 |
+| CNN-LSTM | 0.8355 ± 0.0030 | 0.9412 | 0.7067 |
+| DeepDefense | 0.8144 ± 0.0011 | 0.9259 | 0.6665 |
+| XGBoost | 0.7891 ± 0.0026 | 0.9153 | 0.6460 |
+| GraphSAGE-Approx | 0.7868 ± 0.0013 | 0.9073 | 0.6117 |
+| Kitsune-AE | 0.7682 ± 0.0048 | 0.8858 | 0.5738 |
+| IoT-DNN | 0.7517 ± 0.0010 | 0.8670 | 0.5471 |
+| MLP-IDS | 0.7438 ± 0.0013 | 0.8605 | 0.5343 |
+| Random Forest | 0.6429 ± 0.0037 | 0.8685 | 0.5141 |
 
-TCH-Net v2 beats 11 of 12 baselines in raw F1 (9 significant after Bonferroni correction). It does **not** beat the strongest transformer in-distribution (−0.0105, not significant after correction). This is reported, not hidden — the value of the model is the characterised, honestly ablated design and its role as the BRIDGE reference baseline, not an in-distribution win.
+TCH-Net v2 beats 11 of 12 baselines, and all 11 differences are significant. The test is a seed-matched two-sided paired t-test over 5 pairs, Bonferroni-corrected over 12 comparisons, and TCH-Net is ahead on 5/5 seeds in each. It does **not** beat the strongest transformer in-distribution. Transformer-IDS is ahead on all 5 seeds: ΔF1 = −0.0071, 95% CI [−0.0132, −0.0011], p = 0.031 uncorrected, 0.374 after Bonferroni. This is reported, not hidden — the value of the model is the characterised, honestly ablated design and its role as the BRIDGE reference baseline, not an in-distribution win.
 
 ### BRIDGE LODO generalisation (calibrated head-to-head)
 
-Every repair stage (test-time BN adaptation + disjoint-slice threshold calibration) is applied **identically to every model**. Trivial all-attack predictor = 0.6028.
+Every repair stage (test-time BN adaptation + disjoint-slice threshold calibration) is applied **identically to every model**. Early stopping uses a validation slice of the *source* datasets only; the held-out domain is never used for model selection. Trivial all-attack predictor = 0.6028. F1 below is after adaptation + calibration (mean of 3 seeds per fold).
 
 | Model | CICIDS | BCCC | CICIoMT | UNSW | Mean |
 |-------|--------|------|---------|------|------|
-| Transformer-IDS | **0.6971** | **0.7347** | 0.6016 | **0.6191** | **0.6631** |
-| 1D-CNN-IDS | 0.6662 | 0.7331 | **0.6252** | 0.6100 | 0.6586 |
-| CNN-LSTM | 0.6172 | 0.6968 | 0.5978 | 0.6036 | 0.6289 |
-| BiGRU-IDS | 0.6060 | 0.6933 | 0.5967 | 0.6172 | 0.6283 |
-| MLP-IDS | 0.6012 | 0.7036 | 0.6014 | 0.6046 | 0.6277 |
-| **TCH-Net v2 (Ours)** | 0.6654 | 0.6147 | 0.6121 | 0.6179 | 0.6275 |
-| H-branch only (control) | 0.6575 | 0.6138 | 0.5992 | 0.6034 | 0.6185 |
+| Transformer-IDS | **0.7685** | 0.6079 | **0.6399** | **0.6224** | **0.6597** |
+| 1D-CNN-IDS | 0.6673 | **0.7211** | 0.6062 | 0.6092 | 0.6509 |
+| BiGRU-IDS | 0.7492 | 0.6103 | 0.5979 | 0.6064 | 0.6409 |
+| CNN-LSTM | 0.6284 | 0.7181 | 0.5983 | 0.6072 | 0.6380 |
+| H-branch only (control) | 0.7102 | 0.6087 | 0.5979 | 0.6035 | 0.6301 |
+| MLP-IDS | 0.6011 | 0.7011 | 0.5988 | 0.6032 | 0.6260 |
+| **TCH-Net v2 (Ours)** | 0.6482 | 0.6170 | 0.6044 | 0.6175 | 0.6218 |
 
-All six full models land inside a 0.036 band, within +0.016 to +0.060 of the trivial predictor. **No architecture dominates cross-extractor transfer.** The stage decomposition: +0.344 mean F1 from unsupervised BN adaptation, +0.104 from threshold calibration — both larger than the entire spread between architectures.
+All six full models land inside a 0.038 band, within +0.019 to +0.057 of the trivial predictor. TCH-Net is last of the six. **No architecture dominates cross-extractor transfer.**
 
-**The repair is conditional (read per seed–fold, not as a mean):**
+**Which repair stage does the work (mean over folds and seeds):**
 
-| Regime | Runs | Post-adaptation AUC | Calibrated F1 | vs. trivial (0.6028) |
-|--------|------|--------------------|--------------|----------------------|
-| Ranking restored | 6/12 | 0.7198 | 0.6513 | +0.0485 |
-| Ranking inverted | 6/12 | 0.4478 | 0.6037 | +0.0009 (i.e. trivial) |
+| Model | BN layers | 0.5 thr, no adapt | 0.5 thr, adapted | Calibrated, no adapt | Calibrated, adapted |
+|-------|-----------|-------------------|------------------|----------------------|---------------------|
+| Transformer-IDS | 0 | 0.0376 | 0.0376 | **0.6597** | **0.6597** |
+| 1D-CNN-IDS | 4 | 0.2068 | 0.5784 | 0.6487 | 0.6509 |
+| BiGRU-IDS | 1 | 0.0572 | 0.5192 | 0.6419 | 0.6410 |
+| CNN-LSTM | 3 | 0.3745 | 0.5583 | 0.6340 | 0.6380 |
+| H-branch only | 4 | 0.1479 | 0.4650 | 0.6417 | 0.6301 |
+| MLP-IDS | 3 | 0.2322 | 0.5391 | 0.6301 | 0.6260 |
+| **TCH-Net v2 (Ours)** | 14 | 0.0724 | 0.5157 | 0.6366 | 0.6218 |
 
-Calibrated generalisation gap (in-distribution − calibrated LODO): **0.8834 − 0.6275 = +0.2559.** Cross-extractor transfer is repaired where adaptation restores the ranking, and remains unsolved where it does not.
+Test-time BN adaptation re-estimates `BatchNorm1d` statistics only, so it does nothing for Transformer-IDS (LayerNorm only). At the default 0.5 threshold, adaptation helps every BatchNorm model a great deal. Once the threshold is calibrated, its effect is −0.015 to +0.004. Calibration alone does the repair, and its gain (+0.26 to +0.62) dwarfs the 0.030 spread between architectures.
+
+**The repair is conditional (TCH-Net, read per seed–fold, not as a mean):**
+
+| Regime | Runs | Post-adaptation AUC | Calibrated F1 | vs. trivial on the same folds |
+|--------|------|--------------------|--------------|-------------------------------|
+| Ranking restored | 9/12 | 0.6566 | 0.6290 | ≈ +0.025 |
+| Ranking inverted | 3/12 | 0.3530 | 0.6000 | ≈ +0.0005 (i.e. trivial) |
+
+Only 6 of the 12 runs beat the trivial predictor by more than 0.005. Calibrated generalisation gap (in-distribution − calibrated LODO): **0.8807 − 0.6218 = +0.2589.** Cross-extractor transfer is not solved by any model or repair stage evaluated here.
 
 ---
 
@@ -114,7 +132,7 @@ Direct label/schema inspection is treated as part of dataset selection. Rejected
 | UNSW-NB15 | 93,000 | 93,000 | 186,000 |
 | **Combined** | **323,914** | **323,914** | **647,828** |
 
-After sliding-window construction (W=32, S=4, majority-vote label), the balance shifts to ~57:43 benign:attack. Training sequences: 129,536 (43.1% attack). Test sequences: 32,362 (42.7% attack).
+Each dataset is split by original row order into train / validation / test = 70 / 10 / 20%, **before** windowing. Windows never span two partitions or two datasets. The validation split is used only for early stopping and checkpoint selection. After sliding-window construction (W=32, S=4, majority-vote label), the balance shifts to ~57:43 benign:attack. Training sequences: 113,341 (43.1% attack). Validation sequences: 16,166 (42.9% attack). Test sequences: 32,362 (42.7% attack).
 
 ### The 46 canonical features
 
@@ -163,7 +181,7 @@ Training-only:
 
 > **Note on the name.** The original design had three branches — Temporal (T), Contextual (C), Statistical (H). **The Contextual branch is removed in v2** for a structural reason: no trained identity embedding exists for an unseen domain, so provenance conditioning cannot transfer. Its functions are reassigned to CORAL (training) and test-time BatchNorm adaptation (evaluation). The "C" in the name now stands for CB-GAF, the central fusion mechanism, not a branch.
 
-**~2.386M trainable parameters.** Single-sample inference latency: **8.902 ms** on NVIDIA Tesla T4.
+**~2.386M trainable parameters.** Single-sample inference latency: **8.972 ms** on NVIDIA Tesla T4.
 
 ---
 
@@ -173,33 +191,33 @@ Training-only:
 
 | Variant | F1 | ΔF1 |
 |---------|-----|-----|
-| T + H (Full) | 0.8840 | — |
-| T only | 0.8827 | −0.0013 |
-| **H only** | **0.9017** | **+0.0177** |
+| T + H (Full) | 0.8801 | — |
+| T only | 0.8778 | −0.0023 |
+| **H only** | **0.8975** | **+0.0174** |
 
-The strongest in-distribution model of the study is the standalone Statistical branch (an MLP over window-mean features, <0.2M params). This is reported openly and explained: windowed flow records carry little genuine temporal structure, and the shared trunk costs the internal H expert ~0.020 F1 via gradient interference. Under LODO, however, the same standalone H-branch is the **worst** transfer performer (0.6185) — the temporal capacity that costs F1 in-distribution earns it back cross-domain.
+The strongest in-distribution model of the study is the standalone Statistical branch (an MLP over window-mean features, <0.2M params). This is reported openly and explained: windowed flow records carry little genuine temporal structure, and the shared trunk costs the internal H expert ~0.020 F1 via gradient interference. Under LODO the standalone H-branch also transfers slightly *better* than the full model (calibrated 0.6301 vs 0.6218). The temporal branch therefore does not earn its cost back cross-domain on BRIDGE.
 
 ### Novelty-component ablation (positive ΔF1 = removing it helps)
 
 | Variant | F1 | ΔF1 |
 |---------|-----|-----|
-| Full model | 0.8840 | — |
-| w/o MSTE (multi-scale temporal) | 0.8681 | −0.0159 |
-| w/o CB-GAF (→ plain concat) | 0.8842 | +0.0002 |
-| w/o Aux loss | 0.8821 | −0.0020 |
-| w/o CORAL | 0.8835 | −0.0005 |
-| w/o all (≈ v1 core) | 0.8691 | −0.0150 |
+| Full model | 0.8801 | — |
+| w/o MSTE (multi-scale temporal) | 0.8655 | −0.0146 |
+| w/o CB-GAF (→ plain concat) | 0.8791 | −0.0010 |
+| w/o Aux loss | 0.8794 | −0.0007 |
+| w/o CORAL | 0.8784 | −0.0017 |
+| w/o all (≈ v1 core) | 0.8640 | −0.0161 |
 
 The one unambiguously positive component is **MSTE**. CB-GAF is in-distribution-neutral by F1; its justification is the verified fusion properties below, not raw score.
 
-### Gate recalibration (seed-42 model; all rows calibrated on the same 20% slice, F1 on disjoint 80%)
+### Gate recalibration (seed-42 model; α* and thresholds chosen on the validation split, F1 on the full test set)
 
-| Predictor | Eval F1 |
+| Predictor | Test F1 |
 |-----------|---------|
-| T expert (inside full model) | 0.8872 |
-| H expert (inside full model) | 0.8819 |
-| Full model, learned gate | 0.8874 |
-| Full model, recalibrated (α*=0.70) | **0.8927** |
+| T expert (inside full model) | 0.8827 |
+| H expert (inside full model) | 0.8775 |
+| Full model, learned gate | 0.8833 |
+| Full model, recalibrated (α*=0.80) | **0.8887** |
 
 Gated late fusion with deep supervision matches the best internal expert; held-out recalibration lifts the fused model above both, repairing the mixture-collapse pathology.
 
@@ -215,13 +233,14 @@ Gated late fusion with deep supervision matches the best internal expert; held-o
 | Scheduler | Cosine annealing, 3-epoch warmup |
 | Loss | Focal (γ=2.5, α-weighted, ε=0.01) + deep-sup (λ_ds=0.3) + aux (λ_aux=0.05) + CORAL (λ_coral=0.5) |
 | Batch size | 512 |
-| Max epochs / patience | 30 / 7 |
+| Max epochs / patience | 30 / 7 (LODO: 30 / 5) |
+| Early stopping / checkpoint selection | Validation F1 (10% chronological split; LODO: last 10% of each source dataset) |
 | Window size / stride | 32 / 4 |
 | Dropout | 0.20 |
 | Augmentation | Gaussian noise (σ=0.01, p=0.30, train only) |
 | Hardware | NVIDIA Tesla T4 (Kaggle) |
 
-Seeds: TCH-Net 5 seeds {42, 123, 456, 789, 2024}; baselines and ablations 3 seeds {42, 123, 456}; LODO 3 seeds per fold with bootstrap CIs.
+Seeds: TCH-Net and all 12 baselines 5 seeds {42, 123, 456, 789, 2024}, paired by seed for significance tests; ablations 3 seeds {42, 123, 456}; LODO 3 seeds per fold with bootstrap CIs.
 
 ---
 
@@ -229,13 +248,13 @@ Seeds: TCH-Net 5 seeds {42, 123, 456, 789, 2024}; baselines and ablations 3 seed
 
 | Model | Params (M) | Latency (ms) | F1 |
 |-------|-----------|-------------|-----|
-| **TCH-Net v2 (Ours)** | 2.386 | 8.902 | 0.8834 |
-| Transformer-IDS | 0.618 | 1.786 | 0.8938 |
-| BiLSTM-IDS | 0.609 | 1.995 | 0.8536 |
-| BiGRU-IDS | 0.465 | 1.175 | 0.8518 |
-| CNN-LSTM | 0.142 | 1.199 | 0.8424 |
-| 1D-CNN-IDS | 0.068 | 0.943 | 0.8401 |
-| MLP-IDS | 0.920 | 0.640 | 0.7473 |
+| **TCH-Net v2 (Ours)** | 2.386 | 8.972 | 0.8807 |
+| Transformer-IDS | 0.618 | 1.820 | 0.8878 |
+| BiLSTM-IDS | 0.609 | 2.000 | 0.8483 |
+| BiGRU-IDS | 0.465 | 1.281 | 0.8495 |
+| CNN-LSTM | 0.142 | 1.149 | 0.8355 |
+| 1D-CNN-IDS | 0.068 | 0.949 | 0.8360 |
+| MLP-IDS | 0.920 | 0.613 | 0.7438 |
 
 ---
 
@@ -282,8 +301,9 @@ raw features are scaled and clipped to [−10, 10] before windowing.
 
 ## Limitations
 
-- **Residual cross-dataset gap.** Even after both repair stages, a genuine +0.2559 F1 gap remains, and on half the seed–fold runs the repaired model does not measurably beat the all-attack predictor. Normalisation and threshold placement are recovered; transferable signal that was never learned is not manufactured.
-- **In-distribution position.** Transformer-IDS stays ahead of TCH-Net in-distribution (+0.0105, not significant after correction) and leads the calibrated LODO head-to-head. TCH-Net is a characterised baseline, not the leaderboard winner.
+- **Residual cross-dataset gap.** Even after both repair stages, a genuine +0.2589 F1 gap remains. On half the seed–fold runs, the repaired model does not beat the all-attack predictor by more than 0.005. Threshold placement is recovered; transferable signal that was never learned is not manufactured.
+- **Test-time BN adaptation is not a repair on its own.** It helps only at the default 0.5 threshold, and adds nothing once the threshold is calibrated. It also cannot act on BatchNorm-free models such as Transformer-IDS.
+- **In-distribution position.** Transformer-IDS stays ahead of TCH-Net in-distribution: +0.0071, consistent across all 5 seeds, but not significant after Bonferroni correction. It also leads the calibrated LODO head-to-head, where TCH-Net is last of the six full models. TCH-Net is a characterised baseline, not the leaderboard winner.
 - **Testbed data.** All four datasets are controlled-testbed or aggregated research captures; two (CICIDS-2017, UNSW-NB15) are enterprise rather than IoT-specific, retained as vocabulary/extractor-family anchors.
 - **Binary scope.** Evaluated as a binary detector; multi-class attack typing is future work.
 - **Edge deployment.** Memory/throughput on edge hardware were not measured; distillation, pruning, and INT8 quantisation are the obvious compression routes.
