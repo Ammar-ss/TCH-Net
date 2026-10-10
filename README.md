@@ -259,6 +259,7 @@ Seeds: TCH-Net and all 12 baselines 5 seeds {42, 123, 456, 789, 2024}, paired by
 ```
 TCH-Net/
 ├── Revised_Version_of_BRIDGE_and_TCH_Net.ipynb   # current version: every result in this README
+├── Temporal_Split_Rerun.ipynb                    # temporal re-split only (3 seeds), see note below
 ├── Paper_Version_of_BRIDGE_and_TCH_Net.ipynb     # code as originally submitted to JNSM (superseded)
 ├── Old_Arxiv_Version_of_Bridge_and_TCH_Net       # earlier arXiv preprint (three-branch, five-dataset) notebook
 ├── LICENSE
@@ -266,6 +267,8 @@ TCH-Net/
 ```
 
 The revised notebook is self-contained. It includes the 46-feature canonical vocabulary and alias-mapping tables, dataset loaders and audit checks, preprocessing and windowing, all models, the statistical tests, the LODO protocol, and the calibration methodology. It is committed **with its outputs** from the Kaggle run, so every number above can be traced to a cell. Its first cell lists what changed from the submitted version.
+
+The full run reached Kaggle's 12-hour session limit during the last experiment, the temporal re-split (paper Table 16), after 2 of its 3 seeds. `Temporal_Split_Rerun.ipynb` re-runs only that experiment, for all 3 seeds. It uses the same setup cells, unchanged, and is committed with its outputs. Re-split F1 is 0.8831 ± 0.0022 against 0.8807 for the default split.
 
 The submitted-version notebook is kept for transparency only. It selected checkpoints on the test set, which the revised version corrects, so its numbers should not be used.
 
