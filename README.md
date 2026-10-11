@@ -157,6 +157,17 @@ python make_numbers.py ../results rev2_numbers.tex ../results/C1b
 
 ---
 
+## Contributors
+
+| | GitHub | Name |
+|---|---|---|
+| <img src="https://github.com/Ammar-ss.png" width="40" alt="Ammar-ss"> | [@Ammar-ss](https://github.com/Ammar-ss) | Ammar Bhilwarawala |
+| <img src="https://github.com/Likhamba-Rongmei.png" width="40" alt="Likhamba-Rongmei"> | [@Likhamba-Rongmei](https://github.com/Likhamba-Rongmei) | Likhamba Rongmei |
+
+All seven authors of the paper are listed at the top of this README.
+
+---
+
 ## Citation
 
 The paper is under review, so no DOI has been issued yet.
