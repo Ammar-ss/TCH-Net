@@ -1,0 +1,1681 @@
+{
+  "raw_files": {
+    "CICIDS-2017": [
+      {
+        "file": "friday.csv",
+        "rows": 547557,
+        "n_columns": 89,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Src Port",
+          "Dst Port"
+        ],
+        "attack_frac": 0.4730338576623073,
+        "label_runs": 206119,
+        "mean_label_run": 2.7,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 0.40127329209561746,
+        "ts_nondecreasing_frac": 0.5783250424405718
+      },
+      {
+        "file": "friday_plus.csv",
+        "rows": 547557,
+        "n_columns": 105,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src Port",
+          "Dst Port"
+        ],
+        "attack_frac": 0.4730338576623073,
+        "label_runs": 206119,
+        "mean_label_run": 2.7,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 0.40127329209561746,
+        "ts_nondecreasing_frac": 0.5783250424405718
+      },
+      {
+        "file": "monday.csv",
+        "rows": 371621,
+        "n_columns": 89,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Src Port",
+          "Dst Port"
+        ],
+        "attack_frac": 0.0,
+        "label_runs": 1,
+        "mean_label_run": 371621.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 0.38154463822012213,
+        "ts_nondecreasing_frac": 0.5077403747822469
+      },
+      {
+        "file": "monday_plus.csv",
+        "rows": 371621,
+        "n_columns": 105,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src Port",
+          "Dst Port"
+        ],
+        "attack_frac": 0.0,
+        "label_runs": 1,
+        "mean_label_run": 371621.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 0.38154463822012213,
+        "ts_nondecreasing_frac": 0.5077403747822469
+      },
+      {
+        "file": "thursday.csv",
+        "rows": 362075,
+        "n_columns": 89,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Src Port",
+          "Dst Port"
+        ],
+        "attack_frac": 0.2041124076503487,
+        "label_runs": 98363,
+        "mean_label_run": 3.7,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 0.3860028999516675,
+        "ts_nondecreasing_frac": 0.5234793683502551
+      },
+      {
+        "file": "thursday_plus.csv",
+        "rows": 362075,
+        "n_columns": 105,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src Port",
+          "Dst Port"
+        ],
+        "attack_frac": 0.2041124076503487,
+        "label_runs": 98363,
+        "mean_label_run": 3.7,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 0.3860028999516675,
+        "ts_nondecreasing_frac": 0.5234793683502551
+      },
+      {
+        "file": "tuesday.csv",
+        "rows": 322078,
+        "n_columns": 89,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Src Port",
+          "Dst Port"
+        ],
+        "attack_frac": 0.021646930246710425,
+        "label_runs": 13533,
+        "mean_label_run": 23.8,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 0.385108576183409,
+        "ts_nondecreasing_frac": 0.5088443491300773
+      },
+      {
+        "file": "tuesday_plus.csv",
+        "rows": 322078,
+        "n_columns": 105,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src Port",
+          "Dst Port"
+        ],
+        "attack_frac": 0.021646930246710425,
+        "label_runs": 13533,
+        "mean_label_run": 23.8,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 0.385108576183409,
+        "ts_nondecreasing_frac": 0.5088443491300773
+      },
+      {
+        "file": "wednesday.csv",
+        "rows": 496640,
+        "n_columns": 89,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Src Port",
+          "Dst Port"
+        ],
+        "attack_frac": 0.3574440238402062,
+        "label_runs": 27971,
+        "mean_label_run": 17.8,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 0.32029437822164947,
+        "ts_nondecreasing_frac": 0.5235430942352424
+      },
+      {
+        "file": "wednesday_plus.csv",
+        "rows": 496640,
+        "n_columns": 105,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src Port",
+          "Dst Port"
+        ],
+        "attack_frac": 0.3574440238402062,
+        "label_runs": 27971,
+        "mean_label_run": 17.8,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 0.32029437822164947,
+        "ts_nondecreasing_frac": 0.5235430942352424
+      }
+    ],
+    "CIC-BCCC-NRC-TabularIoTAttacks-2024": [
+      {
+        "file": "Benign Traffic.csv",
+        "rows": 32620,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 0.0,
+        "label_runs": 1,
+        "mean_label_run": 32620.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.8480946687513412
+      },
+      {
+        "file": "DDoS ICMP Flood.csv",
+        "rows": 2552,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 1.0,
+        "label_runs": 1,
+        "mean_label_run": 2552.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.7902783222265778
+      },
+      {
+        "file": "DDoS UDP Flood.csv",
+        "rows": 2576,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 1.0,
+        "label_runs": 1,
+        "mean_label_run": 2576.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.7728155339805826
+      },
+      {
+        "file": "DoS ICMP Flood.csv",
+        "rows": 2107,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 1.0,
+        "label_runs": 1,
+        "mean_label_run": 2107.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.8371320037986705
+      },
+      {
+        "file": "DoS TCP Flood.csv",
+        "rows": 2106916,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 1.0,
+        "label_runs": 1,
+        "mean_label_run": 2106916.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.8777364060723855
+      },
+      {
+        "file": "DoS UDP Flood.csv",
+        "rows": 3115,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 1.0,
+        "label_runs": 1,
+        "mean_label_run": 3115.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.7655748233782916
+      },
+      {
+        "file": "MITM ARP Spoofing.csv",
+        "rows": 1053,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 1.0,
+        "label_runs": 1,
+        "mean_label_run": 1053.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.7994296577946768
+      },
+      {
+        "file": "MQTT DDoS Publish Flood.csv",
+        "rows": 413913,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 1.0,
+        "label_runs": 1,
+        "mean_label_run": 413913.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.8682908444307003
+      },
+      {
+        "file": "MQTT DoS Connect Flood.csv",
+        "rows": 238031,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 1.0,
+        "label_runs": 1,
+        "mean_label_run": 238031.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.7421459479897492
+      },
+      {
+        "file": "MQTT DoS Publish Flood.csv",
+        "rows": 953,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 1.0,
+        "label_runs": 1,
+        "mean_label_run": 953.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.8834033613445378
+      },
+      {
+        "file": "MQTT Malformed.csv",
+        "rows": 2246,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 1.0,
+        "label_runs": 1,
+        "mean_label_run": 2246.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.9363028953229399
+      },
+      {
+        "file": "Recon OS Scan.csv",
+        "rows": 85317,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 1.0,
+        "label_runs": 1,
+        "mean_label_run": 85317.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.5566599465516433
+      },
+      {
+        "file": "Recon Ping Sweep.csv",
+        "rows": 71,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 1.0,
+        "label_runs": 1,
+        "mean_label_run": 71.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.6714285714285714
+      },
+      {
+        "file": "Recon Port Scan.csv",
+        "rows": 485522,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 1.0,
+        "label_runs": 1,
+        "mean_label_run": 485522.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.5626224200395039
+      },
+      {
+        "file": "Recon Vulnerability Scan.csv",
+        "rows": 8321,
+        "n_columns": 85,
+        "timestamp_cols": [
+          "Timestamp"
+        ],
+        "id_cols": [
+          "Flow ID",
+          "Src IP",
+          "Src Port",
+          "Dst IP",
+          "Dst Port"
+        ],
+        "attack_frac": 1.0,
+        "label_runs": 1,
+        "mean_label_run": 8321.0,
+        "ts_col": "Timestamp",
+        "ts_parsed_frac": 1.0,
+        "ts_nondecreasing_frac": 0.5900240384615385
+      }
+    ],
+    "CICIoMT-2024": [
+      {
+        "file": "Test.csv",
+        "rows": 1612117,
+        "n_columns": 46,
+        "timestamp_cols": [],
+        "id_cols": [],
+        "attack_frac": 0.9766722886738369,
+        "label_runs": 3,
+        "mean_label_run": 537372.3
+      },
+      {
+        "file": "Train.csv",
+        "rows": 7155702,
+        "n_columns": 46,
+        "timestamp_cols": [],
+        "id_cols": [],
+        "attack_frac": 0.9730659549545244,
+        "label_runs": 3,
+        "mean_label_run": 2385234.0
+      }
+    ],
+    "UNSW-NB15": [
+      {
+        "file": "UNSW_NB15_testing-set.csv",
+        "rows": 175341,
+        "n_columns": 45,
+        "timestamp_cols": [],
+        "id_cols": [],
+        "attack_frac": 0.6806223302022916,
+        "label_runs": 8172,
+        "mean_label_run": 21.5
+      },
+      {
+        "file": "UNSW_NB15_training-set.csv",
+        "rows": 82332,
+        "n_columns": 45,
+        "timestamp_cols": [],
+        "id_cols": [],
+        "attack_frac": 0.5506000097167566,
+        "label_runs": 5,
+        "mean_label_run": 16466.4
+      }
+    ]
+  },
+  "doc_units": {
+    "CICIDS-2017": {
+      "flow_duration": "us",
+      "iat_*": "us",
+      "*_byte_rate|byte_rate": "bytes/s",
+      "*_pkt_rate|pkt_rate": "pkts/s",
+      "pkt_len_*|*_pkt_len_*": "bytes",
+      "byte_count_*": "bytes"
+    },
+    "CIC-BCCC-NRC-TabularIoTAttacks-2024": {
+      "flow_duration": "us (CICFlowMeter; verify)",
+      "iat_*": "us (verify)",
+      "byte_rate": "bytes/s",
+      "pkt_len_*": "bytes"
+    },
+    "CICIoMT-2024": {
+      "pkt_rate": "pkts/s",
+      "iat_mean": "undocumented (CICIoT2023 \"IAT\")",
+      "pkt_len_*": "bytes",
+      "byte_count_total": "bytes"
+    },
+    "UNSW-NB15": {
+      "flow_duration": "s",
+      "fwd_iat_mean|bwd_iat_mean": "ms",
+      "fwd_byte_rate|bwd_byte_rate": "bits/s",
+      "pkt_len_mean|byte_count": "bytes"
+    }
+  },
+  "units": {
+    "CICIDS-2017": {
+      "flow_duration": {
+        "source": "Flow Duration",
+        "p01": 8.0,
+        "p50": 61996.0,
+        "p99": 118102178.24000001,
+        "zero_frac": 0.0
+      },
+      "pkt_count_fwd": {
+        "source": "Total Fwd Packet",
+        "p01": 1.0,
+        "p50": 2.0,
+        "p99": 61.0,
+        "zero_frac": 1.2e-05
+      },
+      "pkt_count_bwd": {
+        "source": "Total Bwd packets",
+        "p01": 0.0,
+        "p50": 2.0,
+        "p99": 76.0,
+        "zero_frac": 0.025862
+      },
+      "byte_count_fwd": {
+        "source": "Total Length of Fwd Packet",
+        "p01": 0.0,
+        "p50": 80.0,
+        "p99": 6940.010000000009,
+        "zero_frac": 0.145298
+      },
+      "byte_count_bwd": {
+        "source": "Total Length of Bwd Packet",
+        "p01": 0.0,
+        "p50": 218.0,
+        "p99": 101821.13000000012,
+        "zero_frac": 0.157184
+      },
+      "pkt_rate": {
+        "source": "Flow Packets/s",
+        "p01": 0.059687152206897735,
+        "p50": 73.15957641601562,
+        "p99": 500000.0,
+        "zero_frac": 0.0
+      },
+      "byte_rate": {
+        "source": "Flow Bytes/s",
+        "p01": 0.0,
+        "p50": 3855.7447509765625,
+        "p99": 2653846.25,
+        "zero_frac": 0.143378
+      },
+      "fwd_pkt_rate": {
+        "source": "Fwd Packets/s",
+        "p01": 0.0312038566917181,
+        "p50": 38.453989028930664,
+        "p99": 500000.0,
+        "zero_frac": 1.2e-05
+      },
+      "bwd_pkt_rate": {
+        "source": "Bwd Packets/s",
+        "p01": 0.0,
+        "p50": 32.57541275024414,
+        "p99": 55555.5546875,
+        "zero_frac": 0.025862
+      },
+      "fwd_pkt_len_total": {
+        "source": "Total Length of Fwd Packet",
+        "p01": 0.0,
+        "p50": 80.0,
+        "p99": 6940.010000000009,
+        "zero_frac": 0.145298
+      },
+      "bwd_pkt_len_total": {
+        "source": "Total Length of Bwd Packet",
+        "p01": 0.0,
+        "p50": 218.0,
+        "p99": 101821.13000000012,
+        "zero_frac": 0.157184
+      },
+      "subflow_fwd_pkts": {
+        "source": "Subflow Fwd Packets",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 1.0,
+        "zero_frac": 0.974138
+      },
+      "subflow_bwd_pkts": {
+        "source": "Subflow Bwd Packets",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 0.0,
+        "zero_frac": 0.999988
+      },
+      "pkt_len_min": {
+        "source": "Packet Length Min",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 78.0,
+        "zero_frac": 0.523762
+      },
+      "pkt_len_max": {
+        "source": "Packet Length Max",
+        "p01": 0.0,
+        "p50": 131.0,
+        "p99": 10136.0,
+        "zero_frac": 0.143378
+      },
+      "pkt_len_mean": {
+        "source": "Packet Length Mean",
+        "p01": 0.0,
+        "p50": 81.0,
+        "p99": 1055.9090576171875,
+        "zero_frac": 0.143378
+      },
+      "pkt_len_std": {
+        "source": "Packet Length Std",
+        "p01": 0.0,
+        "p50": 52.41779327392578,
+        "p99": 2798.74951171875,
+        "zero_frac": 0.168684
+      },
+      "pkt_len_var": {
+        "source": "Packet Length Variance",
+        "p01": 0.0,
+        "p50": 2747.625,
+        "p99": 7832999.0,
+        "zero_frac": 0.168684
+      },
+      "fwd_pkt_len_min": {
+        "source": "Fwd Packet Length Min",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 78.0,
+        "zero_frac": 0.522396
+      },
+      "fwd_pkt_len_max": {
+        "source": "Fwd Packet Length Max",
+        "p01": 0.0,
+        "p50": 45.0,
+        "p99": 2116.0,
+        "zero_frac": 0.145298
+      },
+      "fwd_pkt_len_mean": {
+        "source": "Fwd Packet Length Mean",
+        "p01": 0.0,
+        "p50": 40.66666793823242,
+        "p99": 321.0772525024417,
+        "zero_frac": 0.145298
+      },
+      "fwd_pkt_len_std": {
+        "source": "Fwd Packet Length Std",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 669.5595703125,
+        "zero_frac": 0.60199
+      },
+      "bwd_pkt_len_min": {
+        "source": "Bwd Packet Length Min",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 268.0,
+        "zero_frac": 0.52803
+      },
+      "bwd_pkt_len_max": {
+        "source": "Bwd Packet Length Max",
+        "p01": 0.0,
+        "p50": 128.0,
+        "p99": 10136.0,
+        "zero_frac": 0.157184
+      },
+      "bwd_pkt_len_mean": {
+        "source": "Bwd Packet Length Mean",
+        "p01": 0.0,
+        "p50": 114.0,
+        "p99": 2898.75,
+        "zero_frac": 0.157184
+      },
+      "bwd_pkt_len_std": {
+        "source": "Bwd Packet Length Std",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 4414.3662109375,
+        "zero_frac": 0.607198
+      },
+      "iat_mean": {
+        "source": "Flow IAT Mean",
+        "p01": 4.0,
+        "p50": 19230.5,
+        "p99": 22057848.480000027,
+        "zero_frac": 0.0
+      },
+      "iat_std": {
+        "source": "Flow IAT Std",
+        "p01": 0.0,
+        "p50": 16498.267578125,
+        "p99": 37608054.60000003,
+        "zero_frac": 0.233926
+      },
+      "iat_max": {
+        "source": "Flow IAT Max",
+        "p01": 5.989999999999782,
+        "p50": 50825.5,
+        "p99": 73304118.16000012,
+        "zero_frac": 0.0
+      },
+      "iat_min": {
+        "source": "Flow IAT Min",
+        "p01": 0.0,
+        "p50": 3.0,
+        "p99": 267740.26000000024,
+        "zero_frac": 0.03882
+      },
+      "fwd_iat_mean": {
+        "source": "Fwd IAT Mean",
+        "p01": 0.0,
+        "p50": 48.0,
+        "p99": 64067360.0,
+        "zero_frac": 0.221356
+      },
+      "fwd_iat_std": {
+        "source": "Fwd IAT Std",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 21573298.84000001,
+        "zero_frac": 0.555092
+      },
+      "bwd_iat_mean": {
+        "source": "Bwd IAT Mean",
+        "p01": 0.0,
+        "p50": 48.0,
+        "p99": 61745141.480000116,
+        "zero_frac": 0.245538
+      },
+      "bwd_iat_std": {
+        "source": "Bwd IAT Std",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 22906419.04,
+        "zero_frac": 0.603768
+      },
+      "flag_syn": {
+        "source": "SYN Flag Count",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 4.0,
+        "zero_frac": 0.506508
+      },
+      "flag_ack": {
+        "source": "ACK Flag Count",
+        "p01": 0.0,
+        "p50": 1.0,
+        "p99": 133.0,
+        "zero_frac": 0.493938
+      },
+      "flag_fin": {
+        "source": "FIN Flag Count",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 3.0,
+        "zero_frac": 0.632486
+      },
+      "flag_rst": {
+        "source": "RST Flag Count",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 3.0,
+        "zero_frac": 0.708704
+      },
+      "flag_psh": {
+        "source": "PSH Flag Count",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 36.0,
+        "zero_frac": 0.620926
+      },
+      "flag_urg": {
+        "source": "URG Flag Count",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 0.0,
+        "zero_frac": 0.99997
+      },
+      "fwd_header_len": {
+        "source": "Fwd Header Length",
+        "p01": 8.0,
+        "p50": 32.0,
+        "p99": 1584.0400000000373,
+        "zero_frac": 0.000972
+      },
+      "init_win_fwd": {
+        "source": "FWD Init Win Bytes",
+        "p01": 0.0,
+        "p50": 624.0,
+        "p99": 65535.0,
+        "zero_frac": 0.480762
+      }
+    },
+    "CIC-BCCC-NRC-TabularIoTAttacks-2024": {
+      "flow_duration": {
+        "source": "Flow Duration",
+        "p01": 0.0,
+        "p50": 58821128.0,
+        "p99": 119776088.47999999,
+        "zero_frac": 0.04545166666666667
+      },
+      "pkt_count_fwd": {
+        "source": "Total Fwd Packet",
+        "p01": 1.0,
+        "p50": 9.0,
+        "p99": 44.0,
+        "zero_frac": 0.0
+      },
+      "pkt_count_bwd": {
+        "source": "Total Bwd packets",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 20.0,
+        "zero_frac": 0.7186393333333333
+      },
+      "byte_count_fwd": {
+        "source": "Total Length of Fwd Packet",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 3488.0,
+        "zero_frac": 0.9071843333333334
+      },
+      "byte_count_bwd": {
+        "source": "Total Length of Bwd Packet",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 4500.0,
+        "zero_frac": 0.9148043333333333
+      },
+      "pkt_rate": {
+        "source": "Flow Packets/s",
+        "p01": 0.06425242125988007,
+        "p50": 0.3259277492761612,
+        "p99": 1488.1007531737043,
+        "zero_frac": 0.0
+      },
+      "byte_rate": {
+        "source": "Flow Bytes/s",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 305882.46875,
+        "zero_frac": 0.842602
+      },
+      "fwd_pkt_rate": {
+        "source": "Fwd Packets/s",
+        "p01": 0.0,
+        "p50": 0.2947385013103485,
+        "p99": 1412.4293212890625,
+        "zero_frac": 0.04545166666666667
+      },
+      "bwd_pkt_rate": {
+        "source": "Bwd Packets/s",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 240.30758666992188,
+        "zero_frac": 0.7186403333333333
+      },
+      "fwd_pkt_len_total": {
+        "source": "Total Length of Fwd Packet",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 3488.0,
+        "zero_frac": 0.9071843333333334
+      },
+      "bwd_pkt_len_total": {
+        "source": "Total Length of Bwd Packet",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 4500.0,
+        "zero_frac": 0.9148043333333333
+      },
+      "subflow_fwd_pkts": {
+        "source": "Subflow Fwd Packets",
+        "p01": 0.0,
+        "p50": 1.0,
+        "p99": 5.0,
+        "zero_frac": 0.34136833333333333
+      },
+      "subflow_bwd_pkts": {
+        "source": "Subflow Bwd Packets",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 3.0,
+        "zero_frac": 0.9635986666666667
+      },
+      "pkt_len_min": {
+        "source": "Packet Length Min",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 0.0,
+        "zero_frac": 0.9982676666666667
+      },
+      "pkt_len_max": {
+        "source": "Packet Length Max",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 1448.0,
+        "zero_frac": 0.887785
+      },
+      "pkt_len_mean": {
+        "source": "Packet Length Mean",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 965.3333129882812,
+        "zero_frac": 0.887785
+      },
+      "pkt_len_std": {
+        "source": "Packet Length Std",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 549.3734918212818,
+        "zero_frac": 0.8886523333333334
+      },
+      "pkt_len_var": {
+        "source": "Packet Length Variance",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 301811.19874999207,
+        "zero_frac": 0.8886523333333334
+      },
+      "fwd_pkt_len_min": {
+        "source": "Fwd Packet Length Min",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 0.0,
+        "zero_frac": 0.993126
+      },
+      "fwd_pkt_len_max": {
+        "source": "Fwd Packet Length Max",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 1408.0,
+        "zero_frac": 0.9071843333333334
+      },
+      "fwd_pkt_len_mean": {
+        "source": "Fwd Packet Length Mean",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 267.5454406738281,
+        "zero_frac": 0.9071843333333334
+      },
+      "fwd_pkt_len_std": {
+        "source": "Fwd Packet Length Std",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 174.93789901731688,
+        "zero_frac": 0.909685
+      },
+      "bwd_pkt_len_min": {
+        "source": "Bwd Packet Length Min",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 0.0,
+        "zero_frac": 0.993836
+      },
+      "bwd_pkt_len_max": {
+        "source": "Bwd Packet Length Max",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 1448.0,
+        "zero_frac": 0.9148043333333333
+      },
+      "bwd_pkt_len_mean": {
+        "source": "Bwd Packet Length Mean",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 508.28570556640625,
+        "zero_frac": 0.9148043333333333
+      },
+      "bwd_pkt_len_std": {
+        "source": "Bwd Packet Length Std",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 308.18328857421875,
+        "zero_frac": 0.9171263333333334
+      },
+      "iat_mean": {
+        "source": "Flow IAT Mean",
+        "p01": 0.0,
+        "p50": 3500641.5,
+        "p99": 18163520.299999993,
+        "zero_frac": 0.04545166666666667
+      },
+      "iat_std": {
+        "source": "Flow IAT Std",
+        "p01": 0.0,
+        "p50": 165844.828125,
+        "p99": 22383318.0,
+        "zero_frac": 0.28477166666666665
+      },
+      "iat_max": {
+        "source": "Flow IAT Max",
+        "p01": 0.0,
+        "p50": 3971903.5,
+        "p99": 71841104.0,
+        "zero_frac": 0.04545166666666667
+      },
+      "iat_min": {
+        "source": "Flow IAT Min",
+        "p01": 0.0,
+        "p50": 2710862.0,
+        "p99": 16145379.01,
+        "zero_frac": 0.09252933333333334
+      },
+      "fwd_iat_mean": {
+        "source": "Fwd IAT Mean",
+        "p01": 0.0,
+        "p50": 3501021.5,
+        "p99": 18214682.0,
+        "zero_frac": 0.233803
+      },
+      "fwd_iat_std": {
+        "source": "Fwd IAT Std",
+        "p01": 0.0,
+        "p50": 166338.03125,
+        "p99": 22393206.0,
+        "zero_frac": 0.307366
+      },
+      "bwd_iat_mean": {
+        "source": "Bwd IAT Mean",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 2601755.039999988,
+        "zero_frac": 0.916791
+      },
+      "bwd_iat_std": {
+        "source": "Bwd IAT Std",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 1970559.8637499611,
+        "zero_frac": 0.9198323333333334
+      },
+      "flag_syn": {
+        "source": "SYN Flag Count",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 2.0,
+        "zero_frac": 0.7586233333333333
+      },
+      "flag_ack": {
+        "source": "ACK Flag Count",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 30.0,
+        "zero_frac": 0.711432
+      },
+      "flag_fin": {
+        "source": "FIN Flag Count",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 1.0,
+        "zero_frac": 0.956444
+      },
+      "flag_rst": {
+        "source": "RST Flag Count",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 2.0,
+        "zero_frac": 0.646778
+      },
+      "flag_psh": {
+        "source": "PSH Flag Count",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 14.0,
+        "zero_frac": 0.8880666666666667
+      },
+      "flag_urg": {
+        "source": "URG Flag Count",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 0.0,
+        "zero_frac": 0.9999366666666667
+      },
+      "fwd_header_len": {
+        "source": "Fwd Header Length",
+        "p01": 20.0,
+        "p50": 180.0,
+        "p99": 880.0,
+        "zero_frac": 0.0
+      },
+      "init_win_fwd": {
+        "source": "FWD Init Win Bytes",
+        "p01": 0.0,
+        "p50": 512.0,
+        "p99": 65160.0,
+        "zero_frac": 0.2733096666666667
+      }
+    },
+    "CICIoMT-2024": {
+      "pkt_rate": {
+        "source": "Rate",
+        "p01": 0.0,
+        "p50": 133.81814575195312,
+        "p99": 185624.2590624998,
+        "zero_frac": 0.038358333333333335
+      },
+      "fwd_pkt_rate": {
+        "source": "Srate",
+        "p01": 0.0,
+        "p50": 133.81814575195312,
+        "p99": 185624.2590624998,
+        "zero_frac": 0.038358333333333335
+      },
+      "pkt_count_total": {
+        "source": "Number",
+        "p01": 5.5,
+        "p50": 9.5,
+        "p99": 13.5,
+        "zero_frac": 0.0
+      },
+      "byte_count_total": {
+        "source": "Tot sum",
+        "p01": 422.6000061035156,
+        "p50": 525.0,
+        "p99": 3730.679931640625,
+        "zero_frac": 0.0
+      },
+      "pkt_len_min": {
+        "source": "Min",
+        "p01": 42.0,
+        "p50": 50.0,
+        "p99": 136.85000610351562,
+        "zero_frac": 0.0
+      },
+      "pkt_len_max": {
+        "source": "Max",
+        "p01": 42.0,
+        "p50": 50.0,
+        "p99": 883.5999755859375,
+        "zero_frac": 0.0
+      },
+      "pkt_len_mean": {
+        "source": "AVG",
+        "p01": 42.0,
+        "p50": 50.0,
+        "p99": 349.77769104003744,
+        "zero_frac": 0.0
+      },
+      "pkt_len_std": {
+        "source": "Std",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 208.92607894897307,
+        "zero_frac": 0.7664423333333333
+      },
+      "pkt_len_var": {
+        "source": "Variance",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 1.0,
+        "zero_frac": 0.7704963333333333
+      },
+      "iat_mean": {
+        "source": "IAT",
+        "p01": 0.00023660660372115672,
+        "p50": 84696416.0,
+        "p99": 169463184.0,
+        "zero_frac": 0.0006973333333333333
+      },
+      "flag_syn": {
+        "source": "syn_flag_number",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 1.0,
+        "zero_frac": 0.789367
+      },
+      "flag_ack": {
+        "source": "ack_flag_number",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 1.0,
+        "zero_frac": 0.820748
+      },
+      "flag_fin": {
+        "source": "fin_flag_number",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 0.20999999344348907,
+        "zero_frac": 0.970966
+      },
+      "flag_rst": {
+        "source": "rst_flag_number",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 0.75,
+        "zero_frac": 0.8822603333333333
+      },
+      "flag_psh": {
+        "source": "psh_flag_number",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 0.5,
+        "zero_frac": 0.925323
+      },
+      "fwd_header_len": {
+        "source": "Header_Length",
+        "p01": 0.0,
+        "p50": 108.0,
+        "p99": 338859.71687499725,
+        "zero_frac": 0.24891366666666667
+      }
+    },
+    "UNSW-NB15": {
+      "flow_duration": {
+        "source": "dur",
+        "p01": 0.0,
+        "p50": 0.0042849997989833355,
+        "p99": 37.85372543334961,
+        "zero_frac": 0.013998362265351822
+      },
+      "pkt_count_fwd": {
+        "source": "spkts",
+        "p01": 1.0,
+        "p50": 4.0,
+        "p99": 230.0,
+        "zero_frac": 0.0
+      },
+      "pkt_count_bwd": {
+        "source": "dpkts",
+        "p01": 0.0,
+        "p50": 2.0,
+        "p99": 368.0,
+        "zero_frac": 0.4668242307110175
+      },
+      "byte_count_fwd": {
+        "source": "sbytes",
+        "p01": 46.0,
+        "p50": 528.0,
+        "p99": 72584.47999999998,
+        "zero_frac": 0.0
+      },
+      "byte_count_bwd": {
+        "source": "dbytes",
+        "p01": 0.0,
+        "p50": 178.0,
+        "p99": 369962.27999999997,
+        "zero_frac": 0.4668242307110175
+      },
+      "fwd_byte_rate": {
+        "source": "sload",
+        "p01": 0.0,
+        "p50": 743942.3125,
+        "p99": 800000000.0,
+        "zero_frac": 0.015430409860559702
+      },
+      "bwd_byte_rate": {
+        "source": "dload",
+        "p01": 0.0,
+        "p50": 1747.4412841796875,
+        "p99": 14435322.2,
+        "zero_frac": 0.4668824440278958
+      },
+      "fwd_pkt_len_total": {
+        "source": "sbytes",
+        "p01": 46.0,
+        "p50": 528.0,
+        "p99": 72584.47999999998,
+        "zero_frac": 0.0
+      },
+      "bwd_pkt_len_total": {
+        "source": "dbytes",
+        "p01": 0.0,
+        "p50": 178.0,
+        "p99": 369962.27999999997,
+        "zero_frac": 0.4668242307110175
+      },
+      "fwd_pkt_len_mean": {
+        "source": "smean",
+        "p01": 45.0,
+        "p50": 73.0,
+        "p99": 1137.0,
+        "zero_frac": 0.0
+      },
+      "bwd_pkt_len_mean": {
+        "source": "dmean",
+        "p01": 0.0,
+        "p50": 44.0,
+        "p99": 1252.0,
+        "zero_frac": 0.4668242307110175
+      },
+      "fwd_iat_mean": {
+        "source": "sinpkt",
+        "p01": 0.0010000000474974513,
+        "p50": 0.3816959857940674,
+        "p99": 60000.6484375,
+        "zero_frac": 0.0030348542532589754
+      },
+      "bwd_iat_mean": {
+        "source": "dinpkt",
+        "p01": 0.0,
+        "p50": 0.007000000216066837,
+        "p99": 473.724600830078,
+        "zero_frac": 0.4669018484668553
+      },
+      "init_win_fwd": {
+        "source": "swin",
+        "p01": 0.0,
+        "p50": 0.0,
+        "p99": 255.0,
+        "zero_frac": 0.5224916851979059
+      }
+    }
+  },
+  "unit_checks": [
+    {
+      "dataset": "CICIDS-2017",
+      "check": "total_bytes / (byte_rate * flow_duration)",
+      "median": 1e-06,
+      "iqr": [
+        9.999999786905215e-07,
+        1.0000000211166122e-06
+      ],
+      "expected": "1e-6 if duration in us, 1 if in s",
+      "n": 428311
+    },
+    {
+      "dataset": "CICIDS-2017",
+      "check": "flow_duration / (iat_mean * (n_pkts-1))",
+      "median": 1.0,
+      "iqr": [
+        0.9999999869266664,
+        1.0000000128390916
+      ],
+      "expected": "1 if duration and IAT share a unit",
+      "n": 500000
+    },
+    {
+      "dataset": "CIC-BCCC-NRC-TabularIoTAttacks-2024",
+      "check": "total_bytes / (byte_rate * flow_duration)",
+      "median": 1.0000000000653947e-06,
+      "iqr": [
+        9.9999997896853e-07,
+        1.0000000210109256e-06
+      ],
+      "expected": "1e-6 if duration in us, 1 if in s",
+      "n": 335839
+    },
+    {
+      "dataset": "CIC-BCCC-NRC-TabularIoTAttacks-2024",
+      "check": "flow_duration / (iat_mean * (n_pkts-1))",
+      "median": 1.0,
+      "iqr": [
+        0.9999999904886593,
+        1.0000000093088854
+      ],
+      "expected": "1 if duration and IAT share a unit",
+      "n": 2863645
+    },
+    {
+      "dataset": "CICIoMT-2024",
+      "check": "iat_mean scale",
+      "p01": 0.0003660244832281024,
+      "p50": 84696416.0,
+      "p99": 169463184.0
+    },
+    {
+      "dataset": "UNSW-NB15",
+      "check": "sload / (sbytes / dur)",
+      "median": 6.000000125921053,
+      "iqr": [
+        3.999999989900971,
+        7.3400401763112155
+      ],
+      "expected": "8 if sload is bits/s and dur seconds",
+      "n": 253697
+    },
+    {
+      "dataset": "UNSW-NB15",
+      "check": "(sinpkt * (spkts-1)) / dur",
+      "median": 999.9999593168899,
+      "iqr": [
+        996.3853046406068,
+        1000.0000171504713
+      ],
+      "expected": "1000 if sinpkt is ms and dur seconds",
+      "n": 253674
+    }
+  ],
+  "window_labels": {
+    "CICIDS-2017": {
+      "W31_test": {
+        "n_windows": 12312,
+        "tie_frac": 0.0,
+        "attack_window_frac": 0.48619233268356077,
+        "mean_purity": 0.5731753966756796,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.5138076673164392
+      },
+      "W32_test": {
+        "n_windows": 12312,
+        "tie_frac": 0.13458414554905784,
+        "attack_window_frac": 0.4198343079922027,
+        "mean_purity": 0.5709927306692657,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.5801656920077972
+      },
+      "W33_test": {
+        "n_windows": 12312,
+        "tie_frac": 0.0,
+        "attack_window_frac": 0.48789798570500326,
+        "mean_purity": 0.5709802705416741,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.5121020142949968
+      },
+      "W32_train": {
+        "n_windows": 43111,
+        "tie_frac": 0.14144881816705712,
+        "attack_window_frac": 0.43225626870172346,
+        "mean_purity": 0.5699669167961773,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.5677437312982765
+      }
+    },
+    "CIC-BCCC-NRC-TabularIoTAttacks-2024": {
+      "W31_test": {
+        "n_windows": 2884,
+        "tie_frac": 0.0,
+        "attack_window_frac": 0.5249653259361997,
+        "mean_purity": 0.572524719251935,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.4750346740638003
+      },
+      "W32_test": {
+        "n_windows": 2883,
+        "tie_frac": 0.13596947624002775,
+        "attack_window_frac": 0.4564689559486646,
+        "mean_purity": 0.5699683489420743,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.5435310440513355
+      },
+      "W33_test": {
+        "n_windows": 2883,
+        "tie_frac": 0.0,
+        "attack_window_frac": 0.5286160249739854,
+        "mean_purity": 0.5701132027875003,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.4713839750260146
+      },
+      "W32_train": {
+        "n_windows": 10110,
+        "tie_frac": 0.14124629080118695,
+        "attack_window_frac": 0.42077151335311574,
+        "mean_purity": 0.5677176063303659,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.5792284866468843
+      }
+    },
+    "CICIoMT-2024": {
+      "W31_test": {
+        "n_windows": 7874,
+        "tie_frac": 0.0,
+        "attack_window_frac": 0.4951739903479807,
+        "mean_purity": 0.5734962760248101,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.5048260096520193
+      },
+      "W32_test": {
+        "n_windows": 7874,
+        "tie_frac": 0.13576327152654305,
+        "attack_window_frac": 0.42468884937769874,
+        "mean_purity": 0.5710963296926593,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.5753111506223012
+      },
+      "W33_test": {
+        "n_windows": 7874,
+        "tie_frac": 0.0,
+        "attack_window_frac": 0.4932689865379731,
+        "mean_purity": 0.571058566359557,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.5067310134620269
+      },
+      "W32_train": {
+        "n_windows": 27577,
+        "tie_frac": 0.14174855858142654,
+        "attack_window_frac": 0.43456503608079194,
+        "mean_purity": 0.5691676940929035,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.565434963919208
+      }
+    },
+    "UNSW-NB15": {
+      "W31_test": {
+        "n_windows": 9293,
+        "tie_frac": 0.0,
+        "attack_window_frac": 0.502744000860863,
+        "mean_purity": 0.5709708660351357,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.497255999139137
+      },
+      "W32_test": {
+        "n_windows": 9293,
+        "tie_frac": 0.14892930162487894,
+        "attack_window_frac": 0.4278489185408372,
+        "mean_purity": 0.5685058646292909,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.5721510814591628
+      },
+      "W33_test": {
+        "n_windows": 9292,
+        "tie_frac": 0.0,
+        "attack_window_frac": 0.5012914334911752,
+        "mean_purity": 0.5687296990568621,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.4987085665088248
+      },
+      "W32_train": {
+        "n_windows": 32543,
+        "tie_frac": 0.14113634268506284,
+        "attack_window_frac": 0.43099898595704145,
+        "mean_purity": 0.5696559167870202,
+        "pure_frac": 0.0,
+        "minority_attack_frac": 0.5690010140429586
+      }
+    }
+  },
+  "split_rows": {
+    "CICIDS-2017": {
+      "train": 172473,
+      "val": 24639,
+      "test": 49278
+    },
+    "CIC-BCCC-NRC-TabularIoTAttacks-2024": {
+      "train": 40470,
+      "val": 5781,
+      "test": 11563
+    },
+    "CICIoMT-2024": {
+      "train": 110337,
+      "val": 15762,
+      "test": 31525
+    },
+    "UNSW-NB15": {
+      "train": 130200,
+      "val": 18600,
+      "test": 37200
+    }
+  },
+  "duplicates": {
+    "CICIDS-2017": {
+      "train_rows": 172473,
+      "train_within_dup_frac": 0.2386344529288642,
+      "val_rows": 24639,
+      "val_within_dup_frac": 0.2022809367263282,
+      "test_rows": 49278,
+      "test_within_dup_frac": 0.2098502374284671,
+      "test_rows_in_train_frac": 0.2718657413044361,
+      "val_rows_in_train_frac": 0.27375299322212754,
+      "test_rows_in_val_frac": 0.21581638865213684,
+      "train_conflicting_label_vectors": 0
+    },
+    "CIC-BCCC-NRC-TabularIoTAttacks-2024": {
+      "train_rows": 40470,
+      "train_within_dup_frac": 0.03587842846553002,
+      "val_rows": 5781,
+      "val_within_dup_frac": 0.02577408752810928,
+      "test_rows": 11563,
+      "test_within_dup_frac": 0.0255124102741503,
+      "test_rows_in_train_frac": 0.04384675257286171,
+      "val_rows_in_train_frac": 0.04411001556824079,
+      "test_rows_in_val_frac": 0.026550203234454728,
+      "train_conflicting_label_vectors": 6
+    },
+    "CICIoMT-2024": {
+      "train_rows": 110337,
+      "train_within_dup_frac": 0.07663793650362072,
+      "val_rows": 15762,
+      "val_within_dup_frac": 0.02943788859281815,
+      "test_rows": 31525,
+      "test_within_dup_frac": 0.04050753370340998,
+      "test_rows_in_train_frac": 0.10810467882632831,
+      "val_rows_in_train_frac": 0.1129298312396904,
+      "test_rows_in_val_frac": 0.04570975416336241,
+      "train_conflicting_label_vectors": 0
+    },
+    "UNSW-NB15": {
+      "train_rows": 130200,
+      "train_within_dup_frac": 0.3948156682027649,
+      "val_rows": 18600,
+      "val_within_dup_frac": 0.3501075268817204,
+      "test_rows": 37200,
+      "test_within_dup_frac": 0.3636827956989247,
+      "test_rows_in_train_frac": 0.4238709677419355,
+      "val_rows_in_train_frac": 0.4272043010752688,
+      "test_rows_in_val_frac": 0.37061827956989246,
+      "train_conflicting_label_vectors": 268
+    }
+  },
+  "cross_dataset_shared_vectors": {
+    "CICIDS-2017 | CIC-BCCC-NRC-TabularIoTAttacks-2024": 0,
+    "CICIDS-2017 | CICIoMT-2024": 0,
+    "CICIDS-2017 | UNSW-NB15": 0,
+    "CIC-BCCC-NRC-TabularIoTAttacks-2024 | CICIoMT-2024": 0,
+    "CIC-BCCC-NRC-TabularIoTAttacks-2024 | UNSW-NB15": 0,
+    "CICIoMT-2024 | UNSW-NB15": 0
+  }
+}

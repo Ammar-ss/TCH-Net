@@ -1,0 +1,4947 @@
+PyTorch 2.11.0+cu128 | Device: cuda
+CUDA: True | XGBoost: True
+
+Canonical vocabulary: 46 features
+Alias maps defined for 4 datasets
+  CICIDS-2017: 42 alias entries / 46 canonical = 91% (alias entries; actual coverage verified at runtime)
+  CIC-BCCC-NRC-TabularIoTAttacks-2024: 42 alias entries / 46 canonical = 91% (alias entries; actual coverage verified at runtime)
+  CICIoMT-2024: 12 alias entries / 46 canonical = 26% (alias entries; actual coverage verified at runtime)
+  UNSW-NB15: 11 alias entries / 46 canonical = 24% (alias entries; actual coverage verified at runtime)
+
+NOTE: actual coverage verified at runtime by build_semantic_vector().
+Run Cell 2b (diagnostic) after Cell 6 to confirm per-dataset coverage.
+Short aliases (<5 chars) only match via exact alias lookup, NOT substring.
+Zero-fill policy: Absent features zero-filled — conflation with true-zero is a known limitation. See Cell 7b shortcut test and paper Section 3.4.1.
+CICIDS-2017 scope: CICIDS-2017 is a general enterprise IDS benchmark, NOT IoT-specific. Retained as vocabulary anchor and cross-extractor shift test only.
+
+Dataset availability:
+  CICIDS-2017                           : FOUND [PRIMARY]
+  CIC-BCCC-NRC-TabularIoTAttacks-2024   : FOUND [PRIMARY]
+  CICIoMT-2024                          : FOUND [PRIMARY]
+  UNSW-NB15                             : FOUND [PRIMARY]
+
+All 4 dataset loaders defined
+
+MultiDatasetLoader ready
+Dataset source IDs: {'CICIDS-2017': 0, 'CIC-BCCC-NRC-TabularIoTAttacks-2024': 1, 'CICIoMT-2024': 2, 'UNSW-NB15': 3}
+
+======================================================================
+LOADING DATASETS
+======================================================================
+
+======================================================================
+LOADING CICIDS-2017
+======================================================================
+  Loading friday.csv...
+    547,557 rows | coverage=42/46 | Ben=288,544 Atk=259,013
+  Loading monday.csv...
+    371,621 rows | coverage=42/46 | Ben=371,621 Atk=0
+  Loading thursday.csv...
+    362,075 rows | coverage=42/46 | Ben=288,171 Atk=73,904
+  Loading tuesday.csv...
+    322,078 rows | coverage=42/46 | Ben=315,106 Atk=6,972
+  Loading wednesday.csv...
+    496,640 rows | coverage=42/46 | Ben=319,119 Atk=177,521
+  Total: 2,099,971 | Ben=1,582,561 Atk=517,410
+  De-duplication: 2,099,971 rows -> 1,713,315 unique, label-consistent vectors (18.4% duplicates, 15 conflicting vectors dropped)
+  Subsampled 1,713,315 -> 500,000 (ben=415,090 atk=84,910 atk%=17.0%)
+  Added CICIDS-2017: 500,000x46 (non-zero dims: 46/46 = 100%)
+
+======================================================================
+LOADING CIC-BCCC-NRC-TabularIoTAttacks-2024
+======================================================================
+  Columns (85): ['Flow ID', 'Src IP', 'Src Port', 'Dst IP', 'Dst Port', 'Protocol', 'Timestamp', 'Flow Duration', 'Total Fwd Packet', 'Total Bwd packets', 'Total Length of Fwd Packet', 'Total Length of Bwd Packet', 'Fwd Packet Length Max', 'Fwd Packet Length Min', 'Fwd Packet Length Mean', 'Fwd Packet Length Std', 'Bwd Packet Length Max', 'Bwd Packet Length Min', 'Bwd Packet Length Mean', 'Bwd Packet Length Std']
+    ... and 65 more
+  Benign Traffic.csv: 32,620 rows | cov=42/46 | acc=32,620
+  DDoS ICMP Flood.csv: 2,552 rows | cov=42/46 | acc=35,172
+  DDoS UDP Flood.csv: 2,576 rows | cov=42/46 | acc=37,748
+  DoS ICMP Flood.csv: 2,107 rows | cov=42/46 | acc=39,855
+  DoS TCP Flood.csv: 2,106,916 rows | cov=42/46 | acc=2,146,771
+  DoS UDP Flood.csv: 3,115 rows | cov=42/46 | acc=2,149,886
+  MITM ARP Spoofing.csv: 1,053 rows | cov=42/46 | acc=2,150,939
+  MQTT DDoS Publish Flood.csv: 413,913 rows | cov=42/46 | acc=2,564,852
+  MQTT DoS Connect Flood.csv: 238,031 rows | cov=42/46 | acc=2,802,883
+  MQTT DoS Publish Flood.csv: 953 rows | cov=42/46 | acc=2,803,836
+  MQTT Malformed.csv: 2,246 rows | cov=42/46 | acc=2,806,082
+  Recon OS Scan.csv: 85,317 rows | cov=42/46 | acc=2,891,399
+  Recon Ping Sweep.csv: 71 rows | cov=42/46 | acc=2,891,470
+  Recon Port Scan.csv: 485,522 rows | cov=42/46 | acc=3,376,992
+  Recon Vulnerability Scan.csv: 8,321 rows | cov=42/46 | acc=3,385,313
+
+  Label cross-validation ('Attack Name' vs numeric 'Label'): 3,385,313/3,385,313 rows agree (100.00%)
+  Total: 3,385,313 | Ben=32,620 Atk=3,352,693 (99.0% attack)
+  De-duplication: 3,385,313 rows -> 2,592,679 unique, label-consistent vectors (23.4% duplicates, 61 conflicting vectors dropped)
+  Added CIC-BCCC-NRC-TabularIoTAttacks-2024: 2,592,679x46 (non-zero dims: 46/46 = 100%)
+
+======================================================================
+LOADING CICIoMT-2024
+======================================================================
+  Columns (46): ['Header_Length', 'Protocol Type', 'Duration', 'Rate', 'Srate', 'Drate', 'fin_flag_number', 'syn_flag_number', 'rst_flag_number', 'psh_flag_number', 'ack_flag_number', 'ece_flag_number', 'cwr_flag_number', 'ack_count', 'syn_count', 'fin_count', 'rst_count', 'HTTP', 'HTTPS', 'DNS']
+    ... and 26 more
+  Test.csv: 1,612,117 rows | cov=12/46 | acc=1,612,117
+  Train.csv: 7,155,702 rows | cov=12/46 | acc=8,767,819
+  Early exit at 8,767,819 rows (max_samples=3,000,000)
+  Total: 8,767,819 | Ben=230,339 Atk=8,537,480 (97.4% attack)
+  De-duplication: 8,767,819 rows -> 5,138,813 unique, label-consistent vectors (41.4% duplicates, 0 conflicting vectors dropped)
+  Subsampled 5,138,813 -> 3,000,000 (ben=134,469 atk=2,865,531 atk%=95.5%)
+  Added CICIoMT-2024: 3,000,000x46 (non-zero dims: 12/46 = 26%)
+
+======================================================================
+LOADING UNSW-NB15
+======================================================================
+  Skip UNSW-NB15_1.csv: not the clean labelled schema (needs 'label'+'dur' header) — raw/meta file
+  Skip UNSW-NB15_2.csv: not the clean labelled schema (needs 'label'+'dur' header) — raw/meta file
+  Skip UNSW-NB15_3.csv: not the clean labelled schema (needs 'label'+'dur' header) — raw/meta file
+  Skip UNSW-NB15_4.csv: not the clean labelled schema (needs 'label'+'dur' header) — raw/meta file
+  Columns (45): ['id', 'dur', 'proto', 'service', 'state', 'spkts', 'dpkts', 'sbytes', 'dbytes', 'rate', 'sttl', 'dttl', 'sload', 'dload', 'sloss', 'dloss', 'sinpkt', 'dinpkt', 'sjit', 'djit']
+    ... and 25 more
+  UNSW_NB15_testing-set.csv: 175,341 rows | cov=11/46 | Ben=56,000 Atk=119,341 | acc=175,341
+  UNSW_NB15_training-set.csv: 82,332 rows | cov=11/46 | Ben=37,000 Atk=45,332 | acc=257,673
+  Total: 257,673 | Ben=93,000 Atk=164,673 (63.9% attack)
+  De-duplication: 257,673 rows -> 132,528 unique, label-consistent vectors (48.4% duplicates, 554 conflicting vectors dropped)
+  Added UNSW-NB15: 132,528x46 (non-zero dims: 19/46 = 41%)
+
+4 datasets loaded: ['CICIDS-2017', 'CIC-BCCC-NRC-TabularIoTAttacks-2024', 'CICIoMT-2024', 'UNSW-NB15']
+
+======================================================================
+FEATURE COVERAGE TABLE (for Section III of paper)
+======================================================================
+Dataset                                 Matched   Coverage Zero-filled features (first 5)
+----------------------------------------------------------------------
+  CICIDS-2017                               46/46      100%   
+  CIC-BCCC-NRC-TabularIoTAttacks-2024       46/46      100%   
+  CICIoMT-2024                              12/46       26%   flow_duration, pkt_count_fwd, pkt_count_bwd, byte_count_fwd, byte_count_bwd...
+  UNSW-NB15                                 19/46       41%   subflow_fwd_pkts, subflow_bwd_pkts, pkt_len_min, pkt_len_max, pkt_len_mean...
+
+======================================================================
+COVERAGE TIERS
+======================================================================
+  dataset                                 mapped  derived  non-const  independent
+  CICIDS-2017                                 42        4         46           44
+  CIC-BCCC-NRC-TabularIoTAttacks-2024         42        4         46           44
+  CICIoMT-2024                                12        0         12           12
+  UNSW-NB15                                   11        8         19           17
+
+  Features non-constant in ALL datasets (3): ['pkt_rate', 'pkt_count_total', 'byte_count_total']
+  ... in all but one dataset (28): ['flow_duration', 'pkt_count_fwd', 'pkt_count_bwd', 'byte_count_fwd', 'byte_count_bwd', 'pkt_rate', 'byte_rate', 'fwd_pkt_rate', 'bwd_pkt_rate', 'fwd_byte_rate', 'bwd_byte_rate', 'pkt_count_total', 'byte_count_total', 'fwd_pkt_len_total', 'bwd_pkt_len_total', 'pkt_len_min', 'pkt_len_max', 'pkt_len_mean', 'pkt_len_std', 'pkt_len_var', 'fwd_pkt_len_mean', 'bwd_pkt_len_mean', 'fwd_iat_mean', 'bwd_iat_mean', 'flag_syn', 'flag_ack', 'flag_fin', 'flag_rst']
+
+  De-duplication: {
+ "CICIDS-2017": {
+  "rows_in": 2099971,
+  "unique_vectors": 1713330,
+  "conflicting_vectors_dropped": 15,
+  "rows_kept": 1713315,
+  "duplicate_frac": 0.18411730447706187
+ },
+ "CIC-BCCC-NRC-TabularIoTAttacks-2024": {
+  "rows_in": 3385313,
+  "unique_vectors": 2592740,
+  "conflicting_vectors_dropped": 61,
+  "rows_kept": 2592679,
+  "duplicate_frac": 0.23412103991565925
+ },
+ "CICIoMT-2024": {
+  "rows_in": 8767819,
+  "unique_vectors": 5138813,
+  "conflicting_vectors_dropped": 0,
+  "rows_kept": 5138813,
+  "duplicate_frac": 0.413900651918111
+ },
+ "UNSW-NB15": {
+  "rows_in": 257673,
+  "unique_vectors": 133082,
+  "conflicting_vectors_dropped": 554,
+  "rows_kept": 132528,
+  "duplicate_frac": 0.4835236908795256
+ }
+}
+
+
+======================================================================
+COMBINE & PREPROCESS
+======================================================================
+  CICIDS-2017: 169,820 rows (ben=84,910 atk=84,910 ratio=1.0:1) est_sequences~42,447
+  CIC-BCCC-NRC-TabularIoTAttacks-2024: 64,400 rows (ben=32,200 atk=32,200 ratio=1.0:1) est_sequences~16,092
+  CICIoMT-2024: 268,938 rows (ben=134,469 atk=134,469 ratio=1.0:1) est_sequences~67,227
+  UNSW-NB15: 110,590 rows (ben=55,295 atk=55,295 ratio=1.0:1) est_sequences~27,640
+
+  Pre-split combined: 613,748 rows | ben=306,874 (50.0%) | atk=306,874 (50.0%)
+  Split mode: POSITIONAL on seeded-shuffled rows (per-dataset train/val/test = 70/10/20% by row order)
+  Train: 429,624 | ben=215,268 (50.1%) | atk=214,356 (49.9%)
+  Val:   61,374 | ben=30,573 (49.8%) | atk=30,801 (50.2%)
+  Test:  122,750 | ben=61,033 (49.7%) | atk=61,717 (50.3%)
+    val rows CICIDS-2017                           : 16,982 (attack 50.2%)
+    val rows CIC-BCCC-NRC-TabularIoTAttacks-2024   : 6,440 (attack 49.6%)
+    val rows CICIoMT-2024                          : 26,893 (attack 50.1%)
+    val rows UNSW-NB15                             : 11,059 (attack 50.9%)
+  Scaler: single RobustScaler(q5,q95) fit on train only
+pkt_count_total derived in combine() before scaling — correct
+N_FEATURES=46  N_DATASETS=4  DS_NAMES=['CICIDS-2017', 'CIC-BCCC-NRC-TabularIoTAttacks-2024', 'CICIoMT-2024', 'UNSW-NB15']
+  test windows CICIDS-2017              n=1,029 attack=51.0% purity=0.571 benign-labelled-with-attacks=49.0%
+  test windows CIC-BCCC-NRC-TabularIoTA n=390 attack=50.8% purity=0.569 benign-labelled-with-attacks=49.2%
+  test windows CICIoMT-2024             n=1,629 attack=52.5% purity=0.571 benign-labelled-with-attacks=47.5%
+  test windows UNSW-NB15                n=670 attack=49.0% purity=0.567 benign-labelled-with-attacks=51.0%
+
+Creating windows (random bags of W records from one dataset; rows are pre-shuffled)...
+  Raw sequences — Train: 107,376 (atk=53,032 49.4%) | Test: 3,718 (atk=1,906 51.3%)
+  [train] 107,376 seqs (ben=54,344 50.6% | atk=53,032 49.4%)
+  [test] 3,718 seqs (ben=1,812 48.7% | atk=1,906 51.3%)
+  [val] 1,858 seqs (ben=907 48.8% | atk=951 51.2%)
+
+Final shapes — Train: (107376, 33, 46) | Test: (3718, 33, 46)
+  Train: ben=54,344 (50.6%)  atk=53,032 (49.4%)
+  Test:  ben=1,812 (48.7%)  atk=1,906 (51.3%)
+All assertions passed — data is clean and balanced
+  X_train: (107376, 33, 46) | y_train attack%: 49.4%
+  X_test:  (3718, 33, 46)  | y_test  attack%: 51.3%
+  X_val:   (1858, 33, 46)  | y_val   attack%: 51.2%  (early stopping only)
+
+======================================================================
+MISSINGNESS MASK & SHORTCUT-LEARNING TEST
+======================================================================
+  Building feature-availability masks from per-dataset raw arrays...
+
+  Per-dataset coverage vs post-balance attack rate:
+    CICIDS-2017                                     : coverage=46/46 (100%)  post-balance atk%=49.5%
+    CIC-BCCC-NRC-TabularIoTAttacks-2024             : coverage=46/46 (100%)  post-balance atk%=49.3%
+    CICIoMT-2024 *low-coverage                      : coverage=12/46 (26%)  post-balance atk%=49.3%
+    UNSW-NB15 *low-coverage                         : coverage=19/46 (41%)  post-balance atk%=49.3%
+
+  SHORTCUT-LEARNING TEST (mask carries ZERO traffic features — only availability bits):
+    mask → LABEL accuracy:         50.61%  (majority-class baseline: 50.61%, gap: +0.00 pts)
+    mask → DATASET-ID accuracy:    89.31%  (majority-class baseline: 43.92%)
+    Mask → label gap: +0.00 pts. Limits: a depth-4 tree on the mask alone; it does not show that zero-filled VALUES carry no label signal (R3 §3.7).
+    Verdict (ds-id):    informational only — mask is EXPECTED to identify dataset
+                         identity (that is its definition), this is NOT a leakage
+                         concern by itself, only the label-prediction number above is.
+
+  Post-scaling zero-fill neutrality check:
+  (A zero-filled feature becomes non-zero after scaling if its
+   RobustScaler center != 0. These may act as dataset fingerprints.)
+  Features whose zero-fill maps to |value|>0.01 after scale+clip: 7/46
+  Actual post-scale-and-clip zero-fill values (first 8): [-0.05, -0.029, -0.157, -0.033, -0.526, -0.011, -0.061] ...
+  Missingness mask M_train shape: (107376, 46) — available for diagnostics
+  Note: explicit mask NOT fed to model (avoids dataset-identity shortcut)
+
+Missingness analysis done
+
+  Missingness summary saved → tch_net_v2_results/missingness_analysis.json
+  Key result: mask→label gap = +0.00 pts (PASS threshold: <5 pts) — PASS
+
+DataLoaders: 209 train | 4 val | 8 test batches
+
+TCH-Net v2 (T+H, gated late fusion): 2,386,068 params | T=512d H=128d -> CB-GAF(gated MoE, 128d)
+
+Baselines defined. Params:
+  BiLSTM-IDS            : 608,898
+  BiGRU-IDS             : 465,026
+  1D-CNN-IDS            : 67,586
+  Transformer-IDS       : 617,986
+  MLP-IDS               : 944,002
+  CNN-LSTM              : 141,826
+
+Training infrastructure ready  |  CORAL + test-time BN adaptation enabled
+
+  [saved tch_net_v2_results/partA_results.json — setup]  elapsed 0.01 h
+
+======================================================================
+PART A: TCH-Net (5 seeds)
+======================================================================
+  -- Seed 42 [1/5] --
+
+
+
+
+  Ep   1/30  Loss=0.0995  valF1=0.8679  valAUC=0.9463  valMCC=0.7213  BenF1=0.8513  AtkF1=0.8679 ★
+
+
+
+  Ep   2/30  Loss=0.0762  valF1=0.8163  valAUC=0.9433  valMCC=0.6761  BenF1=0.8426  AtkF1=0.8163
+
+
+
+  Ep   3/30  Loss=0.0674  valF1=0.8882  valAUC=0.9625  valMCC=0.7640  BenF1=0.8729  AtkF1=0.8882 ★
+
+
+
+  Ep   4/30  Loss=0.0616  valF1=0.8694  valAUC=0.9540  valMCC=0.7422  BenF1=0.8712  AtkF1=0.8694
+
+
+
+  Ep   5/30  Loss=0.0562  valF1=0.8847  valAUC=0.9632  valMCC=0.7543  BenF1=0.8599  AtkF1=0.8847
+
+
+
+  Ep   6/30  Loss=0.0513  valF1=0.8849  valAUC=0.9546  valMCC=0.7551  BenF1=0.8635  AtkF1=0.8849
+
+
+
+  Ep   7/30  Loss=0.0475  valF1=0.8959  valAUC=0.9671  valMCC=0.7879  BenF1=0.8919  AtkF1=0.8959 ★
+
+
+
+  Ep   8/30  Loss=0.0435  valF1=0.8850  valAUC=0.9626  valMCC=0.7587  BenF1=0.8721  AtkF1=0.8850
+
+
+
+  Ep   9/30  Loss=0.0401  valF1=0.8900  valAUC=0.9670  valMCC=0.7662  BenF1=0.8693  AtkF1=0.8900
+
+
+
+  Ep  10/30  Loss=0.0371  valF1=0.8928  valAUC=0.9659  valMCC=0.7724  BenF1=0.8731  AtkF1=0.8928
+
+
+
+  Ep  11/30  Loss=0.0349  valF1=0.8811  valAUC=0.9628  valMCC=0.7748  BenF1=0.8883  AtkF1=0.8811
+
+
+
+  Ep  12/30  Loss=0.0313  valF1=0.8831  valAUC=0.9627  valMCC=0.7775  BenF1=0.8896  AtkF1=0.8831
+
+
+
+  Ep  13/30  Loss=0.0287  valF1=0.8990  valAUC=0.9679  valMCC=0.7887  BenF1=0.8884  AtkF1=0.8990 ★
+
+
+
+  Ep  14/30  Loss=0.0265  valF1=0.8932  valAUC=0.9658  valMCC=0.7896  BenF1=0.8947  AtkF1=0.8932
+
+
+
+  Ep  15/30  Loss=0.0240  valF1=0.9012  valAUC=0.9656  valMCC=0.7964  BenF1=0.8952  AtkF1=0.9012 ★
+
+
+
+  Ep  16/30  Loss=0.0221  valF1=0.8921  valAUC=0.9647  valMCC=0.7817  BenF1=0.8894  AtkF1=0.8921
+
+
+
+  Ep  17/30  Loss=0.0197  valF1=0.8893  valAUC=0.9657  valMCC=0.7856  BenF1=0.8932  AtkF1=0.8893
+
+
+
+  Ep  18/30  Loss=0.0175  valF1=0.8891  valAUC=0.9675  valMCC=0.7895  BenF1=0.8954  AtkF1=0.8891
+
+
+
+  Ep  19/30  Loss=0.0161  valF1=0.9050  valAUC=0.9702  valMCC=0.8040  BenF1=0.8989  AtkF1=0.9050 ★
+
+
+
+  Ep  20/30  Loss=0.0144  valF1=0.8989  valAUC=0.9664  valMCC=0.7879  BenF1=0.8874  AtkF1=0.8989
+
+
+
+  Ep  21/30  Loss=0.0135  valF1=0.9031  valAUC=0.9672  valMCC=0.8058  BenF1=0.9021  AtkF1=0.9031
+
+
+
+  Ep  22/30  Loss=0.0126  valF1=0.8971  valAUC=0.9659  valMCC=0.7913  BenF1=0.8940  AtkF1=0.8971
+
+
+
+  Ep  23/30  Loss=0.0115  valF1=0.9051  valAUC=0.9658  valMCC=0.8102  BenF1=0.9044  AtkF1=0.9051 ★
+
+
+
+  Ep  24/30  Loss=0.0109  valF1=0.9053  valAUC=0.9653  valMCC=0.8086  BenF1=0.9031  AtkF1=0.9053 ★
+
+
+
+  Ep  25/30  Loss=0.0098  valF1=0.9079  valAUC=0.9624  valMCC=0.8127  BenF1=0.9047  AtkF1=0.9079 ★
+
+
+
+  Ep  26/30  Loss=0.0095  valF1=0.9086  valAUC=0.9624  valMCC=0.8126  BenF1=0.9040  AtkF1=0.9086 ★
+
+
+
+  Ep  27/30  Loss=0.0091  valF1=0.9074  valAUC=0.9625  valMCC=0.8105  BenF1=0.9031  AtkF1=0.9074
+
+
+
+  Ep  28/30  Loss=0.0090  valF1=0.9060  valAUC=0.9622  valMCC=0.8084  BenF1=0.9023  AtkF1=0.9060
+
+
+
+  Ep  29/30  Loss=0.0088  valF1=0.9075  valAUC=0.9618  valMCC=0.8129  BenF1=0.9051  AtkF1=0.9075
+
+
+
+  Ep  30/30  Loss=0.0089  valF1=0.9109  valAUC=0.9605  valMCC=0.8193  BenF1=0.9082  AtkF1=0.9109 ★
+
+
+  |  F1=0.9003  AUC=0.9616  MCC=0.8015  PR-AUC=0.9598
+  |  Acc=0.9002  Prec=0.9224  Rec=0.8793
+  |  Benign-F1=0.9001  Attack-F1=0.9003  FPR@TPR99=0.5193  FPR@TPR95=0.1921
+  -- Seed 123 [2/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1010  valF1=0.8562  valAUC=0.9467  valMCC=0.7150  BenF1=0.8574  AtkF1=0.8562 ★
+
+
+
+  Ep   2/30  Loss=0.0767  valF1=0.8582  valAUC=0.9431  valMCC=0.7127  BenF1=0.8543  AtkF1=0.8582 ★
+
+
+
+  Ep   3/30  Loss=0.0677  valF1=0.8784  valAUC=0.9636  valMCC=0.7400  BenF1=0.8508  AtkF1=0.8784 ★
+
+
+
+  Ep   4/30  Loss=0.0606  valF1=0.8823  valAUC=0.9610  valMCC=0.7599  BenF1=0.8775  AtkF1=0.8823 ★
+
+
+
+  Ep   5/30  Loss=0.0548  valF1=0.8742  valAUC=0.9639  valMCC=0.7305  BenF1=0.8397  AtkF1=0.8742
+
+
+
+  Ep   6/30  Loss=0.0509  valF1=0.8800  valAUC=0.9633  valMCC=0.7436  BenF1=0.8523  AtkF1=0.8800
+
+
+
+  Ep   7/30  Loss=0.0465  valF1=0.8570  valAUC=0.9585  valMCC=0.7379  BenF1=0.8710  AtkF1=0.8570
+
+
+
+  Ep   8/30  Loss=0.0425  valF1=0.8772  valAUC=0.9638  valMCC=0.7712  BenF1=0.8867  AtkF1=0.8772
+
+
+
+  Ep   9/30  Loss=0.0394  valF1=0.8883  valAUC=0.9593  valMCC=0.7717  BenF1=0.8834  AtkF1=0.8883 ★
+
+
+
+  Ep  10/30  Loss=0.0364  valF1=0.8822  valAUC=0.9625  valMCC=0.7505  BenF1=0.8647  AtkF1=0.8822
+
+
+
+  Ep  11/30  Loss=0.0332  valF1=0.8902  valAUC=0.9634  valMCC=0.7800  BenF1=0.8891  AtkF1=0.8902 ★
+
+
+
+  Ep  12/30  Loss=0.0306  valF1=0.8793  valAUC=0.9548  valMCC=0.7492  BenF1=0.8695  AtkF1=0.8793
+
+
+
+  Ep  13/30  Loss=0.0284  valF1=0.8835  valAUC=0.9663  valMCC=0.7789  BenF1=0.8903  AtkF1=0.8835
+
+
+
+  Ep  14/30  Loss=0.0260  valF1=0.8853  valAUC=0.9650  valMCC=0.7800  BenF1=0.8906  AtkF1=0.8853
+
+
+
+  Ep  15/30  Loss=0.0243  valF1=0.8936  valAUC=0.9661  valMCC=0.7893  BenF1=0.8944  AtkF1=0.8936 ★
+
+
+
+  Ep  16/30  Loss=0.0216  valF1=0.8938  valAUC=0.9679  valMCC=0.7923  BenF1=0.8962  AtkF1=0.8938 ★
+
+
+
+  Ep  17/30  Loss=0.0195  valF1=0.8930  valAUC=0.9629  valMCC=0.7883  BenF1=0.8939  AtkF1=0.8930
+
+
+
+  Ep  18/30  Loss=0.0179  valF1=0.9022  valAUC=0.9639  valMCC=0.7959  BenF1=0.8929  AtkF1=0.9022 ★
+
+
+
+  Ep  19/30  Loss=0.0165  valF1=0.9003  valAUC=0.9653  valMCC=0.8005  BenF1=0.8995  AtkF1=0.9003
+
+
+
+  Ep  20/30  Loss=0.0148  valF1=0.8993  valAUC=0.9652  valMCC=0.7922  BenF1=0.8927  AtkF1=0.8993
+
+
+
+  Ep  21/30  Loss=0.0137  valF1=0.8947  valAUC=0.9632  valMCC=0.7835  BenF1=0.8888  AtkF1=0.8947
+
+
+
+  Ep  22/30  Loss=0.0127  valF1=0.8974  valAUC=0.9632  valMCC=0.7953  BenF1=0.8970  AtkF1=0.8974
+
+
+
+  Ep  23/30  Loss=0.0113  valF1=0.8975  valAUC=0.9620  valMCC=0.7889  BenF1=0.8914  AtkF1=0.8975
+
+
+
+  Ep  24/30  Loss=0.0108  valF1=0.8933  valAUC=0.9612  valMCC=0.7825  BenF1=0.8891  AtkF1=0.8933
+
+
+
+  Ep  25/30  Loss=0.0101  valF1=0.9035  valAUC=0.9607  valMCC=0.8055  BenF1=0.9017  AtkF1=0.9035 ★
+
+
+
+  Ep  26/30  Loss=0.0097  valF1=0.8944  valAUC=0.9610  valMCC=0.7887  BenF1=0.8936  AtkF1=0.8944
+
+
+
+  Ep  27/30  Loss=0.0093  valF1=0.8988  valAUC=0.9590  valMCC=0.7932  BenF1=0.8944  AtkF1=0.8988
+
+
+
+  Ep  28/30  Loss=0.0091  valF1=0.8959  valAUC=0.9588  valMCC=0.7905  BenF1=0.8942  AtkF1=0.8959
+
+
+
+  Ep  29/30  Loss=0.0093  valF1=0.9006  valAUC=0.9577  valMCC=0.7964  BenF1=0.8959  AtkF1=0.9006
+
+
+
+  Ep  30/30  Loss=0.0088  valF1=0.8994  valAUC=0.9566  valMCC=0.7943  BenF1=0.8949  AtkF1=0.8994
+
+
+  |  F1=0.8914  AUC=0.9580  MCC=0.7796  PR-AUC=0.9545
+  |  Acc=0.8897  Prec=0.9000  Rec=0.8830
+  |  Benign-F1=0.8880  Attack-F1=0.8914  FPR@TPR99=0.4200  FPR@TPR95=0.2379
+  -- Seed 456 [3/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1018  valF1=0.8663  valAUC=0.9427  valMCC=0.7173  BenF1=0.8485  AtkF1=0.8663 ★
+
+
+
+  Ep   2/30  Loss=0.0761  valF1=0.8723  valAUC=0.9556  valMCC=0.7267  BenF1=0.8452  AtkF1=0.8723 ★
+
+
+
+  Ep   3/30  Loss=0.0678  valF1=0.8699  valAUC=0.9584  valMCC=0.7481  BenF1=0.8749  AtkF1=0.8699
+
+
+
+  Ep   4/30  Loss=0.0610  valF1=0.8615  valAUC=0.9475  valMCC=0.7191  BenF1=0.8575  AtkF1=0.8615
+
+
+
+  Ep   5/30  Loss=0.0551  valF1=0.8869  valAUC=0.9556  valMCC=0.7615  BenF1=0.8722  AtkF1=0.8869 ★
+
+
+
+  Ep   6/30  Loss=0.0506  valF1=0.8540  valAUC=0.9596  valMCC=0.7501  BenF1=0.8762  AtkF1=0.8540
+
+
+
+  Ep   7/30  Loss=0.0466  valF1=0.8884  valAUC=0.9638  valMCC=0.7677  BenF1=0.8787  AtkF1=0.8884 ★
+
+
+
+  Ep   8/30  Loss=0.0425  valF1=0.8935  valAUC=0.9664  valMCC=0.7793  BenF1=0.8855  AtkF1=0.8935 ★
+
+
+
+  Ep   9/30  Loss=0.0397  valF1=0.8928  valAUC=0.9633  valMCC=0.7814  BenF1=0.8886  AtkF1=0.8928
+
+
+
+  Ep  10/30  Loss=0.0361  valF1=0.8962  valAUC=0.9672  valMCC=0.7932  BenF1=0.8961  AtkF1=0.8962 ★
+
+
+
+  Ep  11/30  Loss=0.0329  valF1=0.8916  valAUC=0.9670  valMCC=0.7819  BenF1=0.8899  AtkF1=0.8916
+
+
+
+  Ep  12/30  Loss=0.0306  valF1=0.8961  valAUC=0.9684  valMCC=0.7830  BenF1=0.8860  AtkF1=0.8961
+
+
+
+  Ep  13/30  Loss=0.0271  valF1=0.8848  valAUC=0.9640  valMCC=0.7807  BenF1=0.8911  AtkF1=0.8848
+
+
+
+  Ep  14/30  Loss=0.0249  valF1=0.9029  valAUC=0.9682  valMCC=0.7959  BenF1=0.8908  AtkF1=0.9029 ★
+
+
+
+  Ep  15/30  Loss=0.0224  valF1=0.8904  valAUC=0.9695  valMCC=0.7896  BenF1=0.8953  AtkF1=0.8904
+
+
+
+  Ep  16/30  Loss=0.0202  valF1=0.9071  valAUC=0.9708  valMCC=0.8105  BenF1=0.9034  AtkF1=0.9071 ★
+
+
+
+  Ep  17/30  Loss=0.0182  valF1=0.9039  valAUC=0.9714  valMCC=0.7986  BenF1=0.8932  AtkF1=0.9039
+
+
+
+  Ep  18/30  Loss=0.0172  valF1=0.9053  valAUC=0.9718  valMCC=0.8024  BenF1=0.8962  AtkF1=0.9053
+
+
+
+  Ep  19/30  Loss=0.0158  valF1=0.9061  valAUC=0.9689  valMCC=0.8021  BenF1=0.8929  AtkF1=0.9061
+
+
+
+  Ep  20/30  Loss=0.0140  valF1=0.9036  valAUC=0.9696  valMCC=0.7978  BenF1=0.8923  AtkF1=0.9036
+
+
+
+  Ep  21/30  Loss=0.0128  valF1=0.9054  valAUC=0.9709  valMCC=0.8086  BenF1=0.9029  AtkF1=0.9054
+
+
+
+  Ep  22/30  Loss=0.0119  valF1=0.9026  valAUC=0.9697  valMCC=0.8078  BenF1=0.9036  AtkF1=0.9026
+
+
+
+  Ep  23/30  Loss=0.0110  valF1=0.9011  valAUC=0.9675  valMCC=0.7987  BenF1=0.8975  AtkF1=0.9011
+  ⏹ Early stop at epoch 23  |  Best val score=0.9071
+
+
+  |  F1=0.9063  AUC=0.9715  MCC=0.8097  PR-AUC=0.9744
+  |  Acc=0.9048  Prec=0.9141  Rec=0.8987
+  |  Benign-F1=0.9032  Attack-F1=0.9063  FPR@TPR99=0.3482  FPR@TPR95=0.1722
+  -- Seed 789 [4/5] --
+
+
+
+
+  Ep   1/30  Loss=0.0995  valF1=0.8616  valAUC=0.9425  valMCC=0.7032  BenF1=0.8332  AtkF1=0.8616 ★
+
+
+
+  Ep   2/30  Loss=0.0768  valF1=0.8495  valAUC=0.9470  valMCC=0.7036  BenF1=0.8523  AtkF1=0.8495
+
+
+
+  Ep   3/30  Loss=0.0684  valF1=0.8767  valAUC=0.9566  valMCC=0.7429  BenF1=0.8655  AtkF1=0.8767 ★
+
+
+
+  Ep   4/30  Loss=0.0609  valF1=0.8922  valAUC=0.9633  valMCC=0.7718  BenF1=0.8751  AtkF1=0.8922 ★
+
+
+
+  Ep   5/30  Loss=0.0553  valF1=0.8863  valAUC=0.9644  valMCC=0.7711  BenF1=0.8844  AtkF1=0.8863
+
+
+
+  Ep   6/30  Loss=0.0508  valF1=0.8797  valAUC=0.9566  valMCC=0.7557  BenF1=0.8759  AtkF1=0.8797
+
+
+
+  Ep   7/30  Loss=0.0469  valF1=0.8845  valAUC=0.9658  valMCC=0.7538  BenF1=0.8589  AtkF1=0.8845
+
+
+
+  Ep   8/30  Loss=0.0421  valF1=0.8947  valAUC=0.9681  valMCC=0.7768  BenF1=0.8768  AtkF1=0.8947 ★
+
+
+
+  Ep   9/30  Loss=0.0388  valF1=0.8939  valAUC=0.9670  valMCC=0.7890  BenF1=0.8940  AtkF1=0.8939
+
+
+
+  Ep  10/30  Loss=0.0362  valF1=0.8938  valAUC=0.9659  valMCC=0.7824  BenF1=0.8886  AtkF1=0.8938
+
+
+
+  Ep  11/30  Loss=0.0333  valF1=0.8922  valAUC=0.9673  valMCC=0.7753  BenF1=0.8824  AtkF1=0.8922
+
+
+
+  Ep  12/30  Loss=0.0310  valF1=0.8857  valAUC=0.9618  valMCC=0.7565  BenF1=0.8611  AtkF1=0.8857
+
+
+
+  Ep  13/30  Loss=0.0284  valF1=0.8846  valAUC=0.9632  valMCC=0.7666  BenF1=0.8817  AtkF1=0.8846
+
+
+
+  Ep  14/30  Loss=0.0263  valF1=0.8748  valAUC=0.9644  valMCC=0.7321  BenF1=0.8387  AtkF1=0.8748
+
+
+
+  Ep  15/30  Loss=0.0238  valF1=0.8963  valAUC=0.9682  valMCC=0.7839  BenF1=0.8869  AtkF1=0.8963 ★
+
+
+
+  Ep  16/30  Loss=0.0219  valF1=0.8929  valAUC=0.9652  valMCC=0.7750  BenF1=0.8804  AtkF1=0.8929
+
+
+
+  Ep  17/30  Loss=0.0203  valF1=0.9008  valAUC=0.9656  valMCC=0.7936  BenF1=0.8921  AtkF1=0.9008 ★
+
+
+
+  Ep  18/30  Loss=0.0183  valF1=0.9000  valAUC=0.9670  valMCC=0.7933  BenF1=0.8931  AtkF1=0.9000
+
+
+
+  Ep  19/30  Loss=0.0167  valF1=0.9001  valAUC=0.9668  valMCC=0.7893  BenF1=0.8858  AtkF1=0.9001
+
+
+
+  Ep  20/30  Loss=0.0156  valF1=0.8995  valAUC=0.9661  valMCC=0.7913  BenF1=0.8914  AtkF1=0.8995
+
+
+
+  Ep  21/30  Loss=0.0141  valF1=0.8900  valAUC=0.9594  valMCC=0.7694  BenF1=0.8779  AtkF1=0.8900
+
+
+
+  Ep  22/30  Loss=0.0131  valF1=0.8948  valAUC=0.9619  valMCC=0.7799  BenF1=0.8840  AtkF1=0.8948
+
+
+
+  Ep  23/30  Loss=0.0121  valF1=0.8980  valAUC=0.9617  valMCC=0.7922  BenF1=0.8941  AtkF1=0.8980
+
+
+
+  Ep  24/30  Loss=0.0113  valF1=0.8987  valAUC=0.9618  valMCC=0.7901  BenF1=0.8911  AtkF1=0.8987
+  ⏹ Early stop at epoch 24  |  Best val score=0.9008
+
+
+  |  F1=0.9017  AUC=0.9646  MCC=0.7971  PR-AUC=0.9673
+  |  Acc=0.8986  Prec=0.8963  Rec=0.9071
+  |  Benign-F1=0.8953  Attack-F1=0.9017  FPR@TPR99=0.3769  FPR@TPR95=0.2097
+  -- Seed 2024 [5/5] --
+
+
+
+
+  Ep   1/30  Loss=0.0985  valF1=0.8414  valAUC=0.9319  valMCC=0.6686  BenF1=0.8264  AtkF1=0.8414 ★
+
+
+
+  Ep   2/30  Loss=0.0769  valF1=0.8795  valAUC=0.9528  valMCC=0.7476  BenF1=0.8669  AtkF1=0.8795 ★
+
+
+
+  Ep   3/30  Loss=0.0670  valF1=0.8498  valAUC=0.9569  valMCC=0.6787  BenF1=0.7795  AtkF1=0.8498
+
+
+
+  Ep   4/30  Loss=0.0608  valF1=0.8940  valAUC=0.9669  valMCC=0.7749  BenF1=0.8740  AtkF1=0.8940 ★
+
+
+
+  Ep   5/30  Loss=0.0559  valF1=0.8874  valAUC=0.9635  valMCC=0.7639  BenF1=0.8751  AtkF1=0.8874
+
+
+
+  Ep   6/30  Loss=0.0499  valF1=0.8968  valAUC=0.9682  valMCC=0.7842  BenF1=0.8864  AtkF1=0.8968 ★
+
+
+
+  Ep   7/30  Loss=0.0467  valF1=0.8796  valAUC=0.9604  valMCC=0.7598  BenF1=0.8793  AtkF1=0.8796
+
+
+
+  Ep   8/30  Loss=0.0420  valF1=0.8555  valAUC=0.9625  valMCC=0.7404  BenF1=0.8722  AtkF1=0.8555
+
+
+
+  Ep   9/30  Loss=0.0384  valF1=0.8989  valAUC=0.9652  valMCC=0.7902  BenF1=0.8909  AtkF1=0.8989 ★
+
+
+
+  Ep  10/30  Loss=0.0353  valF1=0.8940  valAUC=0.9689  valMCC=0.7758  BenF1=0.8777  AtkF1=0.8940
+
+
+
+  Ep  11/30  Loss=0.0316  valF1=0.8952  valAUC=0.9650  valMCC=0.7796  BenF1=0.8823  AtkF1=0.8952
+
+
+
+  Ep  12/30  Loss=0.0291  valF1=0.8912  valAUC=0.9649  valMCC=0.7822  BenF1=0.8903  AtkF1=0.8912
+
+
+
+  Ep  13/30  Loss=0.0266  valF1=0.8938  valAUC=0.9659  valMCC=0.7876  BenF1=0.8931  AtkF1=0.8938
+
+
+
+  Ep  14/30  Loss=0.0244  valF1=0.8956  valAUC=0.9661  valMCC=0.7857  BenF1=0.8900  AtkF1=0.8956
+
+
+
+  Ep  15/30  Loss=0.0217  valF1=0.8906  valAUC=0.9686  valMCC=0.7875  BenF1=0.8941  AtkF1=0.8906
+
+
+
+  Ep  16/30  Loss=0.0201  valF1=0.9006  valAUC=0.9688  valMCC=0.7926  BenF1=0.8913  AtkF1=0.9006 ★
+
+
+
+  Ep  17/30  Loss=0.0185  valF1=0.8974  valAUC=0.9692  valMCC=0.7984  BenF1=0.8991  AtkF1=0.8974
+
+
+
+  Ep  18/30  Loss=0.0164  valF1=0.8888  valAUC=0.9644  valMCC=0.7795  BenF1=0.8895  AtkF1=0.8888
+
+
+
+  Ep  19/30  Loss=0.0150  valF1=0.8958  valAUC=0.9661  valMCC=0.7868  BenF1=0.8910  AtkF1=0.8958
+
+
+
+  Ep  20/30  Loss=0.0136  valF1=0.8953  valAUC=0.9683  valMCC=0.7957  BenF1=0.8980  AtkF1=0.8953
+
+
+
+  Ep  21/30  Loss=0.0127  valF1=0.8979  valAUC=0.9665  valMCC=0.7872  BenF1=0.8885  AtkF1=0.8979
+
+
+
+  Ep  22/30  Loss=0.0114  valF1=0.8953  valAUC=0.9646  valMCC=0.7940  BenF1=0.8970  AtkF1=0.8953
+
+
+
+  Ep  23/30  Loss=0.0111  valF1=0.8984  valAUC=0.9647  valMCC=0.7891  BenF1=0.8903  AtkF1=0.8984
+  ⏹ Early stop at epoch 23  |  Best val score=0.9006
+
+
+  |  F1=0.8949  AUC=0.9651  MCC=0.7800  PR-AUC=0.9682
+  |  Acc=0.8897  Prec=0.8747  Rec=0.9161
+  |  Benign-F1=0.8840  Attack-F1=0.8949  FPR@TPR99=0.3769  FPR@TPR95=0.2075
+  [saved tch_net_v2_results/partA_results.json — TCH-Net]  elapsed 0.66 h
+
+
+  BiLSTM-IDS
+  -- Seed 42 [1/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1278  valF1=0.6853  valAUC=0.7417  valMCC=0.3698  BenF1=0.6839  AtkF1=0.6853 ★
+
+
+
+  Ep   2/30  Loss=0.0887  valF1=0.7885  valAUC=0.8854  valMCC=0.5804  BenF1=0.7906  AtkF1=0.7885 ★
+
+
+
+  Ep   3/30  Loss=0.0778  valF1=0.8093  valAUC=0.8987  valMCC=0.6125  BenF1=0.8031  AtkF1=0.8093 ★
+
+
+
+  Ep   4/30  Loss=0.0738  valF1=0.8200  valAUC=0.8997  valMCC=0.6078  BenF1=0.7758  AtkF1=0.8200 ★
+
+
+
+  Ep   5/30  Loss=0.0718  valF1=0.8198  valAUC=0.9080  valMCC=0.6352  BenF1=0.8153  AtkF1=0.8198
+
+
+
+  Ep   6/30  Loss=0.0698  valF1=0.7594  valAUC=0.9078  valMCC=0.5992  BenF1=0.8087  AtkF1=0.7594
+
+
+
+  Ep   7/30  Loss=0.0676  valF1=0.8133  valAUC=0.9156  valMCC=0.6414  BenF1=0.8237  AtkF1=0.8133
+
+
+
+  Ep   8/30  Loss=0.0664  valF1=0.8068  valAUC=0.9165  valMCC=0.6377  BenF1=0.8233  AtkF1=0.8068
+
+
+
+  Ep   9/30  Loss=0.0647  valF1=0.8368  valAUC=0.9195  valMCC=0.6502  BenF1=0.8077  AtkF1=0.8368 ★
+
+
+
+  Ep  10/30  Loss=0.0638  valF1=0.8291  valAUC=0.9205  valMCC=0.6560  BenF1=0.8265  AtkF1=0.8291
+
+
+
+  Ep  11/30  Loss=0.0631  valF1=0.8296  valAUC=0.9176  valMCC=0.6478  BenF1=0.8180  AtkF1=0.8296
+
+
+
+  Ep  12/30  Loss=0.0622  valF1=0.8430  valAUC=0.9236  valMCC=0.6718  BenF1=0.8280  AtkF1=0.8430 ★
+
+
+
+  Ep  13/30  Loss=0.0614  valF1=0.8497  valAUC=0.9296  valMCC=0.6773  BenF1=0.8205  AtkF1=0.8497 ★
+
+
+
+  Ep  14/30  Loss=0.0601  valF1=0.8302  valAUC=0.9307  valMCC=0.6690  BenF1=0.8360  AtkF1=0.8302
+
+
+
+  Ep  15/30  Loss=0.0598  valF1=0.8352  valAUC=0.9259  valMCC=0.6629  BenF1=0.8277  AtkF1=0.8352
+
+
+
+  Ep  16/30  Loss=0.0587  valF1=0.8294  valAUC=0.9266  valMCC=0.6652  BenF1=0.8336  AtkF1=0.8294
+
+
+
+  Ep  17/30  Loss=0.0580  valF1=0.8551  valAUC=0.9341  valMCC=0.6921  BenF1=0.8333  AtkF1=0.8551 ★
+
+
+
+  Ep  18/30  Loss=0.0578  valF1=0.8513  valAUC=0.9339  valMCC=0.6824  BenF1=0.8259  AtkF1=0.8513
+
+
+
+  Ep  19/30  Loss=0.0568  valF1=0.8332  valAUC=0.9354  valMCC=0.6803  BenF1=0.8425  AtkF1=0.8332
+
+
+
+  Ep  20/30  Loss=0.0564  valF1=0.8424  valAUC=0.9334  valMCC=0.6855  BenF1=0.8422  AtkF1=0.8424
+
+
+
+  Ep  21/30  Loss=0.0557  valF1=0.8564  valAUC=0.9392  valMCC=0.6999  BenF1=0.8426  AtkF1=0.8564 ★
+
+
+
+  Ep  22/30  Loss=0.0553  valF1=0.8313  valAUC=0.9365  valMCC=0.6840  BenF1=0.8452  AtkF1=0.8313
+
+
+
+  Ep  23/30  Loss=0.0548  valF1=0.8475  valAUC=0.9390  valMCC=0.6951  BenF1=0.8468  AtkF1=0.8475
+
+
+
+  Ep  24/30  Loss=0.0542  valF1=0.8445  valAUC=0.9382  valMCC=0.6859  BenF1=0.8411  AtkF1=0.8445
+
+
+
+  Ep  25/30  Loss=0.0539  valF1=0.8537  valAUC=0.9398  valMCC=0.7030  BenF1=0.8492  AtkF1=0.8537
+
+
+
+  Ep  26/30  Loss=0.0536  valF1=0.8528  valAUC=0.9400  valMCC=0.6962  BenF1=0.8433  AtkF1=0.8528
+
+
+
+  Ep  27/30  Loss=0.0533  valF1=0.8540  valAUC=0.9406  valMCC=0.6995  BenF1=0.8454  AtkF1=0.8540
+
+
+
+  Ep  28/30  Loss=0.0532  valF1=0.8543  valAUC=0.9403  valMCC=0.6995  BenF1=0.8451  AtkF1=0.8543
+  ⏹ Early stop at epoch 28  |  Best val score=0.8564
+
+
+  |  F1=0.8572  AUC=0.9371  MCC=0.7025  PR-AUC=0.9433
+  |  Acc=0.8513  Prec=0.8439  Rec=0.8709
+  |  Benign-F1=0.8448  Attack-F1=0.8572  FPR@TPR99=0.5392  FPR@TPR95=0.3251
+  -- Seed 123 [2/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1278  valF1=0.6051  valAUC=0.7293  valMCC=0.3354  BenF1=0.6971  AtkF1=0.6051 ★
+
+
+
+  Ep   2/30  Loss=0.0879  valF1=0.7815  valAUC=0.8786  valMCC=0.5638  BenF1=0.7815  AtkF1=0.7815 ★
+
+
+
+  Ep   3/30  Loss=0.0773  valF1=0.8133  valAUC=0.8866  valMCC=0.5921  BenF1=0.7658  AtkF1=0.8133 ★
+
+
+
+  Ep   4/30  Loss=0.0742  valF1=0.8170  valAUC=0.9022  valMCC=0.6114  BenF1=0.7917  AtkF1=0.8170 ★
+
+
+
+  Ep   5/30  Loss=0.0721  valF1=0.8171  valAUC=0.9051  valMCC=0.6188  BenF1=0.8011  AtkF1=0.8171 ★
+
+
+
+  Ep   6/30  Loss=0.0695  valF1=0.8278  valAUC=0.9122  valMCC=0.6312  BenF1=0.7986  AtkF1=0.8278 ★
+
+
+
+  Ep   7/30  Loss=0.0676  valF1=0.7932  valAUC=0.9117  valMCC=0.6133  BenF1=0.8119  AtkF1=0.7932
+
+
+
+  Ep   8/30  Loss=0.0666  valF1=0.8365  valAUC=0.9157  valMCC=0.6569  BenF1=0.8193  AtkF1=0.8365 ★
+
+
+
+  Ep   9/30  Loss=0.0657  valF1=0.8289  valAUC=0.9192  valMCC=0.6560  BenF1=0.8267  AtkF1=0.8289
+
+
+
+  Ep  10/30  Loss=0.0644  valF1=0.8220  valAUC=0.9137  valMCC=0.6459  BenF1=0.8228  AtkF1=0.8220
+
+
+
+  Ep  11/30  Loss=0.0633  valF1=0.8346  valAUC=0.9195  valMCC=0.6477  BenF1=0.8095  AtkF1=0.8346
+
+
+
+  Ep  12/30  Loss=0.0625  valF1=0.8399  valAUC=0.9210  valMCC=0.6610  BenF1=0.8186  AtkF1=0.8399 ★
+
+
+
+  Ep  13/30  Loss=0.0615  valF1=0.8117  valAUC=0.9243  valMCC=0.6460  BenF1=0.8271  AtkF1=0.8117
+
+
+
+  Ep  14/30  Loss=0.0605  valF1=0.8440  valAUC=0.9275  valMCC=0.6749  BenF1=0.8303  AtkF1=0.8440 ★
+
+
+
+  Ep  15/30  Loss=0.0595  valF1=0.8375  valAUC=0.9286  valMCC=0.6720  BenF1=0.8341  AtkF1=0.8375
+
+
+
+  Ep  16/30  Loss=0.0589  valF1=0.8345  valAUC=0.9192  valMCC=0.6517  BenF1=0.8157  AtkF1=0.8345
+
+
+
+  Ep  17/30  Loss=0.0580  valF1=0.8426  valAUC=0.9277  valMCC=0.6769  BenF1=0.8343  AtkF1=0.8426
+
+
+
+  Ep  18/30  Loss=0.0569  valF1=0.8290  valAUC=0.9370  valMCC=0.6868  BenF1=0.8471  AtkF1=0.8290
+
+
+
+  Ep  19/30  Loss=0.0561  valF1=0.8464  valAUC=0.9380  valMCC=0.6891  BenF1=0.8425  AtkF1=0.8464 ★
+
+
+
+  Ep  20/30  Loss=0.0554  valF1=0.8442  valAUC=0.9373  valMCC=0.6900  BenF1=0.8447  AtkF1=0.8442
+
+
+
+  Ep  21/30  Loss=0.0550  valF1=0.8455  valAUC=0.9371  valMCC=0.6907  BenF1=0.8445  AtkF1=0.8455
+
+
+
+  Ep  22/30  Loss=0.0546  valF1=0.8488  valAUC=0.9364  valMCC=0.6866  BenF1=0.8375  AtkF1=0.8488 ★
+
+
+
+  Ep  23/30  Loss=0.0538  valF1=0.8532  valAUC=0.9399  valMCC=0.7031  BenF1=0.8497  AtkF1=0.8532 ★
+
+
+
+  Ep  24/30  Loss=0.0534  valF1=0.8574  valAUC=0.9400  valMCC=0.6961  BenF1=0.8340  AtkF1=0.8574 ★
+
+
+
+  Ep  25/30  Loss=0.0529  valF1=0.8492  valAUC=0.9413  valMCC=0.7039  BenF1=0.8526  AtkF1=0.8492
+
+
+
+  Ep  26/30  Loss=0.0527  valF1=0.8594  valAUC=0.9416  valMCC=0.7125  BenF1=0.8531  AtkF1=0.8594 ★
+
+
+
+  Ep  27/30  Loss=0.0524  valF1=0.8551  valAUC=0.9419  valMCC=0.7006  BenF1=0.8454  AtkF1=0.8551
+
+
+
+  Ep  28/30  Loss=0.0524  valF1=0.8584  valAUC=0.9418  valMCC=0.7127  BenF1=0.8542  AtkF1=0.8584
+
+
+
+  Ep  29/30  Loss=0.0524  valF1=0.8556  valAUC=0.9418  valMCC=0.7061  BenF1=0.8504  AtkF1=0.8556
+
+
+
+  Ep  30/30  Loss=0.0521  valF1=0.8550  valAUC=0.9419  valMCC=0.7144  BenF1=0.8576  AtkF1=0.8550
+
+
+  |  F1=0.8589  AUC=0.9416  MCC=0.7082  PR-AUC=0.9475
+  |  Acc=0.8542  Prec=0.8526  Rec=0.8652
+  |  Benign-F1=0.8493  Attack-F1=0.8589  FPR@TPR99=0.5281  FPR@TPR95=0.2969
+  -- Seed 456 [3/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1286  valF1=0.6734  valAUC=0.7407  valMCC=0.3795  BenF1=0.7001  AtkF1=0.6734 ★
+
+
+
+  Ep   2/30  Loss=0.0882  valF1=0.7973  valAUC=0.8733  valMCC=0.5557  BenF1=0.7459  AtkF1=0.7973 ★
+
+
+
+  Ep   3/30  Loss=0.0783  valF1=0.7977  valAUC=0.8827  valMCC=0.5865  BenF1=0.7888  AtkF1=0.7977 ★
+
+
+
+  Ep   4/30  Loss=0.0745  valF1=0.7771  valAUC=0.8884  valMCC=0.5786  BenF1=0.7948  AtkF1=0.7771
+
+
+
+  Ep   5/30  Loss=0.0719  valF1=0.7884  valAUC=0.9064  valMCC=0.6065  BenF1=0.8090  AtkF1=0.7884
+
+
+
+  Ep   6/30  Loss=0.0701  valF1=0.7923  valAUC=0.8969  valMCC=0.5989  BenF1=0.8027  AtkF1=0.7923
+
+
+
+  Ep   7/30  Loss=0.0681  valF1=0.7920  valAUC=0.9121  valMCC=0.6177  BenF1=0.8149  AtkF1=0.7920
+
+
+
+  Ep   8/30  Loss=0.0667  valF1=0.8223  valAUC=0.9112  valMCC=0.6360  BenF1=0.8137  AtkF1=0.8223 ★
+
+
+
+  Ep   9/30  Loss=0.0658  valF1=0.8352  valAUC=0.9199  valMCC=0.6596  BenF1=0.8242  AtkF1=0.8352 ★
+
+
+
+  Ep  10/30  Loss=0.0648  valF1=0.8238  valAUC=0.9128  valMCC=0.6186  BenF1=0.7862  AtkF1=0.8238
+
+
+
+  Ep  11/30  Loss=0.0641  valF1=0.8455  valAUC=0.9231  valMCC=0.6745  BenF1=0.8274  AtkF1=0.8455 ★
+
+
+
+  Ep  12/30  Loss=0.0632  valF1=0.8060  valAUC=0.9118  valMCC=0.6305  BenF1=0.8189  AtkF1=0.8060
+
+
+
+  Ep  13/30  Loss=0.0625  valF1=0.7984  valAUC=0.9185  valMCC=0.6296  BenF1=0.8204  AtkF1=0.7984
+
+
+
+  Ep  14/30  Loss=0.0617  valF1=0.8190  valAUC=0.9203  valMCC=0.6448  BenF1=0.8236  AtkF1=0.8190
+
+
+
+  Ep  15/30  Loss=0.0612  valF1=0.8567  valAUC=0.9291  valMCC=0.6991  BenF1=0.8411  AtkF1=0.8567 ★
+
+
+
+  Ep  16/30  Loss=0.0604  valF1=0.8419  valAUC=0.9277  valMCC=0.6678  BenF1=0.8245  AtkF1=0.8419
+
+
+
+  Ep  17/30  Loss=0.0598  valF1=0.8405  valAUC=0.9306  valMCC=0.6760  BenF1=0.8354  AtkF1=0.8405
+
+
+
+  Ep  18/30  Loss=0.0592  valF1=0.8320  valAUC=0.9279  valMCC=0.6722  BenF1=0.8375  AtkF1=0.8320
+
+
+
+  Ep  19/30  Loss=0.0587  valF1=0.8545  valAUC=0.9351  valMCC=0.6880  BenF1=0.8267  AtkF1=0.8545
+
+
+
+  Ep  20/30  Loss=0.0579  valF1=0.8272  valAUC=0.9304  valMCC=0.6669  BenF1=0.8357  AtkF1=0.8272
+
+
+
+  Ep  21/30  Loss=0.0571  valF1=0.8328  valAUC=0.9285  valMCC=0.6648  BenF1=0.8314  AtkF1=0.8328
+
+
+
+  Ep  22/30  Loss=0.0567  valF1=0.8577  valAUC=0.9364  valMCC=0.6964  BenF1=0.8336  AtkF1=0.8577 ★
+
+
+
+  Ep  23/30  Loss=0.0563  valF1=0.8441  valAUC=0.9302  valMCC=0.6740  BenF1=0.8291  AtkF1=0.8441
+
+
+
+  Ep  24/30  Loss=0.0557  valF1=0.8498  valAUC=0.9373  valMCC=0.6868  BenF1=0.8364  AtkF1=0.8498
+
+
+
+  Ep  25/30  Loss=0.0552  valF1=0.8527  valAUC=0.9382  valMCC=0.7020  BenF1=0.8490  AtkF1=0.8527
+
+
+
+  Ep  26/30  Loss=0.0549  valF1=0.8495  valAUC=0.9380  valMCC=0.6955  BenF1=0.8458  AtkF1=0.8495
+
+
+
+  Ep  27/30  Loss=0.0545  valF1=0.8535  valAUC=0.9380  valMCC=0.7030  BenF1=0.8493  AtkF1=0.8535
+
+
+
+  Ep  28/30  Loss=0.0545  valF1=0.8540  valAUC=0.9386  valMCC=0.7041  BenF1=0.8500  AtkF1=0.8540
+
+
+
+  Ep  29/30  Loss=0.0545  valF1=0.8435  valAUC=0.9379  valMCC=0.6948  BenF1=0.8485  AtkF1=0.8435
+  ⏹ Early stop at epoch 29  |  Best val score=0.8577
+
+
+  |  F1=0.8516  AUC=0.9340  MCC=0.6824  PR-AUC=0.9410
+  |  Acc=0.8397  Prec=0.8104  Rec=0.8972
+  |  Benign-F1=0.8257  Attack-F1=0.8516  FPR@TPR99=0.5408  FPR@TPR95=0.3328
+  -- Seed 789 [4/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1330  valF1=0.6361  valAUC=0.7114  valMCC=0.3144  BenF1=0.6711  AtkF1=0.6361 ★
+
+
+
+  Ep   2/30  Loss=0.0936  valF1=0.7915  valAUC=0.8791  valMCC=0.5794  BenF1=0.7876  AtkF1=0.7915 ★
+
+
+
+  Ep   3/30  Loss=0.0785  valF1=0.8059  valAUC=0.8951  valMCC=0.6037  BenF1=0.7978  AtkF1=0.8059 ★
+
+
+
+  Ep   4/30  Loss=0.0742  valF1=0.7746  valAUC=0.8993  valMCC=0.5854  BenF1=0.7998  AtkF1=0.7746
+
+
+
+  Ep   5/30  Loss=0.0714  valF1=0.7648  valAUC=0.9086  valMCC=0.5887  BenF1=0.8034  AtkF1=0.7648
+
+
+
+  Ep   6/30  Loss=0.0696  valF1=0.7819  valAUC=0.9009  valMCC=0.5996  BenF1=0.8065  AtkF1=0.7819
+
+
+
+  Ep   7/30  Loss=0.0683  valF1=0.8293  valAUC=0.9091  valMCC=0.6391  BenF1=0.8078  AtkF1=0.8293 ★
+
+
+
+  Ep   8/30  Loss=0.0666  valF1=0.8321  valAUC=0.9160  valMCC=0.6464  BenF1=0.8127  AtkF1=0.8321 ★
+
+
+
+  Ep   9/30  Loss=0.0655  valF1=0.8320  valAUC=0.9145  valMCC=0.6482  BenF1=0.8151  AtkF1=0.8320
+
+
+
+  Ep  10/30  Loss=0.0646  valF1=0.8289  valAUC=0.9155  valMCC=0.6407  BenF1=0.8107  AtkF1=0.8289
+
+
+
+  Ep  11/30  Loss=0.0641  valF1=0.8246  valAUC=0.9226  valMCC=0.6598  BenF1=0.8318  AtkF1=0.8246
+
+
+
+  Ep  12/30  Loss=0.0630  valF1=0.8321  valAUC=0.9241  valMCC=0.6600  BenF1=0.8277  AtkF1=0.8321 ★
+
+
+
+  Ep  13/30  Loss=0.0622  valF1=0.8348  valAUC=0.9255  valMCC=0.6692  BenF1=0.8337  AtkF1=0.8348 ★
+
+
+
+  Ep  14/30  Loss=0.0617  valF1=0.8191  valAUC=0.9254  valMCC=0.6551  BenF1=0.8306  AtkF1=0.8191
+
+
+
+  Ep  15/30  Loss=0.0610  valF1=0.8413  valAUC=0.9272  valMCC=0.6736  BenF1=0.8323  AtkF1=0.8413 ★
+
+
+
+  Ep  16/30  Loss=0.0603  valF1=0.8264  valAUC=0.9244  valMCC=0.6531  BenF1=0.8259  AtkF1=0.8264
+
+
+
+  Ep  17/30  Loss=0.0593  valF1=0.8202  valAUC=0.9258  valMCC=0.6557  BenF1=0.8307  AtkF1=0.8202
+
+
+
+  Ep  18/30  Loss=0.0594  valF1=0.8310  valAUC=0.9304  valMCC=0.6729  BenF1=0.8383  AtkF1=0.8310
+
+
+
+  Ep  19/30  Loss=0.0582  valF1=0.8498  valAUC=0.9329  valMCC=0.6804  BenF1=0.8267  AtkF1=0.8498 ★
+
+
+
+  Ep  20/30  Loss=0.0576  valF1=0.8467  valAUC=0.9322  valMCC=0.6794  BenF1=0.8318  AtkF1=0.8467
+
+
+
+  Ep  21/30  Loss=0.0575  valF1=0.8287  valAUC=0.9332  valMCC=0.6734  BenF1=0.8394  AtkF1=0.8287
+
+
+
+  Ep  22/30  Loss=0.0569  valF1=0.8405  valAUC=0.9316  valMCC=0.6748  BenF1=0.8342  AtkF1=0.8405
+
+
+
+  Ep  23/30  Loss=0.0564  valF1=0.8512  valAUC=0.9362  valMCC=0.6941  BenF1=0.8429  AtkF1=0.8512 ★
+
+
+
+  Ep  24/30  Loss=0.0559  valF1=0.8520  valAUC=0.9362  valMCC=0.6885  BenF1=0.8349  AtkF1=0.8520 ★
+
+
+
+  Ep  25/30  Loss=0.0555  valF1=0.8472  valAUC=0.9351  valMCC=0.6994  BenF1=0.8503  AtkF1=0.8472
+
+
+
+  Ep  26/30  Loss=0.0552  valF1=0.8488  valAUC=0.9368  valMCC=0.6921  BenF1=0.8432  AtkF1=0.8488
+
+
+
+  Ep  27/30  Loss=0.0550  valF1=0.8513  valAUC=0.9373  valMCC=0.7026  BenF1=0.8505  AtkF1=0.8513
+
+
+
+  Ep  28/30  Loss=0.0548  valF1=0.8466  valAUC=0.9369  valMCC=0.6902  BenF1=0.8433  AtkF1=0.8466
+
+
+
+  Ep  29/30  Loss=0.0547  valF1=0.8533  valAUC=0.9368  valMCC=0.7070  BenF1=0.8528  AtkF1=0.8533 ★
+
+
+
+  Ep  30/30  Loss=0.0548  valF1=0.8435  valAUC=0.9358  valMCC=0.6904  BenF1=0.8454  AtkF1=0.8435
+
+
+  |  F1=0.8477  AUC=0.9341  MCC=0.6908  PR-AUC=0.9404
+  |  Acc=0.8453  Prec=0.8561  Rec=0.8395
+  |  Benign-F1=0.8429  Attack-F1=0.8477  FPR@TPR99=0.5469  FPR@TPR95=0.3262
+  -- Seed 2024 [5/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1286  valF1=0.6353  valAUC=0.7118  valMCC=0.3237  BenF1=0.6785  AtkF1=0.6353 ★
+
+
+
+  Ep   2/30  Loss=0.0891  valF1=0.7987  valAUC=0.8856  valMCC=0.5886  BenF1=0.7899  AtkF1=0.7987 ★
+
+
+
+  Ep   3/30  Loss=0.0773  valF1=0.7933  valAUC=0.8912  valMCC=0.5928  BenF1=0.7977  AtkF1=0.7933
+
+
+
+  Ep   4/30  Loss=0.0732  valF1=0.7983  valAUC=0.8990  valMCC=0.6024  BenF1=0.8023  AtkF1=0.7983
+
+
+
+  Ep   5/30  Loss=0.0716  valF1=0.8032  valAUC=0.8986  valMCC=0.6068  BenF1=0.8028  AtkF1=0.8032 ★
+
+
+
+  Ep   6/30  Loss=0.0698  valF1=0.8002  valAUC=0.8841  valMCC=0.5699  BenF1=0.7641  AtkF1=0.8002
+
+
+
+  Ep   7/30  Loss=0.0682  valF1=0.8053  valAUC=0.9099  valMCC=0.6221  BenF1=0.8135  AtkF1=0.8053 ★
+
+
+
+  Ep   8/30  Loss=0.0665  valF1=0.8080  valAUC=0.9010  valMCC=0.6047  BenF1=0.7967  AtkF1=0.8080 ★
+
+
+
+  Ep   9/30  Loss=0.0658  valF1=0.8060  valAUC=0.8958  valMCC=0.5843  BenF1=0.7739  AtkF1=0.8060
+
+
+
+  Ep  10/30  Loss=0.0646  valF1=0.8400  valAUC=0.9215  valMCC=0.6704  BenF1=0.8304  AtkF1=0.8400 ★
+
+
+
+  Ep  11/30  Loss=0.0637  valF1=0.8292  valAUC=0.9244  valMCC=0.6559  BenF1=0.8263  AtkF1=0.8292
+
+
+
+  Ep  12/30  Loss=0.0630  valF1=0.8007  valAUC=0.9115  valMCC=0.6257  BenF1=0.8175  AtkF1=0.8007
+
+
+
+  Ep  13/30  Loss=0.0622  valF1=0.8166  valAUC=0.9214  valMCC=0.6464  BenF1=0.8258  AtkF1=0.8166
+
+
+
+  Ep  14/30  Loss=0.0616  valF1=0.8404  valAUC=0.9251  valMCC=0.6715  BenF1=0.8310  AtkF1=0.8404 ★
+
+
+
+  Ep  15/30  Loss=0.0606  valF1=0.8164  valAUC=0.9210  valMCC=0.6481  BenF1=0.8270  AtkF1=0.8164
+
+
+
+  Ep  16/30  Loss=0.0601  valF1=0.8449  valAUC=0.9311  valMCC=0.6743  BenF1=0.8281  AtkF1=0.8449 ★
+
+
+
+  Ep  17/30  Loss=0.0590  valF1=0.8289  valAUC=0.9227  valMCC=0.6511  BenF1=0.8222  AtkF1=0.8289
+
+
+
+  Ep  18/30  Loss=0.0584  valF1=0.8514  valAUC=0.9329  valMCC=0.6910  BenF1=0.8392  AtkF1=0.8514 ★
+
+
+
+  Ep  19/30  Loss=0.0576  valF1=0.8452  valAUC=0.9364  valMCC=0.6857  BenF1=0.8404  AtkF1=0.8452
+
+
+
+  Ep  20/30  Loss=0.0568  valF1=0.8270  valAUC=0.9369  valMCC=0.6803  BenF1=0.8438  AtkF1=0.8270
+
+
+
+  Ep  21/30  Loss=0.0565  valF1=0.8539  valAUC=0.9329  valMCC=0.6884  BenF1=0.8300  AtkF1=0.8539 ★
+
+
+
+  Ep  22/30  Loss=0.0561  valF1=0.8318  valAUC=0.9289  valMCC=0.6639  BenF1=0.8313  AtkF1=0.8318
+
+
+
+  Ep  23/30  Loss=0.0558  valF1=0.8400  valAUC=0.9259  valMCC=0.6704  BenF1=0.8304  AtkF1=0.8400
+
+
+
+  Ep  24/30  Loss=0.0552  valF1=0.8558  valAUC=0.9401  valMCC=0.7111  BenF1=0.8547  AtkF1=0.8558 ★
+
+
+
+  Ep  25/30  Loss=0.0549  valF1=0.8497  valAUC=0.9359  valMCC=0.6909  BenF1=0.8412  AtkF1=0.8497
+
+
+
+  Ep  26/30  Loss=0.0543  valF1=0.8541  valAUC=0.9394  valMCC=0.7017  BenF1=0.8476  AtkF1=0.8541
+
+
+
+  Ep  27/30  Loss=0.0539  valF1=0.8588  valAUC=0.9403  valMCC=0.7103  BenF1=0.8515  AtkF1=0.8588 ★
+
+
+
+  Ep  28/30  Loss=0.0539  valF1=0.8564  valAUC=0.9399  valMCC=0.7060  BenF1=0.8496  AtkF1=0.8564
+
+
+
+  Ep  29/30  Loss=0.0537  valF1=0.8601  valAUC=0.9400  valMCC=0.7135  BenF1=0.8534  AtkF1=0.8601 ★
+
+
+
+  Ep  30/30  Loss=0.0538  valF1=0.8622  valAUC=0.9418  valMCC=0.7127  BenF1=0.8499  AtkF1=0.8622 ★
+
+
+  |  F1=0.8536  AUC=0.9373  MCC=0.6931  PR-AUC=0.9438
+  |  Acc=0.8464  Prec=0.8346  Rec=0.8736
+  |  Benign-F1=0.8385  Attack-F1=0.8536  FPR@TPR99=0.5259  FPR@TPR95=0.3206
+  -> F1=0.8538 ± 0.0045
+  [saved tch_net_v2_results/partA_results.json — BiLSTM-IDS]  elapsed 0.81 h
+
+  BiGRU-IDS
+  -- Seed 42 [1/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1323  valF1=0.6711  valAUC=0.7064  valMCC=0.3006  BenF1=0.6277  AtkF1=0.6711 ★
+
+
+
+  Ep   2/30  Loss=0.0936  valF1=0.7728  valAUC=0.8791  valMCC=0.5654  BenF1=0.7875  AtkF1=0.7728 ★
+
+
+
+  Ep   3/30  Loss=0.0769  valF1=0.7522  valAUC=0.8831  valMCC=0.5525  BenF1=0.7858  AtkF1=0.7522
+
+
+
+  Ep   4/30  Loss=0.0740  valF1=0.7860  valAUC=0.9043  valMCC=0.5991  BenF1=0.8051  AtkF1=0.7860 ★
+
+
+
+  Ep   5/30  Loss=0.0705  valF1=0.8245  valAUC=0.9076  valMCC=0.6381  BenF1=0.8135  AtkF1=0.8245 ★
+
+
+
+  Ep   6/30  Loss=0.0683  valF1=0.8323  valAUC=0.9098  valMCC=0.6398  BenF1=0.8012  AtkF1=0.8323 ★
+
+
+
+  Ep   7/30  Loss=0.0664  valF1=0.8125  valAUC=0.9146  valMCC=0.6360  BenF1=0.8202  AtkF1=0.8125
+
+
+
+  Ep   8/30  Loss=0.0651  valF1=0.8129  valAUC=0.9219  valMCC=0.6418  BenF1=0.8240  AtkF1=0.8129
+
+
+
+  Ep   9/30  Loss=0.0634  valF1=0.8098  valAUC=0.9171  valMCC=0.6397  BenF1=0.8237  AtkF1=0.8098
+
+
+
+  Ep  10/30  Loss=0.0629  valF1=0.8433  valAUC=0.9249  valMCC=0.6719  BenF1=0.8276  AtkF1=0.8433 ★
+
+
+
+  Ep  11/30  Loss=0.0615  valF1=0.8281  valAUC=0.9144  valMCC=0.6490  BenF1=0.8209  AtkF1=0.8281
+
+
+
+  Ep  12/30  Loss=0.0610  valF1=0.8299  valAUC=0.9287  valMCC=0.6663  BenF1=0.8342  AtkF1=0.8299
+
+
+
+  Ep  13/30  Loss=0.0600  valF1=0.8473  valAUC=0.9337  valMCC=0.6900  BenF1=0.8426  AtkF1=0.8473 ★
+
+
+
+  Ep  14/30  Loss=0.0588  valF1=0.8012  valAUC=0.9285  valMCC=0.6404  BenF1=0.8258  AtkF1=0.8012
+
+
+
+  Ep  15/30  Loss=0.0584  valF1=0.8449  valAUC=0.9341  valMCC=0.6834  BenF1=0.8385  AtkF1=0.8449
+
+
+
+  Ep  16/30  Loss=0.0573  valF1=0.8384  valAUC=0.9372  valMCC=0.6853  BenF1=0.8440  AtkF1=0.8384
+
+
+
+  Ep  17/30  Loss=0.0566  valF1=0.8523  valAUC=0.9374  valMCC=0.6922  BenF1=0.8393  AtkF1=0.8523 ★
+
+
+
+  Ep  18/30  Loss=0.0558  valF1=0.8505  valAUC=0.9394  valMCC=0.6977  BenF1=0.8470  AtkF1=0.8505
+
+
+
+  Ep  19/30  Loss=0.0550  valF1=0.8559  valAUC=0.9368  valMCC=0.7027  BenF1=0.8467  AtkF1=0.8559 ★
+
+
+
+  Ep  20/30  Loss=0.0549  valF1=0.8614  valAUC=0.9412  valMCC=0.7125  BenF1=0.8508  AtkF1=0.8614 ★
+
+
+
+  Ep  21/30  Loss=0.0541  valF1=0.8417  valAUC=0.9390  valMCC=0.6902  BenF1=0.8461  AtkF1=0.8417
+
+
+
+  Ep  22/30  Loss=0.0533  valF1=0.8489  valAUC=0.9426  valMCC=0.7041  BenF1=0.8529  AtkF1=0.8489
+
+
+
+  Ep  23/30  Loss=0.0530  valF1=0.8617  valAUC=0.9427  valMCC=0.7107  BenF1=0.8481  AtkF1=0.8617 ★
+
+
+
+  Ep  24/30  Loss=0.0525  valF1=0.8581  valAUC=0.9427  valMCC=0.7128  BenF1=0.8545  AtkF1=0.8581
+
+
+
+  Ep  25/30  Loss=0.0522  valF1=0.8576  valAUC=0.9437  valMCC=0.7104  BenF1=0.8528  AtkF1=0.8576
+
+
+
+  Ep  26/30  Loss=0.0519  valF1=0.8533  valAUC=0.9437  valMCC=0.7056  BenF1=0.8517  AtkF1=0.8533
+
+
+
+  Ep  27/30  Loss=0.0517  valF1=0.8584  valAUC=0.9440  valMCC=0.7127  BenF1=0.8542  AtkF1=0.8584
+
+
+
+  Ep  28/30  Loss=0.0515  valF1=0.8588  valAUC=0.9433  valMCC=0.7163  BenF1=0.8570  AtkF1=0.8588
+
+
+
+  Ep  29/30  Loss=0.0515  valF1=0.8561  valAUC=0.9434  valMCC=0.7097  BenF1=0.8533  AtkF1=0.8561
+
+
+
+  Ep  30/30  Loss=0.0513  valF1=0.8611  valAUC=0.9440  valMCC=0.7157  BenF1=0.8546  AtkF1=0.8611
+  ⏹ Early stop at epoch 30  |  Best val score=0.8617
+
+
+  |  F1=0.8611  AUC=0.9416  MCC=0.7087  PR-AUC=0.9470
+  |  Acc=0.8542  Prec=0.8417  Rec=0.8814
+  |  Benign-F1=0.8466  Attack-F1=0.8611  FPR@TPR99=0.5099  FPR@TPR95=0.2997
+  -- Seed 123 [2/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1285  valF1=0.6767  valAUC=0.7186  valMCC=0.3298  BenF1=0.6529  AtkF1=0.6767 ★
+
+
+
+  Ep   2/30  Loss=0.0910  valF1=0.7823  valAUC=0.8833  valMCC=0.5726  BenF1=0.7881  AtkF1=0.7823 ★
+
+
+
+  Ep   3/30  Loss=0.0777  valF1=0.7702  valAUC=0.8923  valMCC=0.5734  BenF1=0.7937  AtkF1=0.7702
+
+
+
+  Ep   4/30  Loss=0.0735  valF1=0.7913  valAUC=0.9010  valMCC=0.6010  BenF1=0.8046  AtkF1=0.7913 ★
+
+
+
+  Ep   5/30  Loss=0.0707  valF1=0.8267  valAUC=0.9072  valMCC=0.6270  BenF1=0.7936  AtkF1=0.8267 ★
+
+
+
+  Ep   6/30  Loss=0.0684  valF1=0.7873  valAUC=0.8965  valMCC=0.6059  BenF1=0.8090  AtkF1=0.7873
+
+
+
+  Ep   7/30  Loss=0.0666  valF1=0.7973  valAUC=0.9033  valMCC=0.6145  BenF1=0.8114  AtkF1=0.7973
+
+
+
+  Ep   8/30  Loss=0.0652  valF1=0.8342  valAUC=0.9207  valMCC=0.6619  BenF1=0.8277  AtkF1=0.8342 ★
+
+
+
+  Ep   9/30  Loss=0.0640  valF1=0.8258  valAUC=0.9240  valMCC=0.6548  BenF1=0.8276  AtkF1=0.8258
+
+
+
+  Ep  10/30  Loss=0.0632  valF1=0.8391  valAUC=0.9246  valMCC=0.6716  BenF1=0.8325  AtkF1=0.8391 ★
+
+
+
+  Ep  11/30  Loss=0.0621  valF1=0.8224  valAUC=0.9245  valMCC=0.6540  BenF1=0.8288  AtkF1=0.8224
+
+
+
+  Ep  12/30  Loss=0.0611  valF1=0.8282  valAUC=0.9289  valMCC=0.6646  BenF1=0.8337  AtkF1=0.8282
+
+
+
+  Ep  13/30  Loss=0.0600  valF1=0.8267  valAUC=0.9225  valMCC=0.6543  BenF1=0.8267  AtkF1=0.8267
+
+
+
+  Ep  14/30  Loss=0.0596  valF1=0.8229  valAUC=0.9303  valMCC=0.6676  BenF1=0.8374  AtkF1=0.8229
+
+
+
+  Ep  15/30  Loss=0.0584  valF1=0.8510  valAUC=0.9353  valMCC=0.6964  BenF1=0.8454  AtkF1=0.8510 ★
+
+
+
+  Ep  16/30  Loss=0.0576  valF1=0.8554  valAUC=0.9361  valMCC=0.7006  BenF1=0.8450  AtkF1=0.8554 ★
+
+
+
+  Ep  17/30  Loss=0.0565  valF1=0.8428  valAUC=0.9312  valMCC=0.6827  BenF1=0.8396  AtkF1=0.8428
+
+
+
+  Ep  18/30  Loss=0.0559  valF1=0.8478  valAUC=0.9396  valMCC=0.6963  BenF1=0.8476  AtkF1=0.8478
+
+
+
+  Ep  19/30  Loss=0.0552  valF1=0.8536  valAUC=0.9365  valMCC=0.6973  BenF1=0.8436  AtkF1=0.8536
+
+
+
+  Ep  20/30  Loss=0.0548  valF1=0.8480  valAUC=0.9402  valMCC=0.6949  BenF1=0.8463  AtkF1=0.8480
+
+
+
+  Ep  21/30  Loss=0.0541  valF1=0.8556  valAUC=0.9401  valMCC=0.7049  BenF1=0.8493  AtkF1=0.8556 ★
+
+
+
+  Ep  22/30  Loss=0.0535  valF1=0.8579  valAUC=0.9427  valMCC=0.7031  BenF1=0.8444  AtkF1=0.8579 ★
+
+
+
+  Ep  23/30  Loss=0.0532  valF1=0.8628  valAUC=0.9432  valMCC=0.7157  BenF1=0.8527  AtkF1=0.8628 ★
+
+
+
+  Ep  24/30  Loss=0.0524  valF1=0.8387  valAUC=0.9363  valMCC=0.6880  BenF1=0.8457  AtkF1=0.8387
+
+
+
+  Ep  25/30  Loss=0.0520  valF1=0.8634  valAUC=0.9416  valMCC=0.7235  BenF1=0.8599  AtkF1=0.8634 ★
+
+
+
+  Ep  26/30  Loss=0.0519  valF1=0.8526  valAUC=0.9430  valMCC=0.7033  BenF1=0.8503  AtkF1=0.8526
+
+
+
+  Ep  27/30  Loss=0.0516  valF1=0.8584  valAUC=0.9445  valMCC=0.7115  BenF1=0.8531  AtkF1=0.8584
+
+
+
+  Ep  28/30  Loss=0.0514  valF1=0.8581  valAUC=0.9439  valMCC=0.7140  BenF1=0.8556  AtkF1=0.8581
+
+
+
+  Ep  29/30  Loss=0.0515  valF1=0.8611  valAUC=0.9445  valMCC=0.7180  BenF1=0.8568  AtkF1=0.8611
+
+
+
+  Ep  30/30  Loss=0.0514  valF1=0.8599  valAUC=0.9448  valMCC=0.7135  BenF1=0.8537  AtkF1=0.8599
+
+
+  |  F1=0.8587  AUC=0.9379  MCC=0.7134  PR-AUC=0.9437
+  |  Acc=0.8566  Prec=0.8681  Rec=0.8494
+  |  Benign-F1=0.8546  Attack-F1=0.8587  FPR@TPR99=0.5475  FPR@TPR95=0.3168
+  -- Seed 456 [3/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1277  valF1=0.6835  valAUC=0.7178  valMCC=0.3122  BenF1=0.6235  AtkF1=0.6835 ★
+
+
+
+  Ep   2/30  Loss=0.0901  valF1=0.7776  valAUC=0.8815  valMCC=0.5783  BenF1=0.7944  AtkF1=0.7776 ★
+
+
+
+  Ep   3/30  Loss=0.0788  valF1=0.8000  valAUC=0.8929  valMCC=0.5919  BenF1=0.7919  AtkF1=0.8000 ★
+
+
+
+  Ep   4/30  Loss=0.0744  valF1=0.7949  valAUC=0.8879  valMCC=0.5883  BenF1=0.7929  AtkF1=0.7949
+
+
+
+  Ep   5/30  Loss=0.0711  valF1=0.8221  valAUC=0.9080  valMCC=0.6267  BenF1=0.8034  AtkF1=0.8221 ★
+
+
+
+  Ep   6/30  Loss=0.0686  valF1=0.8344  valAUC=0.9136  valMCC=0.6415  BenF1=0.7969  AtkF1=0.8344 ★
+
+
+
+  Ep   7/30  Loss=0.0671  valF1=0.8027  valAUC=0.9156  valMCC=0.6302  BenF1=0.8198  AtkF1=0.8027
+
+
+
+  Ep   8/30  Loss=0.0663  valF1=0.8013  valAUC=0.9032  valMCC=0.5963  BenF1=0.7950  AtkF1=0.8013
+
+
+
+  Ep   9/30  Loss=0.0649  valF1=0.7998  valAUC=0.9133  valMCC=0.6265  BenF1=0.8183  AtkF1=0.7998
+
+
+
+  Ep  10/30  Loss=0.0640  valF1=0.8373  valAUC=0.9213  valMCC=0.6581  BenF1=0.8195  AtkF1=0.8373 ★
+
+
+
+  Ep  11/30  Loss=0.0634  valF1=0.8268  valAUC=0.9221  valMCC=0.6530  BenF1=0.8255  AtkF1=0.8268
+
+
+
+  Ep  12/30  Loss=0.0623  valF1=0.8154  valAUC=0.9199  valMCC=0.6428  BenF1=0.8238  AtkF1=0.8154
+
+
+
+  Ep  13/30  Loss=0.0616  valF1=0.8144  valAUC=0.9230  valMCC=0.6451  BenF1=0.8257  AtkF1=0.8144
+
+
+
+  Ep  14/30  Loss=0.0609  valF1=0.8504  valAUC=0.9287  valMCC=0.6822  BenF1=0.8284  AtkF1=0.8504 ★
+
+
+
+  Ep  15/30  Loss=0.0603  valF1=0.8315  valAUC=0.9276  valMCC=0.6627  BenF1=0.8305  AtkF1=0.8315
+
+
+
+  Ep  16/30  Loss=0.0595  valF1=0.8352  valAUC=0.9269  valMCC=0.6703  BenF1=0.8343  AtkF1=0.8352
+
+
+
+  Ep  17/30  Loss=0.0590  valF1=0.8334  valAUC=0.9232  valMCC=0.6609  BenF1=0.8274  AtkF1=0.8334
+
+
+
+  Ep  18/30  Loss=0.0581  valF1=0.8460  valAUC=0.9296  valMCC=0.6856  BenF1=0.8396  AtkF1=0.8460
+
+
+
+  Ep  19/30  Loss=0.0576  valF1=0.8487  valAUC=0.9317  valMCC=0.6803  BenF1=0.8293  AtkF1=0.8487
+
+
+
+  Ep  20/30  Loss=0.0568  valF1=0.8215  valAUC=0.9315  valMCC=0.6625  BenF1=0.8346  AtkF1=0.8215
+
+
+
+  Ep  21/30  Loss=0.0565  valF1=0.8342  valAUC=0.9323  valMCC=0.6750  BenF1=0.8385  AtkF1=0.8342
+  ⏹ Early stop at epoch 21  |  Best val score=0.8504
+
+
+  |  F1=0.8495  AUC=0.9290  MCC=0.6796  PR-AUC=0.9358
+  |  Acc=0.8389  Prec=0.8152  Rec=0.8867
+  |  Benign-F1=0.8267  Attack-F1=0.8495  FPR@TPR99=0.5464  FPR@TPR95=0.3510
+  -- Seed 789 [4/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1270  valF1=0.6829  valAUC=0.7335  valMCC=0.3416  BenF1=0.6585  AtkF1=0.6829 ★
+
+
+
+  Ep   2/30  Loss=0.0879  valF1=0.7681  valAUC=0.8878  valMCC=0.5658  BenF1=0.7895  AtkF1=0.7681 ★
+
+
+
+  Ep   3/30  Loss=0.0774  valF1=0.7891  valAUC=0.8855  valMCC=0.5764  BenF1=0.7868  AtkF1=0.7891 ★
+
+
+
+  Ep   4/30  Loss=0.0731  valF1=0.8211  valAUC=0.9033  valMCC=0.6245  BenF1=0.8023  AtkF1=0.8211 ★
+
+
+
+  Ep   5/30  Loss=0.0704  valF1=0.7856  valAUC=0.9108  valMCC=0.6076  BenF1=0.8103  AtkF1=0.7856
+
+
+
+  Ep   6/30  Loss=0.0686  valF1=0.8308  valAUC=0.9138  valMCC=0.6460  BenF1=0.8142  AtkF1=0.8308 ★
+
+
+
+  Ep   7/30  Loss=0.0666  valF1=0.8034  valAUC=0.9122  valMCC=0.6296  BenF1=0.8192  AtkF1=0.8034
+
+
+
+  Ep   8/30  Loss=0.0659  valF1=0.8171  valAUC=0.9148  valMCC=0.6389  BenF1=0.8201  AtkF1=0.8171
+
+
+
+  Ep   9/30  Loss=0.0643  valF1=0.8270  valAUC=0.9178  valMCC=0.6568  BenF1=0.8285  AtkF1=0.8270
+
+
+
+  Ep  10/30  Loss=0.0634  valF1=0.8429  valAUC=0.9223  valMCC=0.6607  BenF1=0.8081  AtkF1=0.8429 ★
+
+
+
+  Ep  11/30  Loss=0.0625  valF1=0.8445  valAUC=0.9254  valMCC=0.6780  BenF1=0.8332  AtkF1=0.8445 ★
+
+
+
+  Ep  12/30  Loss=0.0617  valF1=0.8440  valAUC=0.9261  valMCC=0.6651  BenF1=0.8144  AtkF1=0.8440
+
+
+
+  Ep  13/30  Loss=0.0606  valF1=0.8385  valAUC=0.9271  valMCC=0.6717  BenF1=0.8331  AtkF1=0.8385
+
+
+
+  Ep  14/30  Loss=0.0597  valF1=0.8335  valAUC=0.9181  valMCC=0.6597  BenF1=0.8262  AtkF1=0.8335
+
+
+
+  Ep  15/30  Loss=0.0594  valF1=0.8263  valAUC=0.9193  valMCC=0.6506  BenF1=0.8238  AtkF1=0.8263
+
+
+
+  Ep  16/30  Loss=0.0583  valF1=0.8551  valAUC=0.9330  valMCC=0.6909  BenF1=0.8308  AtkF1=0.8551 ★
+
+
+
+  Ep  17/30  Loss=0.0576  valF1=0.8458  valAUC=0.9318  valMCC=0.6856  BenF1=0.8397  AtkF1=0.8458
+
+
+
+  Ep  18/30  Loss=0.0566  valF1=0.8354  valAUC=0.9330  valMCC=0.6815  BenF1=0.8425  AtkF1=0.8354
+
+
+
+  Ep  19/30  Loss=0.0562  valF1=0.8460  valAUC=0.9329  valMCC=0.6844  BenF1=0.8384  AtkF1=0.8460
+
+
+
+  Ep  20/30  Loss=0.0555  valF1=0.8557  valAUC=0.9357  valMCC=0.6954  BenF1=0.8375  AtkF1=0.8557 ★
+
+
+
+  Ep  21/30  Loss=0.0549  valF1=0.8483  valAUC=0.9383  valMCC=0.6960  BenF1=0.8471  AtkF1=0.8483
+
+
+
+  Ep  22/30  Loss=0.0542  valF1=0.8479  valAUC=0.9356  valMCC=0.6976  BenF1=0.8485  AtkF1=0.8479
+
+
+
+  Ep  23/30  Loss=0.0536  valF1=0.8525  valAUC=0.9391  valMCC=0.7074  BenF1=0.8536  AtkF1=0.8525
+
+
+
+  Ep  24/30  Loss=0.0531  valF1=0.8549  valAUC=0.9377  valMCC=0.7039  BenF1=0.8490  AtkF1=0.8549
+
+
+
+  Ep  25/30  Loss=0.0528  valF1=0.8671  valAUC=0.9405  valMCC=0.7254  BenF1=0.8581  AtkF1=0.8671 ★
+
+
+
+  Ep  26/30  Loss=0.0524  valF1=0.8564  valAUC=0.9406  valMCC=0.7083  BenF1=0.8518  AtkF1=0.8564
+
+
+
+  Ep  27/30  Loss=0.0522  valF1=0.8551  valAUC=0.9399  valMCC=0.7129  BenF1=0.8564  AtkF1=0.8551
+
+
+
+  Ep  28/30  Loss=0.0520  valF1=0.8614  valAUC=0.9411  valMCC=0.7168  BenF1=0.8554  AtkF1=0.8614
+
+
+
+  Ep  29/30  Loss=0.0519  valF1=0.8661  valAUC=0.9412  valMCC=0.7243  BenF1=0.8581  AtkF1=0.8661
+
+
+
+  Ep  30/30  Loss=0.0520  valF1=0.8585  valAUC=0.9408  valMCC=0.7114  BenF1=0.8529  AtkF1=0.8585
+
+
+  |  F1=0.8560  AUC=0.9374  MCC=0.7023  PR-AUC=0.9438
+  |  Acc=0.8513  Prec=0.8500  Rec=0.8620
+  |  Benign-F1=0.8463  Attack-F1=0.8560  FPR@TPR99=0.5243  FPR@TPR95=0.3173
+  -- Seed 2024 [5/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1256  valF1=0.6476  valAUC=0.7613  valMCC=0.3783  BenF1=0.7102  AtkF1=0.6476 ★
+
+
+
+  Ep   2/30  Loss=0.0866  valF1=0.7712  valAUC=0.8820  valMCC=0.5680  BenF1=0.7899  AtkF1=0.7712 ★
+
+
+
+  Ep   3/30  Loss=0.0778  valF1=0.8047  valAUC=0.8911  valMCC=0.5909  BenF1=0.7853  AtkF1=0.8047 ★
+
+
+
+  Ep   4/30  Loss=0.0736  valF1=0.8275  valAUC=0.9019  valMCC=0.6234  BenF1=0.7804  AtkF1=0.8275 ★
+
+
+
+  Ep   5/30  Loss=0.0714  valF1=0.8179  valAUC=0.9025  valMCC=0.6219  BenF1=0.8038  AtkF1=0.8179
+
+
+
+  Ep   6/30  Loss=0.0690  valF1=0.7688  valAUC=0.9047  valMCC=0.6021  BenF1=0.8096  AtkF1=0.7688
+
+
+
+  Ep   7/30  Loss=0.0671  valF1=0.8277  valAUC=0.9115  valMCC=0.6263  BenF1=0.7882  AtkF1=0.8277 ★
+
+
+
+  Ep   8/30  Loss=0.0658  valF1=0.8068  valAUC=0.9085  valMCC=0.6268  BenF1=0.8162  AtkF1=0.8068
+
+
+
+  Ep   9/30  Loss=0.0646  valF1=0.8352  valAUC=0.9223  valMCC=0.6677  BenF1=0.8322  AtkF1=0.8352 ★
+
+
+
+  Ep  10/30  Loss=0.0634  valF1=0.8423  valAUC=0.9212  valMCC=0.6680  BenF1=0.8241  AtkF1=0.8423 ★
+
+
+
+  Ep  11/30  Loss=0.0622  valF1=0.8280  valAUC=0.9175  valMCC=0.6513  BenF1=0.8231  AtkF1=0.8280
+
+
+
+  Ep  12/30  Loss=0.0615  valF1=0.7818  valAUC=0.9261  valMCC=0.6304  BenF1=0.8223  AtkF1=0.7818
+
+
+
+  Ep  13/30  Loss=0.0605  valF1=0.8158  valAUC=0.9179  valMCC=0.6425  BenF1=0.8234  AtkF1=0.8158
+
+
+
+  Ep  14/30  Loss=0.0593  valF1=0.8132  valAUC=0.9315  valMCC=0.6545  BenF1=0.8317  AtkF1=0.8132
+
+
+
+  Ep  15/30  Loss=0.0586  valF1=0.8498  valAUC=0.9334  valMCC=0.6841  BenF1=0.8328  AtkF1=0.8498 ★
+
+
+
+  Ep  16/30  Loss=0.0578  valF1=0.8280  valAUC=0.9272  valMCC=0.6633  BenF1=0.8329  AtkF1=0.8280
+
+
+
+  Ep  17/30  Loss=0.0563  valF1=0.8244  valAUC=0.9220  valMCC=0.6514  BenF1=0.8257  AtkF1=0.8244
+
+
+
+  Ep  18/30  Loss=0.0552  valF1=0.8440  valAUC=0.9341  valMCC=0.6790  BenF1=0.8350  AtkF1=0.8440
+
+
+
+  Ep  19/30  Loss=0.0543  valF1=0.8506  valAUC=0.9377  valMCC=0.6977  BenF1=0.8469  AtkF1=0.8506 ★
+
+
+
+  Ep  20/30  Loss=0.0537  valF1=0.8552  valAUC=0.9389  valMCC=0.7016  BenF1=0.8464  AtkF1=0.8552 ★
+
+
+
+  Ep  21/30  Loss=0.0527  valF1=0.8614  valAUC=0.9436  valMCC=0.7192  BenF1=0.8576  AtkF1=0.8614 ★
+
+
+
+  Ep  22/30  Loss=0.0519  valF1=0.8464  valAUC=0.9429  valMCC=0.7047  BenF1=0.8541  AtkF1=0.8464
+
+
+
+  Ep  23/30  Loss=0.0512  valF1=0.8619  valAUC=0.9455  valMCC=0.7215  BenF1=0.8593  AtkF1=0.8619 ★
+
+
+
+  Ep  24/30  Loss=0.0509  valF1=0.8621  valAUC=0.9446  valMCC=0.7178  BenF1=0.8557  AtkF1=0.8621 ★
+
+
+
+  Ep  25/30  Loss=0.0504  valF1=0.8671  valAUC=0.9454  valMCC=0.7244  BenF1=0.8570  AtkF1=0.8671 ★
+
+
+
+  Ep  26/30  Loss=0.0500  valF1=0.8681  valAUC=0.9475  valMCC=0.7308  BenF1=0.8626  AtkF1=0.8681 ★
+
+
+
+  Ep  27/30  Loss=0.0496  valF1=0.8618  valAUC=0.9468  valMCC=0.7179  BenF1=0.8560  AtkF1=0.8618
+
+
+
+  Ep  28/30  Loss=0.0494  valF1=0.8584  valAUC=0.9464  valMCC=0.7139  BenF1=0.8553  AtkF1=0.8584
+
+
+
+  Ep  29/30  Loss=0.0493  valF1=0.8677  valAUC=0.9474  valMCC=0.7275  BenF1=0.8597  AtkF1=0.8677
+
+
+
+  Ep  30/30  Loss=0.0494  valF1=0.8690  valAUC=0.9466  valMCC=0.7318  BenF1=0.8628  AtkF1=0.8690 ★
+
+
+  |  F1=0.8680  AUC=0.9467  MCC=0.7287  PR-AUC=0.9517
+  |  Acc=0.8644  Prec=0.8666  Rec=0.8694
+  |  Benign-F1=0.8607  Attack-F1=0.8680  FPR@TPR99=0.4934  FPR@TPR95=0.2726
+  -> F1=0.8586 ± 0.0068
+  [saved tch_net_v2_results/partA_results.json — BiGRU-IDS]  elapsed 0.96 h
+
+  1D-CNN-IDS
+  -- Seed 42 [1/5] --
+
+
+
+
+  Ep   1/30  Loss=0.0906  valF1=0.8094  valAUC=0.9001  valMCC=0.6090  BenF1=0.7996  AtkF1=0.8094 ★
+
+
+
+  Ep   2/30  Loss=0.0734  valF1=0.8138  valAUC=0.9096  valMCC=0.6222  BenF1=0.8083  AtkF1=0.8138 ★
+
+
+
+  Ep   3/30  Loss=0.0648  valF1=0.8432  valAUC=0.9286  valMCC=0.6662  BenF1=0.8192  AtkF1=0.8432 ★
+
+
+
+  Ep   4/30  Loss=0.0583  valF1=0.8487  valAUC=0.9363  valMCC=0.6909  BenF1=0.8422  AtkF1=0.8487 ★
+
+
+
+  Ep   5/30  Loss=0.0545  valF1=0.8580  valAUC=0.9405  valMCC=0.7081  BenF1=0.8500  AtkF1=0.8580 ★
+
+
+
+  Ep   6/30  Loss=0.0504  valF1=0.8592  valAUC=0.9416  valMCC=0.7037  BenF1=0.8428  AtkF1=0.8592 ★
+
+
+
+  Ep   7/30  Loss=0.0473  valF1=0.8538  valAUC=0.9396  valMCC=0.7042  BenF1=0.8501  AtkF1=0.8538
+
+
+
+  Ep   8/30  Loss=0.0446  valF1=0.8681  valAUC=0.9477  valMCC=0.7308  BenF1=0.8626  AtkF1=0.8681 ★
+
+
+
+  Ep   9/30  Loss=0.0424  valF1=0.8778  valAUC=0.9515  valMCC=0.7460  BenF1=0.8677  AtkF1=0.8778 ★
+
+
+
+  Ep  10/30  Loss=0.0408  valF1=0.8364  valAUC=0.9447  valMCC=0.6991  BenF1=0.8528  AtkF1=0.8364
+
+
+
+  Ep  11/30  Loss=0.0388  valF1=0.8447  valAUC=0.9349  valMCC=0.6897  BenF1=0.8442  AtkF1=0.8447
+
+
+
+  Ep  12/30  Loss=0.0378  valF1=0.8463  valAUC=0.9438  valMCC=0.6972  BenF1=0.8491  AtkF1=0.8463
+
+
+
+  Ep  13/30  Loss=0.0359  valF1=0.8637  valAUC=0.9454  valMCC=0.7234  BenF1=0.8596  AtkF1=0.8637
+
+
+
+  Ep  14/30  Loss=0.0336  valF1=0.8663  valAUC=0.9471  valMCC=0.7253  BenF1=0.8590  AtkF1=0.8663
+
+
+
+  Ep  15/30  Loss=0.0316  valF1=0.8625  valAUC=0.9491  valMCC=0.7327  BenF1=0.8673  AtkF1=0.8625
+
+
+
+  Ep  16/30  Loss=0.0304  valF1=0.8534  valAUC=0.9391  valMCC=0.7142  BenF1=0.8581  AtkF1=0.8534
+  ⏹ Early stop at epoch 16  |  Best val score=0.8778
+
+
+  |  F1=0.8670  AUC=0.9480  MCC=0.7225  PR-AUC=0.9525
+  |  Acc=0.8612  Prec=0.8521  Rec=0.8825
+  |  Benign-F1=0.8549  Attack-F1=0.8670  FPR@TPR99=0.4663  FPR@TPR95=0.2671
+  -- Seed 123 [2/5] --
+
+
+
+
+  Ep   1/30  Loss=0.0896  valF1=0.7714  valAUC=0.8713  valMCC=0.5606  BenF1=0.7847  AtkF1=0.7714 ★
+
+
+
+  Ep   2/30  Loss=0.0741  valF1=0.8053  valAUC=0.9149  valMCC=0.6221  BenF1=0.8135  AtkF1=0.8053 ★
+
+
+
+  Ep   3/30  Loss=0.0657  valF1=0.8336  valAUC=0.9245  valMCC=0.6608  BenF1=0.8272  AtkF1=0.8336 ★
+
+
+
+  Ep   4/30  Loss=0.0585  valF1=0.7292  valAUC=0.8645  valMCC=0.5261  BenF1=0.7756  AtkF1=0.7292
+
+
+
+  Ep   5/30  Loss=0.0550  valF1=0.8607  valAUC=0.9409  valMCC=0.7029  BenF1=0.8371  AtkF1=0.8607 ★
+
+
+
+  Ep   6/30  Loss=0.0517  valF1=0.8389  valAUC=0.9355  valMCC=0.6878  BenF1=0.8455  AtkF1=0.8389
+
+
+
+  Ep   7/30  Loss=0.0489  valF1=0.8360  valAUC=0.9294  valMCC=0.6753  BenF1=0.8379  AtkF1=0.8360
+
+
+
+  Ep   8/30  Loss=0.0459  valF1=0.8613  valAUC=0.9437  valMCC=0.7041  BenF1=0.8376  AtkF1=0.8613 ★
+
+
+
+  Ep   9/30  Loss=0.0440  valF1=0.8665  valAUC=0.9469  valMCC=0.7197  BenF1=0.8518  AtkF1=0.8665 ★
+
+
+
+  Ep  10/30  Loss=0.0416  valF1=0.8579  valAUC=0.9507  valMCC=0.7242  BenF1=0.8632  AtkF1=0.8579
+
+
+
+  Ep  11/30  Loss=0.0394  valF1=0.8637  valAUC=0.9456  valMCC=0.7234  BenF1=0.8596  AtkF1=0.8637
+
+
+
+  Ep  12/30  Loss=0.0373  valF1=0.8593  valAUC=0.9497  valMCC=0.7245  BenF1=0.8629  AtkF1=0.8593
+
+
+
+  Ep  13/30  Loss=0.0355  valF1=0.8747  valAUC=0.9482  valMCC=0.7363  BenF1=0.8596  AtkF1=0.8747 ★
+
+
+
+  Ep  14/30  Loss=0.0337  valF1=0.8644  valAUC=0.9472  valMCC=0.7257  BenF1=0.8610  AtkF1=0.8644
+
+
+
+  Ep  15/30  Loss=0.0322  valF1=0.8682  valAUC=0.9477  valMCC=0.7286  BenF1=0.8603  AtkF1=0.8682
+
+
+
+  Ep  16/30  Loss=0.0309  valF1=0.8644  valAUC=0.9431  valMCC=0.7138  BenF1=0.8472  AtkF1=0.8644
+
+
+
+  Ep  17/30  Loss=0.0292  valF1=0.8662  valAUC=0.9497  valMCC=0.7232  BenF1=0.8568  AtkF1=0.8662
+
+
+
+  Ep  18/30  Loss=0.0284  valF1=0.8655  valAUC=0.9443  valMCC=0.7266  BenF1=0.8611  AtkF1=0.8655
+
+
+
+  Ep  19/30  Loss=0.0261  valF1=0.8660  valAUC=0.9471  valMCC=0.7289  BenF1=0.8627  AtkF1=0.8660
+
+
+
+  Ep  20/30  Loss=0.0243  valF1=0.8702  valAUC=0.9480  valMCC=0.7308  BenF1=0.8603  AtkF1=0.8702
+  ⏹ Early stop at epoch 20  |  Best val score=0.8747
+
+
+  |  F1=0.8769  AUC=0.9495  MCC=0.7399  PR-AUC=0.9526
+  |  Acc=0.8693  Prec=0.8477  Rec=0.9082
+  |  Benign-F1=0.8607  Attack-F1=0.8769  FPR@TPR99=0.4266  FPR@TPR95=0.2511
+  -- Seed 456 [3/5] --
+
+
+
+
+  Ep   1/30  Loss=0.0924  valF1=0.8104  valAUC=0.8900  valMCC=0.6090  BenF1=0.7984  AtkF1=0.8104 ★
+
+
+
+  Ep   2/30  Loss=0.0739  valF1=0.7952  valAUC=0.8973  valMCC=0.6000  BenF1=0.8021  AtkF1=0.7952
+
+
+
+  Ep   3/30  Loss=0.0649  valF1=0.8506  valAUC=0.9282  valMCC=0.6774  BenF1=0.8152  AtkF1=0.8506 ★
+
+
+
+  Ep   4/30  Loss=0.0588  valF1=0.8432  valAUC=0.9285  valMCC=0.6648  BenF1=0.8168  AtkF1=0.8432
+
+
+
+  Ep   5/30  Loss=0.0545  valF1=0.8402  valAUC=0.9365  valMCC=0.6749  BenF1=0.8346  AtkF1=0.8402
+
+
+
+  Ep   6/30  Loss=0.0520  valF1=0.8553  valAUC=0.9366  valMCC=0.6884  BenF1=0.8228  AtkF1=0.8553 ★
+
+
+
+  Ep   7/30  Loss=0.0485  valF1=0.8574  valAUC=0.9396  valMCC=0.7117  BenF1=0.8540  AtkF1=0.8574 ★
+
+
+
+  Ep   8/30  Loss=0.0458  valF1=0.8595  valAUC=0.9434  valMCC=0.7064  BenF1=0.8460  AtkF1=0.8595 ★
+
+
+
+  Ep   9/30  Loss=0.0443  valF1=0.8603  valAUC=0.9447  valMCC=0.7146  BenF1=0.8543  AtkF1=0.8603 ★
+
+
+
+  Ep  10/30  Loss=0.0413  valF1=0.8517  valAUC=0.9343  valMCC=0.6901  BenF1=0.8377  AtkF1=0.8517
+
+
+
+  Ep  11/30  Loss=0.0394  valF1=0.8596  valAUC=0.9465  valMCC=0.7173  BenF1=0.8573  AtkF1=0.8596
+
+
+
+  Ep  12/30  Loss=0.0380  valF1=0.8524  valAUC=0.9330  valMCC=0.6952  BenF1=0.8427  AtkF1=0.8524
+
+
+
+  Ep  13/30  Loss=0.0355  valF1=0.8579  valAUC=0.9438  valMCC=0.7141  BenF1=0.8557  AtkF1=0.8579
+
+
+
+  Ep  14/30  Loss=0.0335  valF1=0.8598  valAUC=0.9412  valMCC=0.7199  BenF1=0.8593  AtkF1=0.8598
+
+
+
+  Ep  15/30  Loss=0.0319  valF1=0.8681  valAUC=0.9471  valMCC=0.7286  BenF1=0.8605  AtkF1=0.8681 ★
+
+
+
+  Ep  16/30  Loss=0.0305  valF1=0.8494  valAUC=0.9447  valMCC=0.7099  BenF1=0.8565  AtkF1=0.8494
+
+
+
+  Ep  17/30  Loss=0.0293  valF1=0.8622  valAUC=0.9418  valMCC=0.7156  BenF1=0.8533  AtkF1=0.8622
+
+
+
+  Ep  18/30  Loss=0.0278  valF1=0.8530  valAUC=0.9386  valMCC=0.7044  BenF1=0.8509  AtkF1=0.8530
+
+
+
+  Ep  19/30  Loss=0.0254  valF1=0.8645  valAUC=0.9440  valMCC=0.7283  BenF1=0.8632  AtkF1=0.8645
+
+
+
+  Ep  20/30  Loss=0.0242  valF1=0.8607  valAUC=0.9445  valMCC=0.7208  BenF1=0.8595  AtkF1=0.8607
+
+
+
+  Ep  21/30  Loss=0.0228  valF1=0.8653  valAUC=0.9416  valMCC=0.7255  BenF1=0.8601  AtkF1=0.8653
+
+
+
+  Ep  22/30  Loss=0.0218  valF1=0.8582  valAUC=0.9413  valMCC=0.7166  BenF1=0.8576  AtkF1=0.8582
+  ⏹ Early stop at epoch 22  |  Best val score=0.8681
+
+
+  |  F1=0.8740  AUC=0.9467  MCC=0.7380  PR-AUC=0.9517
+  |  Acc=0.8690  Prec=0.8622  Rec=0.8861
+  |  Benign-F1=0.8636  Attack-F1=0.8740  FPR@TPR99=0.4829  FPR@TPR95=0.2831
+  -- Seed 789 [4/5] --
+
+
+
+
+  Ep   1/30  Loss=0.0975  valF1=0.8071  valAUC=0.8860  valMCC=0.5934  BenF1=0.7847  AtkF1=0.8071 ★
+
+
+
+  Ep   2/30  Loss=0.0764  valF1=0.7987  valAUC=0.9029  valMCC=0.6106  BenF1=0.8082  AtkF1=0.7987
+
+
+
+  Ep   3/30  Loss=0.0678  valF1=0.8263  valAUC=0.9156  valMCC=0.6469  BenF1=0.8206  AtkF1=0.8263 ★
+
+
+
+  Ep   4/30  Loss=0.0604  valF1=0.8343  valAUC=0.9278  valMCC=0.6680  BenF1=0.8331  AtkF1=0.8343 ★
+
+
+
+  Ep   5/30  Loss=0.0554  valF1=0.8473  valAUC=0.9373  valMCC=0.6913  BenF1=0.8438  AtkF1=0.8473 ★
+
+
+
+  Ep   6/30  Loss=0.0519  valF1=0.8663  valAUC=0.9451  valMCC=0.7161  BenF1=0.8459  AtkF1=0.8663 ★
+
+
+
+  Ep   7/30  Loss=0.0486  valF1=0.8048  valAUC=0.9229  valMCC=0.6397  BenF1=0.8249  AtkF1=0.8048
+
+
+
+  Ep   8/30  Loss=0.0465  valF1=0.8661  valAUC=0.9496  valMCC=0.7277  BenF1=0.8615  AtkF1=0.8661
+
+
+
+  Ep   9/30  Loss=0.0435  valF1=0.8473  valAUC=0.9362  valMCC=0.6796  BenF1=0.8311  AtkF1=0.8473
+
+
+
+  Ep  10/30  Loss=0.0413  valF1=0.8664  valAUC=0.9490  valMCC=0.7288  BenF1=0.8623  AtkF1=0.8664 ★
+
+
+
+  Ep  11/30  Loss=0.0402  valF1=0.8674  valAUC=0.9481  valMCC=0.7335  BenF1=0.8657  AtkF1=0.8674 ★
+
+
+
+  Ep  12/30  Loss=0.0381  valF1=0.8444  valAUC=0.9447  valMCC=0.7034  BenF1=0.8539  AtkF1=0.8444
+
+
+
+  Ep  13/30  Loss=0.0362  valF1=0.8725  valAUC=0.9489  valMCC=0.7394  BenF1=0.8669  AtkF1=0.8725 ★
+
+
+
+  Ep  14/30  Loss=0.0344  valF1=0.8661  valAUC=0.9405  valMCC=0.7213  BenF1=0.8546  AtkF1=0.8661
+
+
+
+  Ep  15/30  Loss=0.0329  valF1=0.8627  valAUC=0.9398  valMCC=0.7178  BenF1=0.8551  AtkF1=0.8627
+
+
+
+  Ep  16/30  Loss=0.0311  valF1=0.8734  valAUC=0.9496  valMCC=0.7393  BenF1=0.8659  AtkF1=0.8734 ★
+
+
+
+  Ep  17/30  Loss=0.0297  valF1=0.8748  valAUC=0.9493  valMCC=0.7448  BenF1=0.8700  AtkF1=0.8748 ★
+
+
+
+  Ep  18/30  Loss=0.0280  valF1=0.8706  valAUC=0.9487  valMCC=0.7339  BenF1=0.8633  AtkF1=0.8706
+
+
+
+  Ep  19/30  Loss=0.0264  valF1=0.8686  valAUC=0.9478  valMCC=0.7356  BenF1=0.8666  AtkF1=0.8686
+
+
+
+  Ep  20/30  Loss=0.0257  valF1=0.8763  valAUC=0.9480  valMCC=0.7458  BenF1=0.8695  AtkF1=0.8763 ★
+
+
+
+  Ep  21/30  Loss=0.0239  valF1=0.8692  valAUC=0.9456  valMCC=0.7367  BenF1=0.8671  AtkF1=0.8692
+
+
+
+  Ep  22/30  Loss=0.0227  valF1=0.8739  valAUC=0.9470  valMCC=0.7492  BenF1=0.8742  AtkF1=0.8739
+
+
+
+  Ep  23/30  Loss=0.0212  valF1=0.8680  valAUC=0.9460  valMCC=0.7320  BenF1=0.8639  AtkF1=0.8680
+
+
+
+  Ep  24/30  Loss=0.0206  valF1=0.8653  valAUC=0.9452  valMCC=0.7334  BenF1=0.8666  AtkF1=0.8653
+
+
+
+  Ep  25/30  Loss=0.0195  valF1=0.8732  valAUC=0.9456  valMCC=0.7428  BenF1=0.8695  AtkF1=0.8732
+
+
+
+  Ep  26/30  Loss=0.0184  valF1=0.8761  valAUC=0.9456  valMCC=0.7507  BenF1=0.8742  AtkF1=0.8761
+
+
+
+  Ep  27/30  Loss=0.0180  valF1=0.8721  valAUC=0.9447  valMCC=0.7433  BenF1=0.8706  AtkF1=0.8721
+  ⏹ Early stop at epoch 27  |  Best val score=0.8763
+
+
+  |  F1=0.8686  AUC=0.9454  MCC=0.7271  PR-AUC=0.9488
+  |  Acc=0.8636  Prec=0.8585  Rec=0.8788
+  |  Benign-F1=0.8583  Attack-F1=0.8686  FPR@TPR99=0.4691  FPR@TPR95=0.2638
+  -- Seed 2024 [5/5] --
+
+
+
+
+  Ep   1/30  Loss=0.0917  valF1=0.7833  valAUC=0.8899  valMCC=0.5861  BenF1=0.7975  AtkF1=0.7833 ★
+
+
+
+  Ep   2/30  Loss=0.0726  valF1=0.8410  valAUC=0.9198  valMCC=0.6675  BenF1=0.8257  AtkF1=0.8410 ★
+
+
+
+  Ep   3/30  Loss=0.0645  valF1=0.8166  valAUC=0.9219  valMCC=0.6558  BenF1=0.8318  AtkF1=0.8166
+
+
+
+  Ep   4/30  Loss=0.0577  valF1=0.8348  valAUC=0.9406  valMCC=0.6903  BenF1=0.8481  AtkF1=0.8348
+
+
+
+  Ep   5/30  Loss=0.0528  valF1=0.8535  valAUC=0.9398  valMCC=0.7056  BenF1=0.8516  AtkF1=0.8535 ★
+
+
+
+  Ep   6/30  Loss=0.0503  valF1=0.8433  valAUC=0.9359  valMCC=0.6826  BenF1=0.8391  AtkF1=0.8433
+
+
+
+  Ep   7/30  Loss=0.0471  valF1=0.8606  valAUC=0.9447  valMCC=0.7054  BenF1=0.8422  AtkF1=0.8606 ★
+
+
+
+  Ep   8/30  Loss=0.0446  valF1=0.8556  valAUC=0.9437  valMCC=0.6889  BenF1=0.8223  AtkF1=0.8556
+
+
+
+  Ep   9/30  Loss=0.0425  valF1=0.8624  valAUC=0.9442  valMCC=0.7128  BenF1=0.8496  AtkF1=0.8624 ★
+
+
+
+  Ep  10/30  Loss=0.0406  valF1=0.8210  valAUC=0.9412  valMCC=0.6789  BenF1=0.8438  AtkF1=0.8210
+
+
+
+  Ep  11/30  Loss=0.0389  valF1=0.8491  valAUC=0.9444  valMCC=0.7025  BenF1=0.8517  AtkF1=0.8491
+
+
+
+  Ep  12/30  Loss=0.0367  valF1=0.8776  valAUC=0.9500  valMCC=0.7442  BenF1=0.8657  AtkF1=0.8776 ★
+
+
+
+  Ep  13/30  Loss=0.0350  valF1=0.8735  valAUC=0.9495  valMCC=0.7355  BenF1=0.8612  AtkF1=0.8735
+
+
+
+  Ep  14/30  Loss=0.0332  valF1=0.8765  valAUC=0.9464  valMCC=0.7481  BenF1=0.8716  AtkF1=0.8765
+
+
+
+  Ep  15/30  Loss=0.0317  valF1=0.8776  valAUC=0.9485  valMCC=0.7459  BenF1=0.8680  AtkF1=0.8776 ★
+
+
+
+  Ep  16/30  Loss=0.0302  valF1=0.8782  valAUC=0.9487  valMCC=0.7501  BenF1=0.8720  AtkF1=0.8782 ★
+
+
+
+  Ep  17/30  Loss=0.0284  valF1=0.8810  valAUC=0.9469  valMCC=0.7544  BenF1=0.8733  AtkF1=0.8810 ★
+
+
+
+  Ep  18/30  Loss=0.0271  valF1=0.8754  valAUC=0.9476  valMCC=0.7368  BenF1=0.8588  AtkF1=0.8754
+
+
+
+  Ep  19/30  Loss=0.0256  valF1=0.8814  valAUC=0.9488  valMCC=0.7535  BenF1=0.8717  AtkF1=0.8814 ★
+
+
+
+  Ep  20/30  Loss=0.0242  valF1=0.8778  valAUC=0.9468  valMCC=0.7470  BenF1=0.8689  AtkF1=0.8778
+
+
+
+  Ep  21/30  Loss=0.0227  valF1=0.8671  valAUC=0.9434  valMCC=0.7275  BenF1=0.8605  AtkF1=0.8671
+
+
+
+  Ep  22/30  Loss=0.0214  valF1=0.8768  valAUC=0.9465  valMCC=0.7480  BenF1=0.8711  AtkF1=0.8768
+
+
+
+  Ep  23/30  Loss=0.0205  valF1=0.8744  valAUC=0.9466  valMCC=0.7394  BenF1=0.8648  AtkF1=0.8744
+
+
+
+  Ep  24/30  Loss=0.0194  valF1=0.8730  valAUC=0.9437  valMCC=0.7442  BenF1=0.8708  AtkF1=0.8730
+
+
+
+  Ep  25/30  Loss=0.0188  valF1=0.8782  valAUC=0.9452  valMCC=0.7501  BenF1=0.8720  AtkF1=0.8782
+
+
+
+  Ep  26/30  Loss=0.0178  valF1=0.8767  valAUC=0.9449  valMCC=0.7480  BenF1=0.8713  AtkF1=0.8767
+  ⏹ Early stop at epoch 26  |  Best val score=0.8814
+
+
+  |  F1=0.8742  AUC=0.9450  MCC=0.7405  PR-AUC=0.9498
+  |  Acc=0.8704  Prec=0.8697  Rec=0.8788
+  |  Benign-F1=0.8663  Attack-F1=0.8742  FPR@TPR99=0.4884  FPR@TPR95=0.2820
+  -> F1=0.8721 ± 0.0042
+  [saved tch_net_v2_results/partA_results.json — 1D-CNN-IDS]  elapsed 1.05 h
+
+  Transformer-IDS
+  -- Seed 42 [1/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1037  valF1=0.7439  valAUC=0.8646  valMCC=0.5357  BenF1=0.7779  AtkF1=0.7439 ★
+
+
+
+  Ep   2/30  Loss=0.0821  valF1=0.8113  valAUC=0.8967  valMCC=0.5856  BenF1=0.7580  AtkF1=0.8113 ★
+
+
+
+  Ep   3/30  Loss=0.0753  valF1=0.8300  valAUC=0.9146  valMCC=0.6478  BenF1=0.8176  AtkF1=0.8300 ★
+
+
+
+  Ep   4/30  Loss=0.0683  valF1=0.8296  valAUC=0.9313  valMCC=0.6680  BenF1=0.8355  AtkF1=0.8296
+
+
+
+  Ep   5/30  Loss=0.0631  valF1=0.8567  valAUC=0.9394  valMCC=0.7049  BenF1=0.8481  AtkF1=0.8567 ★
+
+
+
+  Ep   6/30  Loss=0.0577  valF1=0.8791  valAUC=0.9528  valMCC=0.7483  BenF1=0.8685  AtkF1=0.8791 ★
+
+
+
+  Ep   7/30  Loss=0.0553  valF1=0.8736  valAUC=0.9502  valMCC=0.7307  BenF1=0.8511  AtkF1=0.8736
+
+
+
+  Ep   8/30  Loss=0.0537  valF1=0.8751  valAUC=0.9531  valMCC=0.7448  BenF1=0.8697  AtkF1=0.8751
+
+
+
+  Ep   9/30  Loss=0.0521  valF1=0.8787  valAUC=0.9578  valMCC=0.7548  BenF1=0.8758  AtkF1=0.8787
+
+
+
+  Ep  10/30  Loss=0.0514  valF1=0.8747  valAUC=0.9555  valMCC=0.7378  BenF1=0.8620  AtkF1=0.8747
+
+
+
+  Ep  11/30  Loss=0.0498  valF1=0.8850  valAUC=0.9573  valMCC=0.7563  BenF1=0.8672  AtkF1=0.8850 ★
+
+
+
+  Ep  12/30  Loss=0.0485  valF1=0.8782  valAUC=0.9630  valMCC=0.7625  BenF1=0.8817  AtkF1=0.8782
+
+
+
+  Ep  13/30  Loss=0.0480  valF1=0.8927  valAUC=0.9637  valMCC=0.7749  BenF1=0.8805  AtkF1=0.8927 ★
+
+
+
+  Ep  14/30  Loss=0.0475  valF1=0.8854  valAUC=0.9630  valMCC=0.7702  BenF1=0.8842  AtkF1=0.8854
+
+
+
+  Ep  15/30  Loss=0.0463  valF1=0.8814  valAUC=0.9643  valMCC=0.7707  BenF1=0.8860  AtkF1=0.8814
+
+
+
+  Ep  16/30  Loss=0.0455  valF1=0.8907  valAUC=0.9665  valMCC=0.7784  BenF1=0.8876  AtkF1=0.8907
+
+
+
+  Ep  17/30  Loss=0.0444  valF1=0.8991  valAUC=0.9682  valMCC=0.7944  BenF1=0.8952  AtkF1=0.8991 ★
+
+
+
+  Ep  18/30  Loss=0.0443  valF1=0.8820  valAUC=0.9654  valMCC=0.7735  BenF1=0.8875  AtkF1=0.8820
+
+
+
+  Ep  19/30  Loss=0.0434  valF1=0.8946  valAUC=0.9688  valMCC=0.7899  BenF1=0.8944  AtkF1=0.8946
+
+
+
+  Ep  20/30  Loss=0.0428  valF1=0.8963  valAUC=0.9692  valMCC=0.7890  BenF1=0.8927  AtkF1=0.8963
+
+
+
+  Ep  21/30  Loss=0.0420  valF1=0.8896  valAUC=0.9687  valMCC=0.7888  BenF1=0.8950  AtkF1=0.8896
+
+
+
+  Ep  22/30  Loss=0.0415  valF1=0.9016  valAUC=0.9710  valMCC=0.8011  BenF1=0.8992  AtkF1=0.9016 ★
+
+
+
+  Ep  23/30  Loss=0.0411  valF1=0.8990  valAUC=0.9706  valMCC=0.7985  BenF1=0.8986  AtkF1=0.8990
+
+
+
+  Ep  24/30  Loss=0.0409  valF1=0.8972  valAUC=0.9703  valMCC=0.7939  BenF1=0.8961  AtkF1=0.8972
+
+
+
+  Ep  25/30  Loss=0.0406  valF1=0.9051  valAUC=0.9720  valMCC=0.8031  BenF1=0.8976  AtkF1=0.9051 ★
+
+
+
+  Ep  26/30  Loss=0.0403  valF1=0.9014  valAUC=0.9715  valMCC=0.7999  BenF1=0.8984  AtkF1=0.9014
+
+
+
+  Ep  27/30  Loss=0.0401  valF1=0.9078  valAUC=0.9719  valMCC=0.8128  BenF1=0.9048  AtkF1=0.9078 ★
+
+
+
+  Ep  28/30  Loss=0.0400  valF1=0.9024  valAUC=0.9720  valMCC=0.8034  BenF1=0.9006  AtkF1=0.9024
+
+
+
+  Ep  29/30  Loss=0.0399  valF1=0.9024  valAUC=0.9719  valMCC=0.8034  BenF1=0.9006  AtkF1=0.9024
+
+
+
+  Ep  30/30  Loss=0.0398  valF1=0.8989  valAUC=0.9718  valMCC=0.7944  BenF1=0.8955  AtkF1=0.8989
+
+
+  |  F1=0.9051  AUC=0.9707  MCC=0.8090  PR-AUC=0.9734
+  |  Acc=0.9042  Prec=0.9203  Rec=0.8903
+  |  Benign-F1=0.9034  Attack-F1=0.9051  FPR@TPR99=0.3521  FPR@TPR95=0.1816
+  -- Seed 123 [2/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1087  valF1=0.7411  valAUC=0.8650  valMCC=0.5255  BenF1=0.7725  AtkF1=0.7411 ★
+
+
+
+  Ep   2/30  Loss=0.0823  valF1=0.8155  valAUC=0.8994  valMCC=0.6028  BenF1=0.7812  AtkF1=0.8155 ★
+
+
+
+  Ep   3/30  Loss=0.0764  valF1=0.8290  valAUC=0.9165  valMCC=0.6245  BenF1=0.7616  AtkF1=0.8290 ★
+
+
+
+  Ep   4/30  Loss=0.0672  valF1=0.8359  valAUC=0.9315  valMCC=0.6740  BenF1=0.8369  AtkF1=0.8359 ★
+
+
+
+  Ep   5/30  Loss=0.0604  valF1=0.8611  valAUC=0.9425  valMCC=0.7005  BenF1=0.8191  AtkF1=0.8611 ★
+
+
+
+  Ep   6/30  Loss=0.0570  valF1=0.8618  valAUC=0.9459  valMCC=0.7243  BenF1=0.8616  AtkF1=0.8618 ★
+
+
+
+  Ep   7/30  Loss=0.0559  valF1=0.8687  valAUC=0.9525  valMCC=0.7343  BenF1=0.8654  AtkF1=0.8687 ★
+
+
+
+  Ep   8/30  Loss=0.0538  valF1=0.8731  valAUC=0.9500  valMCC=0.7304  BenF1=0.8532  AtkF1=0.8731 ★
+
+
+
+  Ep   9/30  Loss=0.0531  valF1=0.8754  valAUC=0.9539  valMCC=0.7416  BenF1=0.8659  AtkF1=0.8754 ★
+
+
+
+  Ep  10/30  Loss=0.0514  valF1=0.8790  valAUC=0.9581  valMCC=0.7501  BenF1=0.8710  AtkF1=0.8790 ★
+
+
+
+  Ep  11/30  Loss=0.0508  valF1=0.8643  valAUC=0.9563  valMCC=0.7283  BenF1=0.8633  AtkF1=0.8643
+
+
+
+  Ep  12/30  Loss=0.0496  valF1=0.8828  valAUC=0.9599  valMCC=0.7610  BenF1=0.8782  AtkF1=0.8828 ★
+
+
+
+  Ep  13/30  Loss=0.0486  valF1=0.8789  valAUC=0.9598  valMCC=0.7603  BenF1=0.8800  AtkF1=0.8789
+
+
+
+  Ep  14/30  Loss=0.0478  valF1=0.8856  valAUC=0.9625  valMCC=0.7675  BenF1=0.8818  AtkF1=0.8856 ★
+
+
+
+  Ep  15/30  Loss=0.0471  valF1=0.8775  valAUC=0.9598  valMCC=0.7527  BenF1=0.8749  AtkF1=0.8775
+
+
+
+  Ep  16/30  Loss=0.0466  valF1=0.8776  valAUC=0.9636  valMCC=0.7615  BenF1=0.8812  AtkF1=0.8776
+
+
+
+  Ep  17/30  Loss=0.0456  valF1=0.8870  valAUC=0.9641  valMCC=0.7654  BenF1=0.8779  AtkF1=0.8870 ★
+
+
+
+  Ep  18/30  Loss=0.0447  valF1=0.8979  valAUC=0.9665  valMCC=0.7880  BenF1=0.8898  AtkF1=0.8979 ★
+
+
+
+  Ep  19/30  Loss=0.0444  valF1=0.8861  valAUC=0.9667  valMCC=0.7726  BenF1=0.8857  AtkF1=0.8861
+
+
+
+  Ep  20/30  Loss=0.0436  valF1=0.8922  valAUC=0.9660  valMCC=0.7804  BenF1=0.8882  AtkF1=0.8922
+
+
+
+  Ep  21/30  Loss=0.0434  valF1=0.8978  valAUC=0.9680  valMCC=0.7880  BenF1=0.8899  AtkF1=0.8978
+
+
+
+  Ep  22/30  Loss=0.0428  valF1=0.8962  valAUC=0.9674  valMCC=0.7867  BenF1=0.8905  AtkF1=0.8962
+
+
+
+  Ep  23/30  Loss=0.0423  valF1=0.8986  valAUC=0.9674  valMCC=0.7892  BenF1=0.8901  AtkF1=0.8986 ★
+
+
+
+  Ep  24/30  Loss=0.0419  valF1=0.8983  valAUC=0.9695  valMCC=0.7900  BenF1=0.8916  AtkF1=0.8983
+
+
+
+  Ep  25/30  Loss=0.0417  valF1=0.8900  valAUC=0.9690  valMCC=0.7832  BenF1=0.8915  AtkF1=0.8900
+
+
+
+  Ep  26/30  Loss=0.0415  valF1=0.9004  valAUC=0.9700  valMCC=0.7953  BenF1=0.8949  AtkF1=0.9004 ★
+
+
+
+  Ep  27/30  Loss=0.0412  valF1=0.8975  valAUC=0.9698  valMCC=0.7889  BenF1=0.8914  AtkF1=0.8975
+
+
+
+  Ep  28/30  Loss=0.0411  valF1=0.8988  valAUC=0.9698  valMCC=0.7921  BenF1=0.8933  AtkF1=0.8988
+
+
+
+  Ep  29/30  Loss=0.0411  valF1=0.8978  valAUC=0.9698  valMCC=0.7936  BenF1=0.8955  AtkF1=0.8978
+
+
+
+  Ep  30/30  Loss=0.0410  valF1=0.8976  valAUC=0.9702  valMCC=0.7924  BenF1=0.8946  AtkF1=0.8976
+
+
+  |  F1=0.8984  AUC=0.9675  MCC=0.7935  PR-AUC=0.9706
+  |  Acc=0.8967  Prec=0.9061  Rec=0.8909
+  |  Benign-F1=0.8950  Attack-F1=0.8984  FPR@TPR99=0.3493  FPR@TPR95=0.2003
+  -- Seed 456 [3/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1012  valF1=0.7857  valAUC=0.8699  valMCC=0.5171  BenF1=0.6945  AtkF1=0.7857 ★
+
+
+
+  Ep   2/30  Loss=0.0835  valF1=0.8071  valAUC=0.8876  valMCC=0.5822  BenF1=0.7672  AtkF1=0.8071 ★
+
+
+
+  Ep   3/30  Loss=0.0759  valF1=0.8036  valAUC=0.9093  valMCC=0.6310  BenF1=0.8200  AtkF1=0.8036
+
+
+
+  Ep   4/30  Loss=0.0715  valF1=0.8397  valAUC=0.9185  valMCC=0.6573  BenF1=0.8126  AtkF1=0.8397 ★
+
+
+
+  Ep   5/30  Loss=0.0639  valF1=0.8581  valAUC=0.9381  valMCC=0.6980  BenF1=0.8356  AtkF1=0.8581 ★
+
+
+
+  Ep   6/30  Loss=0.0597  valF1=0.8529  valAUC=0.9445  valMCC=0.7130  BenF1=0.8574  AtkF1=0.8529
+
+
+
+  Ep   7/30  Loss=0.0561  valF1=0.8693  valAUC=0.9506  valMCC=0.7287  BenF1=0.8591  AtkF1=0.8693 ★
+
+
+
+  Ep   8/30  Loss=0.0536  valF1=0.8673  valAUC=0.9523  valMCC=0.7155  BenF1=0.8395  AtkF1=0.8673
+
+
+
+  Ep   9/30  Loss=0.0525  valF1=0.8765  valAUC=0.9557  valMCC=0.7492  BenF1=0.8726  AtkF1=0.8765 ★
+
+
+
+  Ep  10/30  Loss=0.0510  valF1=0.8783  valAUC=0.9548  valMCC=0.7471  BenF1=0.8683  AtkF1=0.8783 ★
+
+
+
+  Ep  11/30  Loss=0.0499  valF1=0.8843  valAUC=0.9573  valMCC=0.7555  BenF1=0.8682  AtkF1=0.8843 ★
+
+
+
+  Ep  12/30  Loss=0.0490  valF1=0.8844  valAUC=0.9602  valMCC=0.7642  BenF1=0.8797  AtkF1=0.8844 ★
+
+
+
+  Ep  13/30  Loss=0.0476  valF1=0.8919  valAUC=0.9618  valMCC=0.7761  BenF1=0.8839  AtkF1=0.8919 ★
+
+
+
+  Ep  14/30  Loss=0.0474  valF1=0.8968  valAUC=0.9645  valMCC=0.7842  BenF1=0.8864  AtkF1=0.8968 ★
+
+
+
+  Ep  15/30  Loss=0.0460  valF1=0.8887  valAUC=0.9595  valMCC=0.7645  BenF1=0.8723  AtkF1=0.8887
+
+
+
+  Ep  16/30  Loss=0.0454  valF1=0.8984  valAUC=0.9651  valMCC=0.7875  BenF1=0.8880  AtkF1=0.8984 ★
+
+
+
+  Ep  17/30  Loss=0.0446  valF1=0.8972  valAUC=0.9662  valMCC=0.7912  BenF1=0.8939  AtkF1=0.8972
+
+
+
+  Ep  18/30  Loss=0.0439  valF1=0.8938  valAUC=0.9664  valMCC=0.7848  BenF1=0.8908  AtkF1=0.8938
+
+
+
+  Ep  19/30  Loss=0.0432  valF1=0.8960  valAUC=0.9665  valMCC=0.7891  BenF1=0.8930  AtkF1=0.8960
+
+
+
+  Ep  20/30  Loss=0.0429  valF1=0.8980  valAUC=0.9688  valMCC=0.7900  BenF1=0.8920  AtkF1=0.8980
+
+
+
+  Ep  21/30  Loss=0.0421  valF1=0.8931  valAUC=0.9693  valMCC=0.7914  BenF1=0.8959  AtkF1=0.8931
+
+
+
+  Ep  22/30  Loss=0.0419  valF1=0.8978  valAUC=0.9693  valMCC=0.7964  BenF1=0.8976  AtkF1=0.8978
+
+
+
+  Ep  23/30  Loss=0.0415  valF1=0.9021  valAUC=0.9699  valMCC=0.8022  BenF1=0.8998  AtkF1=0.9021 ★
+
+
+
+  Ep  24/30  Loss=0.0410  valF1=0.8978  valAUC=0.9697  valMCC=0.7923  BenF1=0.8944  AtkF1=0.8978
+
+
+
+  Ep  25/30  Loss=0.0408  valF1=0.8975  valAUC=0.9697  valMCC=0.7937  BenF1=0.8958  AtkF1=0.8975
+
+
+
+  Ep  26/30  Loss=0.0402  valF1=0.9000  valAUC=0.9698  valMCC=0.7979  BenF1=0.8976  AtkF1=0.9000
+
+
+
+  Ep  27/30  Loss=0.0402  valF1=0.8993  valAUC=0.9700  valMCC=0.7932  BenF1=0.8939  AtkF1=0.8993
+
+
+
+  Ep  28/30  Loss=0.0400  valF1=0.8992  valAUC=0.9694  valMCC=0.7921  BenF1=0.8928  AtkF1=0.8992
+
+
+
+  Ep  29/30  Loss=0.0399  valF1=0.8993  valAUC=0.9702  valMCC=0.7932  BenF1=0.8939  AtkF1=0.8993
+
+
+
+  Ep  30/30  Loss=0.0399  valF1=0.9023  valAUC=0.9707  valMCC=0.7997  BenF1=0.8974  AtkF1=0.9023 ★
+
+
+  |  F1=0.9003  AUC=0.9697  MCC=0.7960  PR-AUC=0.9726
+  |  Acc=0.8981  Prec=0.9025  Rec=0.8982
+  |  Benign-F1=0.8957  Attack-F1=0.9003  FPR@TPR99=0.3267  FPR@TPR95=0.1898
+  -- Seed 789 [4/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1039  valF1=0.7463  valAUC=0.8762  valMCC=0.5514  BenF1=0.7863  AtkF1=0.7463 ★
+
+
+
+  Ep   2/30  Loss=0.0817  valF1=0.7920  valAUC=0.8939  valMCC=0.5894  BenF1=0.7957  AtkF1=0.7920 ★
+
+
+
+  Ep   3/30  Loss=0.0750  valF1=0.8278  valAUC=0.9207  valMCC=0.6502  BenF1=0.8223  AtkF1=0.8278 ★
+
+
+
+  Ep   4/30  Loss=0.0674  valF1=0.8464  valAUC=0.9299  valMCC=0.6823  BenF1=0.8357  AtkF1=0.8464 ★
+
+
+
+  Ep   5/30  Loss=0.0606  valF1=0.8655  valAUC=0.9397  valMCC=0.7193  BenF1=0.8530  AtkF1=0.8655 ★
+
+
+
+  Ep   6/30  Loss=0.0571  valF1=0.8485  valAUC=0.9456  valMCC=0.7060  BenF1=0.8543  AtkF1=0.8485
+
+
+
+  Ep   7/30  Loss=0.0547  valF1=0.8668  valAUC=0.9514  valMCC=0.7275  BenF1=0.8608  AtkF1=0.8668 ★
+
+
+
+  Ep   8/30  Loss=0.0531  valF1=0.8667  valAUC=0.9530  valMCC=0.7339  BenF1=0.8664  AtkF1=0.8667
+
+
+
+  Ep   9/30  Loss=0.0512  valF1=0.8838  valAUC=0.9558  valMCC=0.7589  BenF1=0.8747  AtkF1=0.8838 ★
+
+
+
+  Ep  10/30  Loss=0.0504  valF1=0.8807  valAUC=0.9596  valMCC=0.7605  BenF1=0.8793  AtkF1=0.8807
+
+
+
+  Ep  11/30  Loss=0.0491  valF1=0.8815  valAUC=0.9581  valMCC=0.7589  BenF1=0.8773  AtkF1=0.8815
+
+
+
+  Ep  12/30  Loss=0.0481  valF1=0.8753  valAUC=0.9585  valMCC=0.7512  BenF1=0.8750  AtkF1=0.8753
+
+
+
+  Ep  13/30  Loss=0.0477  valF1=0.8879  valAUC=0.9604  valMCC=0.7657  BenF1=0.8770  AtkF1=0.8879 ★
+
+
+
+  Ep  14/30  Loss=0.0465  valF1=0.8659  valAUC=0.9621  valMCC=0.7556  BenF1=0.8793  AtkF1=0.8659
+
+
+
+  Ep  15/30  Loss=0.0459  valF1=0.8933  valAUC=0.9661  valMCC=0.7814  BenF1=0.8880  AtkF1=0.8933 ★
+
+
+
+  Ep  16/30  Loss=0.0451  valF1=0.8861  valAUC=0.9659  valMCC=0.7757  BenF1=0.8878  AtkF1=0.8861
+
+
+
+  Ep  17/30  Loss=0.0450  valF1=0.8934  valAUC=0.9659  valMCC=0.7814  BenF1=0.8879  AtkF1=0.8934 ★
+
+
+
+  Ep  18/30  Loss=0.0439  valF1=0.8998  valAUC=0.9677  valMCC=0.7914  BenF1=0.8910  AtkF1=0.8998 ★
+
+
+
+  Ep  19/30  Loss=0.0435  valF1=0.8928  valAUC=0.9665  valMCC=0.7782  BenF1=0.8852  AtkF1=0.8928
+
+
+
+  Ep  20/30  Loss=0.0432  valF1=0.8950  valAUC=0.9679  valMCC=0.7857  BenF1=0.8907  AtkF1=0.8950
+
+
+
+  Ep  21/30  Loss=0.0424  valF1=0.8945  valAUC=0.9666  valMCC=0.7797  BenF1=0.8844  AtkF1=0.8945
+
+
+
+  Ep  22/30  Loss=0.0419  valF1=0.8950  valAUC=0.9685  valMCC=0.7801  BenF1=0.8837  AtkF1=0.8950
+
+
+
+  Ep  23/30  Loss=0.0417  valF1=0.8933  valAUC=0.9690  valMCC=0.7880  BenF1=0.8935  AtkF1=0.8933
+
+
+
+  Ep  24/30  Loss=0.0411  valF1=0.8977  valAUC=0.9688  valMCC=0.7923  BenF1=0.8945  AtkF1=0.8977
+
+
+
+  Ep  25/30  Loss=0.0408  valF1=0.8947  valAUC=0.9692  valMCC=0.7858  BenF1=0.8911  AtkF1=0.8947
+  ⏹ Early stop at epoch 25  |  Best val score=0.8998
+
+
+  |  F1=0.8907  AUC=0.9659  MCC=0.7721  PR-AUC=0.9693
+  |  Acc=0.8860  Prec=0.8754  Rec=0.9066
+  |  Benign-F1=0.8808  Attack-F1=0.8907  FPR@TPR99=0.3664  FPR@TPR95=0.2108
+  -- Seed 2024 [5/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1021  valF1=0.7738  valAUC=0.8770  valMCC=0.5566  BenF1=0.7805  AtkF1=0.7738 ★
+
+
+
+  Ep   2/30  Loss=0.0829  valF1=0.8187  valAUC=0.9019  valMCC=0.6017  BenF1=0.7641  AtkF1=0.8187 ★
+
+
+
+  Ep   3/30  Loss=0.0733  valF1=0.8357  valAUC=0.9221  valMCC=0.6586  BenF1=0.8226  AtkF1=0.8357 ★
+
+
+
+  Ep   4/30  Loss=0.0657  valF1=0.8582  valAUC=0.9376  valMCC=0.7015  BenF1=0.8417  AtkF1=0.8582 ★
+
+
+
+  Ep   5/30  Loss=0.0601  valF1=0.8568  valAUC=0.9490  valMCC=0.7190  BenF1=0.8600  AtkF1=0.8568
+
+
+
+  Ep   6/30  Loss=0.0561  valF1=0.8677  valAUC=0.9493  valMCC=0.7219  BenF1=0.8528  AtkF1=0.8677 ★
+
+
+
+  Ep   7/30  Loss=0.0548  valF1=0.8720  valAUC=0.9528  valMCC=0.7372  BenF1=0.8652  AtkF1=0.8720 ★
+
+
+
+  Ep   8/30  Loss=0.0526  valF1=0.8824  valAUC=0.9550  valMCC=0.7587  BenF1=0.8764  AtkF1=0.8824 ★
+
+
+
+  Ep   9/30  Loss=0.0510  valF1=0.8859  valAUC=0.9599  valMCC=0.7607  BenF1=0.8734  AtkF1=0.8859 ★
+
+
+
+  Ep  10/30  Loss=0.0497  valF1=0.8772  valAUC=0.9599  valMCC=0.7503  BenF1=0.8729  AtkF1=0.8772
+
+
+
+  Ep  11/30  Loss=0.0489  valF1=0.8905  valAUC=0.9625  valMCC=0.7704  BenF1=0.8785  AtkF1=0.8905 ★
+
+
+
+  Ep  12/30  Loss=0.0481  valF1=0.8823  valAUC=0.9617  valMCC=0.7666  BenF1=0.8830  AtkF1=0.8823
+
+
+
+  Ep  13/30  Loss=0.0474  valF1=0.8824  valAUC=0.9631  valMCC=0.7697  BenF1=0.8851  AtkF1=0.8824
+
+
+
+  Ep  14/30  Loss=0.0465  valF1=0.8864  valAUC=0.9611  valMCC=0.7599  BenF1=0.8703  AtkF1=0.8864
+
+
+
+  Ep  15/30  Loss=0.0461  valF1=0.8867  valAUC=0.9638  valMCC=0.7685  BenF1=0.8818  AtkF1=0.8867
+
+
+
+  Ep  16/30  Loss=0.0452  valF1=0.8763  valAUC=0.9620  valMCC=0.7579  BenF1=0.8793  AtkF1=0.8763
+
+
+
+  Ep  17/30  Loss=0.0447  valF1=0.8974  valAUC=0.9685  valMCC=0.7854  BenF1=0.8867  AtkF1=0.8974 ★
+
+
+
+  Ep  18/30  Loss=0.0442  valF1=0.8883  valAUC=0.9656  valMCC=0.7769  BenF1=0.8878  AtkF1=0.8883
+
+
+
+  Ep  19/30  Loss=0.0438  valF1=0.8967  valAUC=0.9665  valMCC=0.7914  BenF1=0.8945  AtkF1=0.8967
+
+
+
+  Ep  20/30  Loss=0.0433  valF1=0.8977  valAUC=0.9671  valMCC=0.7889  BenF1=0.8911  AtkF1=0.8977 ★
+
+
+
+  Ep  21/30  Loss=0.0427  valF1=0.8936  valAUC=0.9694  valMCC=0.7909  BenF1=0.8954  AtkF1=0.8936
+
+
+
+  Ep  22/30  Loss=0.0421  valF1=0.8985  valAUC=0.9687  valMCC=0.7959  BenF1=0.8970  AtkF1=0.8985 ★
+
+
+
+  Ep  23/30  Loss=0.0419  valF1=0.8994  valAUC=0.9687  valMCC=0.7982  BenF1=0.8983  AtkF1=0.8994 ★
+
+
+
+  Ep  24/30  Loss=0.0417  valF1=0.8969  valAUC=0.9702  valMCC=0.7843  BenF1=0.8862  AtkF1=0.8969
+
+
+
+  Ep  25/30  Loss=0.0412  valF1=0.8985  valAUC=0.9709  valMCC=0.7946  BenF1=0.8959  AtkF1=0.8985
+
+
+
+  Ep  26/30  Loss=0.0409  valF1=0.8999  valAUC=0.9705  valMCC=0.7954  BenF1=0.8955  AtkF1=0.8999 ★
+
+
+
+  Ep  27/30  Loss=0.0405  valF1=0.8986  valAUC=0.9701  valMCC=0.7921  BenF1=0.8935  AtkF1=0.8986
+
+
+
+  Ep  28/30  Loss=0.0405  valF1=0.8980  valAUC=0.9712  valMCC=0.7911  BenF1=0.8931  AtkF1=0.8980
+
+
+
+  Ep  29/30  Loss=0.0405  valF1=0.9016  valAUC=0.9710  valMCC=0.7986  BenF1=0.8970  AtkF1=0.9016 ★
+
+
+
+  Ep  30/30  Loss=0.0405  valF1=0.9016  valAUC=0.9714  valMCC=0.7975  BenF1=0.8959  AtkF1=0.9016
+
+
+  |  F1=0.9005  AUC=0.9683  MCC=0.7972  PR-AUC=0.9713
+  |  Acc=0.8986  Prec=0.9060  Rec=0.8951
+  |  Benign-F1=0.8966  Attack-F1=0.9005  FPR@TPR99=0.3631  FPR@TPR95=0.1887
+  -> F1=0.8990 ± 0.0052
+  [saved tch_net_v2_results/partA_results.json — Transformer-IDS]  elapsed 1.39 h
+
+  MLP-IDS
+  -- Seed 42 [1/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1209  valF1=0.7399  valAUC=0.8180  valMCC=0.4646  BenF1=0.7247  AtkF1=0.7399 ★
+
+
+
+  Ep   2/30  Loss=0.0960  valF1=0.7584  valAUC=0.8418  valMCC=0.4990  BenF1=0.7404  AtkF1=0.7584 ★
+
+
+
+  Ep   3/30  Loss=0.0890  valF1=0.7704  valAUC=0.8583  valMCC=0.5293  BenF1=0.7590  AtkF1=0.7704 ★
+
+
+
+  Ep   4/30  Loss=0.0839  valF1=0.7751  valAUC=0.8619  valMCC=0.5460  BenF1=0.7707  AtkF1=0.7751 ★
+
+
+
+  Ep   5/30  Loss=0.0803  valF1=0.7796  valAUC=0.8648  valMCC=0.5432  BenF1=0.7634  AtkF1=0.7796 ★
+
+
+
+  Ep   6/30  Loss=0.0768  valF1=0.7860  valAUC=0.8631  valMCC=0.5520  BenF1=0.7652  AtkF1=0.7860 ★
+
+
+
+  Ep   7/30  Loss=0.0744  valF1=0.7569  valAUC=0.8632  valMCC=0.5397  BenF1=0.7762  AtkF1=0.7569
+
+
+
+  Ep   8/30  Loss=0.0717  valF1=0.7767  valAUC=0.8612  valMCC=0.5378  BenF1=0.7610  AtkF1=0.7767
+
+
+
+  Ep   9/30  Loss=0.0689  valF1=0.7625  valAUC=0.8659  valMCC=0.5461  BenF1=0.7784  AtkF1=0.7625
+
+
+
+  Ep  10/30  Loss=0.0668  valF1=0.7749  valAUC=0.8614  valMCC=0.5402  BenF1=0.7653  AtkF1=0.7749
+
+
+
+  Ep  11/30  Loss=0.0640  valF1=0.7586  valAUC=0.8606  valMCC=0.5277  BenF1=0.7665  AtkF1=0.7586
+
+
+
+  Ep  12/30  Loss=0.0617  valF1=0.7680  valAUC=0.8554  valMCC=0.5217  BenF1=0.7536  AtkF1=0.7680
+
+
+
+  Ep  13/30  Loss=0.0586  valF1=0.7574  valAUC=0.8646  valMCC=0.5337  BenF1=0.7718  AtkF1=0.7574
+  ⏹ Early stop at epoch 13  |  Best val score=0.7860
+
+
+  |  F1=0.7885  AUC=0.8670  MCC=0.5545  PR-AUC=0.8755
+  |  Acc=0.7773  Prec=0.7684  Rec=0.8095
+  |  Benign-F1=0.7649  Attack-F1=0.7885  FPR@TPR99=0.7351  FPR@TPR95=0.5116
+  -- Seed 123 [2/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1187  valF1=0.7301  valAUC=0.8202  valMCC=0.4604  BenF1=0.7295  AtkF1=0.7301 ★
+
+
+
+  Ep   2/30  Loss=0.0955  valF1=0.7491  valAUC=0.8475  valMCC=0.4932  BenF1=0.7439  AtkF1=0.7491 ★
+
+
+
+  Ep   3/30  Loss=0.0886  valF1=0.7657  valAUC=0.8537  valMCC=0.5141  BenF1=0.7482  AtkF1=0.7657 ★
+
+
+
+  Ep   4/30  Loss=0.0835  valF1=0.7740  valAUC=0.8570  valMCC=0.5357  BenF1=0.7617  AtkF1=0.7740 ★
+
+
+
+  Ep   5/30  Loss=0.0801  valF1=0.7786  valAUC=0.8599  valMCC=0.5369  BenF1=0.7576  AtkF1=0.7786 ★
+
+
+
+  Ep   6/30  Loss=0.0768  valF1=0.7761  valAUC=0.8622  valMCC=0.5401  BenF1=0.7640  AtkF1=0.7761
+
+
+
+  Ep   7/30  Loss=0.0742  valF1=0.7757  valAUC=0.8603  valMCC=0.5435  BenF1=0.7678  AtkF1=0.7757
+
+
+
+  Ep   8/30  Loss=0.0715  valF1=0.7755  valAUC=0.8601  valMCC=0.5379  BenF1=0.7623  AtkF1=0.7755
+
+
+
+  Ep   9/30  Loss=0.0688  valF1=0.7907  valAUC=0.8668  valMCC=0.5628  BenF1=0.7714  AtkF1=0.7907 ★
+
+
+
+  Ep  10/30  Loss=0.0663  valF1=0.7612  valAUC=0.8621  valMCC=0.5331  BenF1=0.7693  AtkF1=0.7612
+
+
+
+  Ep  11/30  Loss=0.0638  valF1=0.7847  valAUC=0.8597  valMCC=0.5562  BenF1=0.7714  AtkF1=0.7847
+
+
+
+  Ep  12/30  Loss=0.0609  valF1=0.7681  valAUC=0.8638  valMCC=0.5459  BenF1=0.7754  AtkF1=0.7681
+
+
+
+  Ep  13/30  Loss=0.0586  valF1=0.7747  valAUC=0.8604  valMCC=0.5437  BenF1=0.7688  AtkF1=0.7747
+
+
+
+  Ep  14/30  Loss=0.0562  valF1=0.7698  valAUC=0.8597  valMCC=0.5414  BenF1=0.7706  AtkF1=0.7698
+
+
+
+  Ep  15/30  Loss=0.0540  valF1=0.7776  valAUC=0.8587  valMCC=0.5467  BenF1=0.7691  AtkF1=0.7776
+
+
+
+  Ep  16/30  Loss=0.0518  valF1=0.7871  valAUC=0.8582  valMCC=0.5605  BenF1=0.7733  AtkF1=0.7871
+  ⏹ Early stop at epoch 16  |  Best val score=0.7907
+
+
+  |  F1=0.7870  AUC=0.8699  MCC=0.5503  PR-AUC=0.8781
+  |  Acc=0.7751  Prec=0.7651  Rec=0.8101
+  |  Benign-F1=0.7620  Attack-F1=0.7870  FPR@TPR99=0.7213  FPR@TPR95=0.5403
+  -- Seed 456 [3/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1197  valF1=0.7332  valAUC=0.8171  valMCC=0.4528  BenF1=0.7196  AtkF1=0.7332 ★
+
+
+
+  Ep   2/30  Loss=0.0957  valF1=0.7540  valAUC=0.8448  valMCC=0.5005  BenF1=0.7464  AtkF1=0.7540 ★
+
+
+
+  Ep   3/30  Loss=0.0888  valF1=0.7705  valAUC=0.8498  valMCC=0.5238  BenF1=0.7531  AtkF1=0.7705 ★
+
+
+
+  Ep   4/30  Loss=0.0838  valF1=0.7758  valAUC=0.8592  valMCC=0.5325  BenF1=0.7562  AtkF1=0.7758 ★
+
+
+
+  Ep   5/30  Loss=0.0803  valF1=0.7669  valAUC=0.8585  valMCC=0.5275  BenF1=0.7605  AtkF1=0.7669
+
+
+
+  Ep   6/30  Loss=0.0772  valF1=0.7760  valAUC=0.8588  valMCC=0.5412  BenF1=0.7652  AtkF1=0.7760 ★
+
+
+
+  Ep   7/30  Loss=0.0742  valF1=0.7814  valAUC=0.8661  valMCC=0.5444  BenF1=0.7625  AtkF1=0.7814 ★
+
+
+
+  Ep   8/30  Loss=0.0714  valF1=0.7738  valAUC=0.8613  valMCC=0.5346  BenF1=0.7608  AtkF1=0.7738
+
+
+
+  Ep   9/30  Loss=0.0689  valF1=0.7865  valAUC=0.8643  valMCC=0.5639  BenF1=0.7774  AtkF1=0.7865 ★
+
+
+
+  Ep  10/30  Loss=0.0660  valF1=0.7736  valAUC=0.8629  valMCC=0.5464  BenF1=0.7721  AtkF1=0.7736
+
+
+
+  Ep  11/30  Loss=0.0636  valF1=0.7831  valAUC=0.8658  valMCC=0.5519  BenF1=0.7686  AtkF1=0.7831
+
+
+
+  Ep  12/30  Loss=0.0611  valF1=0.7754  valAUC=0.8686  valMCC=0.5520  BenF1=0.7757  AtkF1=0.7754
+
+
+
+  Ep  13/30  Loss=0.0586  valF1=0.7764  valAUC=0.8567  valMCC=0.5517  BenF1=0.7747  AtkF1=0.7764
+
+
+
+  Ep  14/30  Loss=0.0559  valF1=0.7815  valAUC=0.8625  valMCC=0.5565  BenF1=0.7749  AtkF1=0.7815
+
+
+
+  Ep  15/30  Loss=0.0538  valF1=0.7659  valAUC=0.8561  valMCC=0.5377  BenF1=0.7701  AtkF1=0.7659
+
+
+
+  Ep  16/30  Loss=0.0510  valF1=0.7826  valAUC=0.8603  valMCC=0.5647  BenF1=0.7814  AtkF1=0.7826
+  ⏹ Early stop at epoch 16  |  Best val score=0.7865
+
+
+  |  F1=0.7836  AUC=0.8650  MCC=0.5504  PR-AUC=0.8740
+  |  Acc=0.7754  Prec=0.7742  Rec=0.7933
+  |  Benign-F1=0.7666  Attack-F1=0.7836  FPR@TPR99=0.7224  FPR@TPR95=0.5105
+  -- Seed 789 [4/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1276  valF1=0.7149  valAUC=0.8057  valMCC=0.4327  BenF1=0.7167  AtkF1=0.7149 ★
+
+
+
+  Ep   2/30  Loss=0.0983  valF1=0.7457  valAUC=0.8419  valMCC=0.4904  BenF1=0.7441  AtkF1=0.7457 ★
+
+
+
+  Ep   3/30  Loss=0.0905  valF1=0.7591  valAUC=0.8470  valMCC=0.5102  BenF1=0.7510  AtkF1=0.7591 ★
+
+
+
+  Ep   4/30  Loss=0.0848  valF1=0.7524  valAUC=0.8564  valMCC=0.5107  BenF1=0.7567  AtkF1=0.7524
+
+
+
+  Ep   5/30  Loss=0.0809  valF1=0.7718  valAUC=0.8598  valMCC=0.5292  BenF1=0.7574  AtkF1=0.7718 ★
+
+
+
+  Ep   6/30  Loss=0.0776  valF1=0.7891  valAUC=0.8616  valMCC=0.5585  BenF1=0.7686  AtkF1=0.7891 ★
+
+
+
+  Ep   7/30  Loss=0.0748  valF1=0.7834  valAUC=0.8674  valMCC=0.5682  BenF1=0.7839  AtkF1=0.7834
+
+
+
+  Ep   8/30  Loss=0.0718  valF1=0.7697  valAUC=0.8677  valMCC=0.5479  BenF1=0.7760  AtkF1=0.7697
+
+
+
+  Ep   9/30  Loss=0.0692  valF1=0.7675  valAUC=0.8658  valMCC=0.5462  BenF1=0.7759  AtkF1=0.7675
+
+
+
+  Ep  10/30  Loss=0.0670  valF1=0.7835  valAUC=0.8637  valMCC=0.5597  BenF1=0.7761  AtkF1=0.7835
+
+
+
+  Ep  11/30  Loss=0.0643  valF1=0.7710  valAUC=0.8634  valMCC=0.5499  BenF1=0.7768  AtkF1=0.7710
+
+
+
+  Ep  12/30  Loss=0.0615  valF1=0.7818  valAUC=0.8595  valMCC=0.5508  BenF1=0.7690  AtkF1=0.7818
+
+
+
+  Ep  13/30  Loss=0.0590  valF1=0.7661  valAUC=0.8558  valMCC=0.5389  BenF1=0.7710  AtkF1=0.7661
+  ⏹ Early stop at epoch 13  |  Best val score=0.7891
+
+
+  |  F1=0.7845  AUC=0.8660  MCC=0.5459  PR-AUC=0.8730
+  |  Acc=0.7730  Prec=0.7642  Rec=0.8059
+  |  Benign-F1=0.7602  Attack-F1=0.7845  FPR@TPR99=0.7108  FPR@TPR95=0.5072
+  -- Seed 2024 [5/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1227  valF1=0.7342  valAUC=0.8141  valMCC=0.4631  BenF1=0.7287  AtkF1=0.7342 ★
+
+
+
+  Ep   2/30  Loss=0.0968  valF1=0.7612  valAUC=0.8443  valMCC=0.5122  BenF1=0.7510  AtkF1=0.7612 ★
+
+
+
+  Ep   3/30  Loss=0.0897  valF1=0.7744  valAUC=0.8534  valMCC=0.5325  BenF1=0.7578  AtkF1=0.7744 ★
+
+
+
+  Ep   4/30  Loss=0.0846  valF1=0.7696  valAUC=0.8525  valMCC=0.5272  BenF1=0.7576  AtkF1=0.7696
+
+
+
+  Ep   5/30  Loss=0.0806  valF1=0.7811  valAUC=0.8580  valMCC=0.5373  BenF1=0.7546  AtkF1=0.7811 ★
+
+
+
+  Ep   6/30  Loss=0.0774  valF1=0.7748  valAUC=0.8667  valMCC=0.5461  BenF1=0.7709  AtkF1=0.7748
+
+
+
+  Ep   7/30  Loss=0.0745  valF1=0.7795  valAUC=0.8586  valMCC=0.5370  BenF1=0.7565  AtkF1=0.7795
+
+
+
+  Ep   8/30  Loss=0.0722  valF1=0.7646  valAUC=0.8647  valMCC=0.5280  BenF1=0.7628  AtkF1=0.7646
+
+
+
+  Ep   9/30  Loss=0.0696  valF1=0.7796  valAUC=0.8637  valMCC=0.5534  BenF1=0.7736  AtkF1=0.7796
+
+
+
+  Ep  10/30  Loss=0.0671  valF1=0.7611  valAUC=0.8547  valMCC=0.5254  BenF1=0.7631  AtkF1=0.7611
+
+
+
+  Ep  11/30  Loss=0.0644  valF1=0.7801  valAUC=0.8617  valMCC=0.5476  BenF1=0.7674  AtkF1=0.7801
+
+
+
+  Ep  12/30  Loss=0.0622  valF1=0.7797  valAUC=0.8584  valMCC=0.5411  BenF1=0.7609  AtkF1=0.7797
+  ⏹ Early stop at epoch 12  |  Best val score=0.7811
+
+
+  |  F1=0.7854  AUC=0.8664  MCC=0.5401  PR-AUC=0.8735
+  |  Acc=0.7695  Prec=0.7513  Rec=0.8227
+  |  Benign-F1=0.7511  Attack-F1=0.7854  FPR@TPR99=0.6965  FPR@TPR95=0.5132
+  -> F1=0.7858 ± 0.0019
+  [saved tch_net_v2_results/partA_results.json — MLP-IDS]  elapsed 1.44 h
+
+  CNN-LSTM
+  -- Seed 42 [1/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1116  valF1=0.7928  valAUC=0.8724  valMCC=0.5641  BenF1=0.7700  AtkF1=0.7928 ★
+
+
+
+  Ep   2/30  Loss=0.0791  valF1=0.8018  valAUC=0.9041  valMCC=0.6201  BenF1=0.8136  AtkF1=0.8018 ★
+
+
+
+  Ep   3/30  Loss=0.0686  valF1=0.8070  valAUC=0.9000  valMCC=0.5953  BenF1=0.7873  AtkF1=0.8070 ★
+
+
+
+  Ep   4/30  Loss=0.0624  valF1=0.7118  valAUC=0.8626  valMCC=0.5008  BenF1=0.7650  AtkF1=0.7118
+
+
+
+  Ep   5/30  Loss=0.0580  valF1=0.8275  valAUC=0.9366  valMCC=0.6745  BenF1=0.8404  AtkF1=0.8275 ★
+
+
+
+  Ep   6/30  Loss=0.0546  valF1=0.8455  valAUC=0.9275  valMCC=0.6654  BenF1=0.8068  AtkF1=0.8455 ★
+
+
+
+  Ep   7/30  Loss=0.0514  valF1=0.8480  valAUC=0.9404  valMCC=0.6876  BenF1=0.8396  AtkF1=0.8480 ★
+
+
+
+  Ep   8/30  Loss=0.0494  valF1=0.8576  valAUC=0.9381  valMCC=0.6989  BenF1=0.8388  AtkF1=0.8576 ★
+
+
+
+  Ep   9/30  Loss=0.0476  valF1=0.7860  valAUC=0.9123  valMCC=0.6210  BenF1=0.8175  AtkF1=0.7860
+
+
+
+  Ep  10/30  Loss=0.0458  valF1=0.8681  valAUC=0.9469  valMCC=0.7308  BenF1=0.8626  AtkF1=0.8681 ★
+
+
+
+  Ep  11/30  Loss=0.0437  valF1=0.8595  valAUC=0.9401  valMCC=0.7092  BenF1=0.8495  AtkF1=0.8595
+
+
+
+  Ep  12/30  Loss=0.0416  valF1=0.8616  valAUC=0.9449  valMCC=0.7125  BenF1=0.8506  AtkF1=0.8616
+
+
+
+  Ep  13/30  Loss=0.0392  valF1=0.8647  valAUC=0.9431  valMCC=0.7232  BenF1=0.8586  AtkF1=0.8647
+
+
+
+  Ep  14/30  Loss=0.0390  valF1=0.8639  valAUC=0.9446  valMCC=0.7272  BenF1=0.8627  AtkF1=0.8639
+
+
+
+  Ep  15/30  Loss=0.0371  valF1=0.8593  valAUC=0.9443  valMCC=0.7149  BenF1=0.8554  AtkF1=0.8593
+
+
+
+  Ep  16/30  Loss=0.0349  valF1=0.8623  valAUC=0.9432  valMCC=0.7127  BenF1=0.8497  AtkF1=0.8623
+
+
+
+  Ep  17/30  Loss=0.0336  valF1=0.8669  valAUC=0.9458  valMCC=0.7264  BenF1=0.8595  AtkF1=0.8669
+  ⏹ Early stop at epoch 17  |  Best val score=0.8681
+
+
+  |  F1=0.8589  AUC=0.9421  MCC=0.7110  PR-AUC=0.9484
+  |  Acc=0.8556  Prec=0.8605  Rec=0.8573
+  |  Benign-F1=0.8521  Attack-F1=0.8589  FPR@TPR99=0.4774  FPR@TPR95=0.3113
+  -- Seed 123 [2/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1056  valF1=0.7901  valAUC=0.8794  valMCC=0.5691  BenF1=0.7790  AtkF1=0.7901 ★
+
+
+
+  Ep   2/30  Loss=0.0766  valF1=0.7958  valAUC=0.9049  valMCC=0.6052  BenF1=0.8057  AtkF1=0.7958 ★
+
+
+
+  Ep   3/30  Loss=0.0682  valF1=0.8238  valAUC=0.9124  valMCC=0.6273  BenF1=0.8014  AtkF1=0.8238 ★
+
+
+
+  Ep   4/30  Loss=0.0609  valF1=0.8166  valAUC=0.9092  valMCC=0.6198  BenF1=0.8029  AtkF1=0.8166
+
+
+
+  Ep   5/30  Loss=0.0578  valF1=0.8344  valAUC=0.9151  valMCC=0.6476  BenF1=0.8097  AtkF1=0.8344 ★
+
+
+
+  Ep   6/30  Loss=0.0543  valF1=0.8410  valAUC=0.9367  valMCC=0.6835  BenF1=0.8415  AtkF1=0.8410 ★
+
+
+
+  Ep   7/30  Loss=0.0513  valF1=0.8536  valAUC=0.9361  valMCC=0.6882  BenF1=0.8304  AtkF1=0.8536 ★
+
+
+
+  Ep   8/30  Loss=0.0496  valF1=0.8619  valAUC=0.9407  valMCC=0.7030  BenF1=0.8302  AtkF1=0.8619 ★
+
+
+
+  Ep   9/30  Loss=0.0474  valF1=0.8509  valAUC=0.9401  valMCC=0.7015  BenF1=0.8499  AtkF1=0.8509
+
+
+
+  Ep  10/30  Loss=0.0454  valF1=0.8507  valAUC=0.9386  valMCC=0.7002  BenF1=0.8489  AtkF1=0.8507
+
+
+
+  Ep  11/30  Loss=0.0434  valF1=0.8651  valAUC=0.9462  valMCC=0.7243  BenF1=0.8592  AtkF1=0.8651 ★
+
+
+
+  Ep  12/30  Loss=0.0429  valF1=0.8627  valAUC=0.9475  valMCC=0.7189  BenF1=0.8562  AtkF1=0.8627
+
+
+
+  Ep  13/30  Loss=0.0401  valF1=0.8588  valAUC=0.9418  valMCC=0.7061  BenF1=0.8469  AtkF1=0.8588
+
+
+
+  Ep  14/30  Loss=0.0391  valF1=0.8515  valAUC=0.9406  valMCC=0.7039  BenF1=0.8515  AtkF1=0.8515
+
+
+
+  Ep  15/30  Loss=0.0373  valF1=0.8705  valAUC=0.9445  valMCC=0.7283  BenF1=0.8565  AtkF1=0.8705 ★
+
+
+
+  Ep  16/30  Loss=0.0352  valF1=0.8649  valAUC=0.9423  valMCC=0.7256  BenF1=0.8606  AtkF1=0.8649
+
+
+
+  Ep  17/30  Loss=0.0342  valF1=0.8539  valAUC=0.9442  valMCC=0.7271  BenF1=0.8657  AtkF1=0.8539
+
+
+
+  Ep  18/30  Loss=0.0325  valF1=0.8637  valAUC=0.9447  valMCC=0.7247  BenF1=0.8607  AtkF1=0.8637
+
+
+
+  Ep  19/30  Loss=0.0314  valF1=0.8528  valAUC=0.9410  valMCC=0.7086  BenF1=0.8544  AtkF1=0.8528
+
+
+
+  Ep  20/30  Loss=0.0295  valF1=0.8700  valAUC=0.9412  valMCC=0.7318  BenF1=0.8617  AtkF1=0.8700
+
+
+
+  Ep  21/30  Loss=0.0287  valF1=0.8699  valAUC=0.9436  valMCC=0.7298  BenF1=0.8595  AtkF1=0.8699
+
+
+
+  Ep  22/30  Loss=0.0272  valF1=0.8714  valAUC=0.9442  valMCC=0.7340  BenF1=0.8624  AtkF1=0.8714 ★
+
+
+
+  Ep  23/30  Loss=0.0256  valF1=0.8712  valAUC=0.9430  valMCC=0.7411  BenF1=0.8694  AtkF1=0.8712
+
+
+
+  Ep  24/30  Loss=0.0247  valF1=0.8661  valAUC=0.9415  valMCC=0.7289  BenF1=0.8626  AtkF1=0.8661
+
+
+
+  Ep  25/30  Loss=0.0238  valF1=0.8722  valAUC=0.9412  valMCC=0.7383  BenF1=0.8661  AtkF1=0.8722 ★
+
+
+
+  Ep  26/30  Loss=0.0231  valF1=0.8698  valAUC=0.9415  valMCC=0.7377  BenF1=0.8675  AtkF1=0.8698
+
+
+
+  Ep  27/30  Loss=0.0227  valF1=0.8719  valAUC=0.9412  valMCC=0.7408  BenF1=0.8687  AtkF1=0.8719
+
+
+
+  Ep  28/30  Loss=0.0223  valF1=0.8704  valAUC=0.9411  valMCC=0.7375  BenF1=0.8670  AtkF1=0.8704
+
+
+
+  Ep  29/30  Loss=0.0220  valF1=0.8720  valAUC=0.9408  valMCC=0.7407  BenF1=0.8685  AtkF1=0.8720
+
+
+
+  Ep  30/30  Loss=0.0220  valF1=0.8719  valAUC=0.9412  valMCC=0.7408  BenF1=0.8687  AtkF1=0.8719
+
+
+  |  F1=0.8596  AUC=0.9364  MCC=0.7144  PR-AUC=0.9390
+  |  Acc=0.8572  Prec=0.8667  Rec=0.8526
+  |  Benign-F1=0.8547  Attack-F1=0.8596  FPR@TPR99=0.5408  FPR@TPR95=0.3046
+  -- Seed 456 [3/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1203  valF1=0.7732  valAUC=0.8708  valMCC=0.5404  BenF1=0.7670  AtkF1=0.7732 ★
+
+
+
+  Ep   2/30  Loss=0.0796  valF1=0.8191  valAUC=0.9107  valMCC=0.6142  BenF1=0.7914  AtkF1=0.8191 ★
+
+
+
+  Ep   3/30  Loss=0.0681  valF1=0.8100  valAUC=0.9043  valMCC=0.6159  BenF1=0.8057  AtkF1=0.8100
+
+
+
+  Ep   4/30  Loss=0.0621  valF1=0.8265  valAUC=0.9235  valMCC=0.6446  BenF1=0.8181  AtkF1=0.8265 ★
+
+
+
+  Ep   5/30  Loss=0.0574  valF1=0.8552  valAUC=0.9364  valMCC=0.7027  BenF1=0.8475  AtkF1=0.8552 ★
+
+
+
+  Ep   6/30  Loss=0.0546  valF1=0.8425  valAUC=0.9357  valMCC=0.6792  BenF1=0.8366  AtkF1=0.8425
+
+
+
+  Ep   7/30  Loss=0.0522  valF1=0.8474  valAUC=0.9385  valMCC=0.6866  BenF1=0.8391  AtkF1=0.8474
+
+
+
+  Ep   8/30  Loss=0.0503  valF1=0.8536  valAUC=0.9421  valMCC=0.6953  BenF1=0.8413  AtkF1=0.8536
+
+
+
+  Ep   9/30  Loss=0.0492  valF1=0.8600  valAUC=0.9438  valMCC=0.7001  BenF1=0.8330  AtkF1=0.8600 ★
+
+
+
+  Ep  10/30  Loss=0.0466  valF1=0.8652  valAUC=0.9414  valMCC=0.7174  BenF1=0.8510  AtkF1=0.8652 ★
+
+
+
+  Ep  11/30  Loss=0.0449  valF1=0.8564  valAUC=0.9447  valMCC=0.7083  BenF1=0.8518  AtkF1=0.8564
+
+
+
+  Ep  12/30  Loss=0.0435  valF1=0.8551  valAUC=0.9428  valMCC=0.7114  BenF1=0.8553  AtkF1=0.8551
+
+
+
+  Ep  13/30  Loss=0.0415  valF1=0.8461  valAUC=0.9384  valMCC=0.6931  BenF1=0.8461  AtkF1=0.8461
+
+
+
+  Ep  14/30  Loss=0.0399  valF1=0.8559  valAUC=0.9429  valMCC=0.7038  BenF1=0.8478  AtkF1=0.8559
+
+
+
+  Ep  15/30  Loss=0.0381  valF1=0.7805  valAUC=0.9306  valMCC=0.6323  BenF1=0.8231  AtkF1=0.7805
+
+
+
+  Ep  16/30  Loss=0.0366  valF1=0.8599  valAUC=0.9430  valMCC=0.7021  BenF1=0.8383  AtkF1=0.8599
+
+
+
+  Ep  17/30  Loss=0.0349  valF1=0.8603  valAUC=0.9443  valMCC=0.7183  BenF1=0.8576  AtkF1=0.8603
+  ⏹ Early stop at epoch 17  |  Best val score=0.8652
+
+
+  |  F1=0.8603  AUC=0.9399  MCC=0.7043  PR-AUC=0.9442
+  |  Acc=0.8515  Prec=0.8309  Rec=0.8919
+  |  Benign-F1=0.8416  Attack-F1=0.8603  FPR@TPR99=0.4978  FPR@TPR95=0.2809
+  -- Seed 789 [4/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1108  valF1=0.7861  valAUC=0.8603  valMCC=0.5444  BenF1=0.7555  AtkF1=0.7861 ★
+
+
+
+  Ep   2/30  Loss=0.0791  valF1=0.7974  valAUC=0.8980  valMCC=0.6002  BenF1=0.8011  AtkF1=0.7974 ★
+
+
+
+  Ep   3/30  Loss=0.0691  valF1=0.8169  valAUC=0.9164  valMCC=0.6390  BenF1=0.8203  AtkF1=0.8169 ★
+
+
+
+  Ep   4/30  Loss=0.0607  valF1=0.8516  valAUC=0.9336  valMCC=0.6875  BenF1=0.8342  AtkF1=0.8516 ★
+
+
+
+  Ep   5/30  Loss=0.0563  valF1=0.8335  valAUC=0.9367  valMCC=0.6785  BenF1=0.8412  AtkF1=0.8335
+
+
+
+  Ep   6/30  Loss=0.0532  valF1=0.8622  valAUC=0.9421  valMCC=0.7067  BenF1=0.8402  AtkF1=0.8622 ★
+
+
+
+  Ep   7/30  Loss=0.0509  valF1=0.8256  valAUC=0.9175  valMCC=0.6290  BenF1=0.8002  AtkF1=0.8256
+
+
+
+  Ep   8/30  Loss=0.0497  valF1=0.8653  valAUC=0.9430  valMCC=0.7175  BenF1=0.8508  AtkF1=0.8653 ★
+
+
+
+  Ep   9/30  Loss=0.0473  valF1=0.8618  valAUC=0.9442  valMCC=0.7146  BenF1=0.8527  AtkF1=0.8618
+
+
+
+  Ep  10/30  Loss=0.0454  valF1=0.8427  valAUC=0.9339  valMCC=0.6828  BenF1=0.8398  AtkF1=0.8427
+
+
+
+  Ep  11/30  Loss=0.0431  valF1=0.8628  valAUC=0.9431  valMCC=0.7225  BenF1=0.8595  AtkF1=0.8628
+
+
+
+  Ep  12/30  Loss=0.0414  valF1=0.8393  valAUC=0.9293  valMCC=0.6652  BenF1=0.8254  AtkF1=0.8393
+
+
+
+  Ep  13/30  Loss=0.0396  valF1=0.8539  valAUC=0.9393  valMCC=0.7123  BenF1=0.8565  AtkF1=0.8539
+
+
+
+  Ep  14/30  Loss=0.0378  valF1=0.8667  valAUC=0.9462  valMCC=0.7160  BenF1=0.8441  AtkF1=0.8667 ★
+
+
+
+  Ep  15/30  Loss=0.0360  valF1=0.8612  valAUC=0.9444  valMCC=0.7080  BenF1=0.8451  AtkF1=0.8612
+
+
+
+  Ep  16/30  Loss=0.0349  valF1=0.8568  valAUC=0.9429  valMCC=0.7107  BenF1=0.8536  AtkF1=0.8568
+
+
+
+  Ep  17/30  Loss=0.0328  valF1=0.8588  valAUC=0.9430  valMCC=0.7219  BenF1=0.8613  AtkF1=0.8588
+
+
+
+  Ep  18/30  Loss=0.0324  valF1=0.8620  valAUC=0.9412  valMCC=0.7060  BenF1=0.8392  AtkF1=0.8620
+
+
+
+  Ep  19/30  Loss=0.0297  valF1=0.8600  valAUC=0.9404  valMCC=0.7113  BenF1=0.8513  AtkF1=0.8600
+
+
+
+  Ep  20/30  Loss=0.0284  valF1=0.8616  valAUC=0.9400  valMCC=0.7135  BenF1=0.8517  AtkF1=0.8616
+
+
+
+  Ep  21/30  Loss=0.0272  valF1=0.8669  valAUC=0.9386  valMCC=0.7224  BenF1=0.8549  AtkF1=0.8669 ★
+
+
+
+  Ep  22/30  Loss=0.0263  valF1=0.8629  valAUC=0.9382  valMCC=0.7167  BenF1=0.8536  AtkF1=0.8629
+
+
+
+  Ep  23/30  Loss=0.0247  valF1=0.8573  valAUC=0.9387  valMCC=0.7144  BenF1=0.8564  AtkF1=0.8573
+
+
+
+  Ep  24/30  Loss=0.0238  valF1=0.8552  valAUC=0.9379  valMCC=0.7087  BenF1=0.8531  AtkF1=0.8552
+
+
+
+  Ep  25/30  Loss=0.0233  valF1=0.8577  valAUC=0.9364  valMCC=0.7104  BenF1=0.8526  AtkF1=0.8577
+
+
+
+  Ep  26/30  Loss=0.0226  valF1=0.8620  valAUC=0.9362  valMCC=0.7179  BenF1=0.8559  AtkF1=0.8620
+
+
+
+  Ep  27/30  Loss=0.0217  valF1=0.8603  valAUC=0.9359  valMCC=0.7146  BenF1=0.8543  AtkF1=0.8603
+
+
+
+  Ep  28/30  Loss=0.0216  valF1=0.8556  valAUC=0.9347  valMCC=0.7073  BenF1=0.8515  AtkF1=0.8556
+  ⏹ Early stop at epoch 28  |  Best val score=0.8669
+
+
+  |  F1=0.8681  AUC=0.9401  MCC=0.7238  PR-AUC=0.9429
+  |  Acc=0.8618  Prec=0.8494  Rec=0.8877
+  |  Benign-F1=0.8547  Attack-F1=0.8681  FPR@TPR99=0.5066  FPR@TPR95=0.2886
+  -- Seed 2024 [5/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1032  valF1=0.7966  valAUC=0.8712  valMCC=0.5663  BenF1=0.7665  AtkF1=0.7966 ★
+
+
+
+  Ep   2/30  Loss=0.0764  valF1=0.7952  valAUC=0.8986  valMCC=0.6014  BenF1=0.8032  AtkF1=0.7952
+
+
+
+  Ep   3/30  Loss=0.0667  valF1=0.8093  valAUC=0.9200  valMCC=0.6451  BenF1=0.8271  AtkF1=0.8093 ★
+
+
+
+  Ep   4/30  Loss=0.0600  valF1=0.8258  valAUC=0.9319  valMCC=0.6730  BenF1=0.8399  AtkF1=0.8258 ★
+
+
+
+  Ep   5/30  Loss=0.0566  valF1=0.8507  valAUC=0.9373  valMCC=0.6862  BenF1=0.8341  AtkF1=0.8507 ★
+
+
+
+  Ep   6/30  Loss=0.0541  valF1=0.8245  valAUC=0.9290  valMCC=0.6527  BenF1=0.8267  AtkF1=0.8245
+
+
+
+  Ep   7/30  Loss=0.0509  valF1=0.8271  valAUC=0.9359  valMCC=0.6733  BenF1=0.8398  AtkF1=0.8271
+
+
+
+  Ep   8/30  Loss=0.0483  valF1=0.8400  valAUC=0.9301  valMCC=0.6787  BenF1=0.8381  AtkF1=0.8400
+
+
+
+  Ep   9/30  Loss=0.0469  valF1=0.8467  valAUC=0.9382  valMCC=0.6928  BenF1=0.8454  AtkF1=0.8467
+
+
+
+  Ep  10/30  Loss=0.0451  valF1=0.8600  valAUC=0.9428  valMCC=0.7147  BenF1=0.8546  AtkF1=0.8600 ★
+
+
+
+  Ep  11/30  Loss=0.0432  valF1=0.8441  valAUC=0.9349  valMCC=0.6676  BenF1=0.8193  AtkF1=0.8441
+
+
+
+  Ep  12/30  Loss=0.0418  valF1=0.8562  valAUC=0.9446  valMCC=0.7180  BenF1=0.8596  AtkF1=0.8562
+
+
+
+  Ep  13/30  Loss=0.0399  valF1=0.8508  valAUC=0.9433  valMCC=0.7042  BenF1=0.8521  AtkF1=0.8508
+
+
+
+  Ep  14/30  Loss=0.0384  valF1=0.8547  valAUC=0.9459  valMCC=0.7147  BenF1=0.8579  AtkF1=0.8547
+
+
+
+  Ep  15/30  Loss=0.0364  valF1=0.8551  valAUC=0.9463  valMCC=0.7173  BenF1=0.8596  AtkF1=0.8551
+
+
+
+  Ep  16/30  Loss=0.0349  valF1=0.8586  valAUC=0.9372  valMCC=0.7081  BenF1=0.8494  AtkF1=0.8586
+
+
+
+  Ep  17/30  Loss=0.0331  valF1=0.8550  valAUC=0.9386  valMCC=0.6942  BenF1=0.8372  AtkF1=0.8550
+  ⏹ Early stop at epoch 17  |  Best val score=0.8600
+
+
+  |  F1=0.8568  AUC=0.9424  MCC=0.7061  PR-AUC=0.9475
+  |  Acc=0.8531  Prec=0.8568  Rec=0.8568
+  |  Benign-F1=0.8493  Attack-F1=0.8568  FPR@TPR99=0.5011  FPR@TPR95=0.2964
+  -> F1=0.8607 ± 0.0043
+  [saved tch_net_v2_results/partA_results.json — CNN-LSTM]  elapsed 1.56 h
+
+  DeepDefense
+  -- Seed 42 [1/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1081  valF1=0.7712  valAUC=0.8427  valMCC=0.4747  BenF1=0.6379  AtkF1=0.7712 ★
+
+
+
+  Ep   2/30  Loss=0.0852  valF1=0.7760  valAUC=0.8804  valMCC=0.5706  BenF1=0.7898  AtkF1=0.7760 ★
+
+
+
+  Ep   3/30  Loss=0.0768  valF1=0.8092  valAUC=0.8967  valMCC=0.5968  BenF1=0.7858  AtkF1=0.8092 ★
+
+
+
+  Ep   4/30  Loss=0.0704  valF1=0.8009  valAUC=0.9125  valMCC=0.6271  BenF1=0.8183  AtkF1=0.8009
+
+
+
+  Ep   5/30  Loss=0.0667  valF1=0.8095  valAUC=0.9121  valMCC=0.6225  BenF1=0.8116  AtkF1=0.8095 ★
+
+
+
+  Ep   6/30  Loss=0.0643  valF1=0.8049  valAUC=0.9141  valMCC=0.6314  BenF1=0.8199  AtkF1=0.8049
+
+
+
+  Ep   7/30  Loss=0.0611  valF1=0.8272  valAUC=0.9138  valMCC=0.6384  BenF1=0.8104  AtkF1=0.8272 ★
+
+
+
+  Ep   8/30  Loss=0.0582  valF1=0.8305  valAUC=0.9177  valMCC=0.6356  BenF1=0.7986  AtkF1=0.8305 ★
+
+
+
+  Ep   9/30  Loss=0.0562  valF1=0.8358  valAUC=0.9222  valMCC=0.6515  BenF1=0.8129  AtkF1=0.8358 ★
+
+
+
+  Ep  10/30  Loss=0.0537  valF1=0.8265  valAUC=0.9221  valMCC=0.6571  BenF1=0.8291  AtkF1=0.8265
+
+
+
+  Ep  11/30  Loss=0.0515  valF1=0.8341  valAUC=0.9209  valMCC=0.6608  BenF1=0.8266  AtkF1=0.8341
+
+
+
+  Ep  12/30  Loss=0.0488  valF1=0.8000  valAUC=0.9207  valMCC=0.6492  BenF1=0.8304  AtkF1=0.8000
+
+
+
+  Ep  13/30  Loss=0.0478  valF1=0.8304  valAUC=0.9235  valMCC=0.6593  BenF1=0.8284  AtkF1=0.8304
+
+
+
+  Ep  14/30  Loss=0.0453  valF1=0.8327  valAUC=0.9237  valMCC=0.6610  BenF1=0.8282  AtkF1=0.8327
+
+
+
+  Ep  15/30  Loss=0.0420  valF1=0.8351  valAUC=0.9214  valMCC=0.6618  BenF1=0.8267  AtkF1=0.8351
+
+
+
+  Ep  16/30  Loss=0.0411  valF1=0.8405  valAUC=0.9217  valMCC=0.6664  BenF1=0.8251  AtkF1=0.8405 ★
+
+
+
+  Ep  17/30  Loss=0.0393  valF1=0.8197  valAUC=0.9218  valMCC=0.6546  BenF1=0.8301  AtkF1=0.8197
+
+
+
+  Ep  18/30  Loss=0.0361  valF1=0.8396  valAUC=0.9188  valMCC=0.6593  BenF1=0.8166  AtkF1=0.8396
+
+
+
+  Ep  19/30  Loss=0.0347  valF1=0.8286  valAUC=0.9183  valMCC=0.6524  BenF1=0.8236  AtkF1=0.8286
+
+
+
+  Ep  20/30  Loss=0.0334  valF1=0.8379  valAUC=0.9186  valMCC=0.6545  BenF1=0.8125  AtkF1=0.8379
+
+
+
+  Ep  21/30  Loss=0.0304  valF1=0.8277  valAUC=0.9165  valMCC=0.6467  BenF1=0.8190  AtkF1=0.8277
+
+
+
+  Ep  22/30  Loss=0.0286  valF1=0.8314  valAUC=0.9136  valMCC=0.6490  BenF1=0.8171  AtkF1=0.8314
+
+
+
+  Ep  23/30  Loss=0.0274  valF1=0.8294  valAUC=0.9138  valMCC=0.6457  BenF1=0.8159  AtkF1=0.8294
+  ⏹ Early stop at epoch 23  |  Best val score=0.8405
+
+
+  |  F1=0.8329  AUC=0.9169  MCC=0.6476  PR-AUC=0.9234
+  |  Acc=0.8236  Prec=0.8094  Rec=0.8578
+  |  Benign-F1=0.8131  Attack-F1=0.8329  FPR@TPR99=0.5657  FPR@TPR95=0.3786
+  -- Seed 123 [2/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1128  valF1=0.7308  valAUC=0.8325  valMCC=0.4791  BenF1=0.7446  AtkF1=0.7308 ★
+
+
+
+  Ep   2/30  Loss=0.0863  valF1=0.7967  valAUC=0.8825  valMCC=0.5737  BenF1=0.7760  AtkF1=0.7967 ★
+
+
+
+  Ep   3/30  Loss=0.0782  valF1=0.8060  valAUC=0.8954  valMCC=0.6085  BenF1=0.8022  AtkF1=0.8060 ★
+
+
+
+  Ep   4/30  Loss=0.0721  valF1=0.7636  valAUC=0.9100  valMCC=0.6013  BenF1=0.8095  AtkF1=0.7636
+
+
+
+  Ep   5/30  Loss=0.0674  valF1=0.8324  valAUC=0.9163  valMCC=0.6375  BenF1=0.7959  AtkF1=0.8324 ★
+
+
+
+  Ep   6/30  Loss=0.0640  valF1=0.8290  valAUC=0.9171  valMCC=0.6500  BenF1=0.8209  AtkF1=0.8290
+
+
+
+  Ep   7/30  Loss=0.0609  valF1=0.8359  valAUC=0.9226  valMCC=0.6675  BenF1=0.8314  AtkF1=0.8359 ★
+
+
+
+  Ep   8/30  Loss=0.0583  valF1=0.8383  valAUC=0.9246  valMCC=0.6755  BenF1=0.8366  AtkF1=0.8383 ★
+
+
+
+  Ep   9/30  Loss=0.0558  valF1=0.8411  valAUC=0.9262  valMCC=0.6685  BenF1=0.8268  AtkF1=0.8411 ★
+
+
+
+  Ep  10/30  Loss=0.0540  valF1=0.8431  valAUC=0.9292  valMCC=0.6852  BenF1=0.8415  AtkF1=0.8431 ★
+
+
+
+  Ep  11/30  Loss=0.0512  valF1=0.8486  valAUC=0.9293  valMCC=0.6740  BenF1=0.8169  AtkF1=0.8486 ★
+
+
+
+  Ep  12/30  Loss=0.0506  valF1=0.8412  valAUC=0.9303  valMCC=0.6821  BenF1=0.8402  AtkF1=0.8412
+
+
+
+  Ep  13/30  Loss=0.0463  valF1=0.8400  valAUC=0.9301  valMCC=0.6787  BenF1=0.8381  AtkF1=0.8400
+
+
+
+  Ep  14/30  Loss=0.0452  valF1=0.8501  valAUC=0.9300  valMCC=0.6909  BenF1=0.8406  AtkF1=0.8501 ★
+
+
+
+  Ep  15/30  Loss=0.0427  valF1=0.8503  valAUC=0.9289  valMCC=0.6802  BenF1=0.8248  AtkF1=0.8503 ★
+
+
+
+  Ep  16/30  Loss=0.0410  valF1=0.8455  valAUC=0.9300  valMCC=0.6857  BenF1=0.8401  AtkF1=0.8455
+
+
+
+  Ep  17/30  Loss=0.0397  valF1=0.8468  valAUC=0.9287  valMCC=0.6866  BenF1=0.8398  AtkF1=0.8468
+
+
+
+  Ep  18/30  Loss=0.0367  valF1=0.8487  valAUC=0.9275  valMCC=0.6819  BenF1=0.8318  AtkF1=0.8487
+
+
+
+  Ep  19/30  Loss=0.0341  valF1=0.8518  valAUC=0.9277  valMCC=0.6876  BenF1=0.8340  AtkF1=0.8518 ★
+
+
+
+  Ep  20/30  Loss=0.0323  valF1=0.8438  valAUC=0.9237  valMCC=0.6875  BenF1=0.8430  AtkF1=0.8438
+
+
+
+  Ep  21/30  Loss=0.0304  valF1=0.8476  valAUC=0.9232  valMCC=0.6855  BenF1=0.8378  AtkF1=0.8476
+
+
+
+  Ep  22/30  Loss=0.0294  valF1=0.8347  valAUC=0.9228  valMCC=0.6853  BenF1=0.8452  AtkF1=0.8347
+
+
+
+  Ep  23/30  Loss=0.0268  valF1=0.8447  valAUC=0.9219  valMCC=0.6742  BenF1=0.8283  AtkF1=0.8447
+
+
+
+  Ep  24/30  Loss=0.0260  valF1=0.8473  valAUC=0.9195  valMCC=0.6779  BenF1=0.8288  AtkF1=0.8473
+
+
+
+  Ep  25/30  Loss=0.0244  valF1=0.8386  valAUC=0.9199  valMCC=0.6741  BenF1=0.8352  AtkF1=0.8386
+
+
+
+  Ep  26/30  Loss=0.0235  valF1=0.8419  valAUC=0.9197  valMCC=0.6747  BenF1=0.8328  AtkF1=0.8419
+  ⏹ Early stop at epoch 26  |  Best val score=0.8518
+
+
+  |  F1=0.8398  AUC=0.9226  MCC=0.6590  PR-AUC=0.9297
+  |  Acc=0.8287  Prec=0.8064  Rec=0.8762
+  |  Benign-F1=0.8158  Attack-F1=0.8398  FPR@TPR99=0.5822  FPR@TPR95=0.3731
+  -- Seed 456 [3/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1081  valF1=0.7705  valAUC=0.8417  valMCC=0.4872  BenF1=0.6959  AtkF1=0.7705 ★
+
+
+
+  Ep   2/30  Loss=0.0847  valF1=0.7966  valAUC=0.8770  valMCC=0.5654  BenF1=0.7652  AtkF1=0.7966 ★
+
+
+
+  Ep   3/30  Loss=0.0770  valF1=0.8099  valAUC=0.8986  valMCC=0.6210  BenF1=0.8101  AtkF1=0.8099 ★
+
+
+
+  Ep   4/30  Loss=0.0704  valF1=0.8154  valAUC=0.9029  valMCC=0.6187  BenF1=0.8031  AtkF1=0.8154 ★
+
+
+
+  Ep   5/30  Loss=0.0666  valF1=0.8087  valAUC=0.9084  valMCC=0.6215  BenF1=0.8113  AtkF1=0.8087
+
+
+
+  Ep   6/30  Loss=0.0630  valF1=0.8108  valAUC=0.9156  valMCC=0.6436  BenF1=0.8258  AtkF1=0.8108
+
+
+
+  Ep   7/30  Loss=0.0603  valF1=0.8203  valAUC=0.9182  valMCC=0.6541  BenF1=0.8296  AtkF1=0.8203 ★
+
+
+
+  Ep   8/30  Loss=0.0570  valF1=0.8332  valAUC=0.9209  valMCC=0.6553  BenF1=0.8220  AtkF1=0.8332 ★
+
+
+
+  Ep   9/30  Loss=0.0541  valF1=0.8368  valAUC=0.9198  valMCC=0.6722  BenF1=0.8349  AtkF1=0.8368 ★
+
+
+
+  Ep  10/30  Loss=0.0518  valF1=0.8269  valAUC=0.9193  valMCC=0.6656  BenF1=0.8349  AtkF1=0.8269
+
+
+
+  Ep  11/30  Loss=0.0485  valF1=0.8471  valAUC=0.9212  valMCC=0.6748  BenF1=0.8241  AtkF1=0.8471 ★
+
+
+
+  Ep  12/30  Loss=0.0473  valF1=0.8369  valAUC=0.9214  valMCC=0.6709  BenF1=0.8337  AtkF1=0.8369
+
+
+
+  Ep  13/30  Loss=0.0448  valF1=0.8434  valAUC=0.9198  valMCC=0.6748  BenF1=0.8311  AtkF1=0.8434
+
+
+
+  Ep  14/30  Loss=0.0418  valF1=0.8439  valAUC=0.9209  valMCC=0.6730  BenF1=0.8281  AtkF1=0.8439
+
+
+
+  Ep  15/30  Loss=0.0391  valF1=0.8071  valAUC=0.9169  valMCC=0.6458  BenF1=0.8279  AtkF1=0.8071
+
+
+
+  Ep  16/30  Loss=0.0365  valF1=0.8222  valAUC=0.9181  valMCC=0.6651  BenF1=0.8360  AtkF1=0.8222
+
+
+
+  Ep  17/30  Loss=0.0338  valF1=0.8167  valAUC=0.9163  valMCC=0.6509  BenF1=0.8287  AtkF1=0.8167
+
+
+
+  Ep  18/30  Loss=0.0330  valF1=0.8162  valAUC=0.9169  valMCC=0.6467  BenF1=0.8262  AtkF1=0.8162
+  ⏹ Early stop at epoch 18  |  Best val score=0.8471
+
+
+  |  F1=0.8397  AUC=0.9165  MCC=0.6558  PR-AUC=0.9217
+  |  Acc=0.8263  Prec=0.7966  Rec=0.8877
+  |  Benign-F1=0.8103  Attack-F1=0.8397  FPR@TPR99=0.6087  FPR@TPR95=0.3731
+  -- Seed 789 [4/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1058  valF1=0.7552  valAUC=0.8426  valMCC=0.4915  BenF1=0.7360  AtkF1=0.7552 ★
+
+
+
+  Ep   2/30  Loss=0.0859  valF1=0.7955  valAUC=0.8750  valMCC=0.5715  BenF1=0.7751  AtkF1=0.7955 ★
+
+
+
+  Ep   3/30  Loss=0.0790  valF1=0.8159  valAUC=0.8941  valMCC=0.6045  BenF1=0.7831  AtkF1=0.8159 ★
+
+
+
+  Ep   4/30  Loss=0.0721  valF1=0.7720  valAUC=0.8996  valMCC=0.5829  BenF1=0.7990  AtkF1=0.7720
+
+
+
+  Ep   5/30  Loss=0.0686  valF1=0.7982  valAUC=0.9095  valMCC=0.6232  BenF1=0.8166  AtkF1=0.7982
+
+
+
+  Ep   6/30  Loss=0.0651  valF1=0.8202  valAUC=0.9147  valMCC=0.6414  BenF1=0.8202  AtkF1=0.8202 ★
+
+
+
+  Ep   7/30  Loss=0.0621  valF1=0.8083  valAUC=0.9177  valMCC=0.6379  BenF1=0.8230  AtkF1=0.8083
+
+
+
+  Ep   8/30  Loss=0.0594  valF1=0.8252  valAUC=0.9147  valMCC=0.6391  BenF1=0.8138  AtkF1=0.8252 ★
+
+
+
+  Ep   9/30  Loss=0.0586  valF1=0.8391  valAUC=0.9210  valMCC=0.6623  BenF1=0.8220  AtkF1=0.8391 ★
+
+
+
+  Ep  10/30  Loss=0.0546  valF1=0.8173  valAUC=0.9196  valMCC=0.6430  BenF1=0.8231  AtkF1=0.8173
+
+
+
+  Ep  11/30  Loss=0.0534  valF1=0.8334  valAUC=0.9223  valMCC=0.6504  BenF1=0.8159  AtkF1=0.8334
+
+
+
+  Ep  12/30  Loss=0.0510  valF1=0.8251  valAUC=0.9250  valMCC=0.6538  BenF1=0.8272  AtkF1=0.8251
+
+
+
+  Ep  13/30  Loss=0.0499  valF1=0.8299  valAUC=0.9249  valMCC=0.6707  BenF1=0.8373  AtkF1=0.8299
+
+
+
+  Ep  14/30  Loss=0.0459  valF1=0.8370  valAUC=0.9271  valMCC=0.6661  BenF1=0.8291  AtkF1=0.8370
+
+
+
+  Ep  15/30  Loss=0.0438  valF1=0.8221  valAUC=0.9253  valMCC=0.6572  BenF1=0.8311  AtkF1=0.8221
+
+
+
+  Ep  16/30  Loss=0.0425  valF1=0.8400  valAUC=0.9249  valMCC=0.6673  BenF1=0.8269  AtkF1=0.8400 ★
+
+
+
+  Ep  17/30  Loss=0.0401  valF1=0.8424  valAUC=0.9244  valMCC=0.6737  BenF1=0.8310  AtkF1=0.8424 ★
+
+
+
+  Ep  18/30  Loss=0.0379  valF1=0.8267  valAUC=0.9240  valMCC=0.6517  BenF1=0.8245  AtkF1=0.8267
+
+
+
+  Ep  19/30  Loss=0.0365  valF1=0.8316  valAUC=0.9214  valMCC=0.6614  BenF1=0.8293  AtkF1=0.8316
+
+
+
+  Ep  20/30  Loss=0.0345  valF1=0.8328  valAUC=0.9215  valMCC=0.6598  BenF1=0.8269  AtkF1=0.8328
+
+
+
+  Ep  21/30  Loss=0.0327  valF1=0.8302  valAUC=0.9206  valMCC=0.6544  BenF1=0.8241  AtkF1=0.8302
+
+
+
+  Ep  22/30  Loss=0.0311  valF1=0.8325  valAUC=0.9194  valMCC=0.6564  BenF1=0.8239  AtkF1=0.8325
+
+
+
+  Ep  23/30  Loss=0.0293  valF1=0.8288  valAUC=0.9180  valMCC=0.6548  BenF1=0.8256  AtkF1=0.8288
+
+
+
+  Ep  24/30  Loss=0.0280  valF1=0.8279  valAUC=0.9169  valMCC=0.6490  BenF1=0.8211  AtkF1=0.8279
+  ⏹ Early stop at epoch 24  |  Best val score=0.8424
+
+
+  |  F1=0.8352  AUC=0.9170  MCC=0.6582  PR-AUC=0.9216
+  |  Acc=0.8292  Prec=0.8264  Rec=0.8442
+  |  Benign-F1=0.8228  Attack-F1=0.8352  FPR@TPR99=0.5855  FPR@TPR95=0.3847
+  -- Seed 2024 [5/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1061  valF1=0.7456  valAUC=0.8438  valMCC=0.5030  BenF1=0.7548  AtkF1=0.7456 ★
+
+
+
+  Ep   2/30  Loss=0.0843  valF1=0.8019  valAUC=0.8823  valMCC=0.5865  BenF1=0.7840  AtkF1=0.8019 ★
+
+
+
+  Ep   3/30  Loss=0.0765  valF1=0.8054  valAUC=0.8974  valMCC=0.5840  BenF1=0.7747  AtkF1=0.8054 ★
+
+
+
+  Ep   4/30  Loss=0.0706  valF1=0.8236  valAUC=0.9072  valMCC=0.6224  BenF1=0.7942  AtkF1=0.8236 ★
+
+
+
+  Ep   5/30  Loss=0.0669  valF1=0.8357  valAUC=0.9134  valMCC=0.6540  BenF1=0.8166  AtkF1=0.8357 ★
+
+
+
+  Ep   6/30  Loss=0.0629  valF1=0.7845  valAUC=0.9139  valMCC=0.6121  BenF1=0.8131  AtkF1=0.7845
+
+
+
+  Ep   7/30  Loss=0.0608  valF1=0.8443  valAUC=0.9228  valMCC=0.6639  BenF1=0.8100  AtkF1=0.8443 ★
+
+
+
+  Ep   8/30  Loss=0.0581  valF1=0.7647  valAUC=0.9221  valMCC=0.6155  BenF1=0.8157  AtkF1=0.7647
+
+
+
+  Ep   9/30  Loss=0.0547  valF1=0.8129  valAUC=0.9267  valMCC=0.6601  BenF1=0.8349  AtkF1=0.8129
+
+
+
+  Ep  10/30  Loss=0.0520  valF1=0.8399  valAUC=0.9261  valMCC=0.6588  BenF1=0.8149  AtkF1=0.8399
+
+
+
+  Ep  11/30  Loss=0.0501  valF1=0.8161  valAUC=0.9251  valMCC=0.6669  BenF1=0.8381  AtkF1=0.8161
+
+
+
+  Ep  12/30  Loss=0.0476  valF1=0.8103  valAUC=0.9261  valMCC=0.6560  BenF1=0.8330  AtkF1=0.8103
+
+
+
+  Ep  13/30  Loss=0.0454  valF1=0.8436  valAUC=0.9261  valMCC=0.6837  BenF1=0.8399  AtkF1=0.8436
+
+
+
+  Ep  14/30  Loss=0.0433  valF1=0.8353  valAUC=0.9245  valMCC=0.6641  BenF1=0.8288  AtkF1=0.8353
+  ⏹ Early stop at epoch 14  |  Best val score=0.8443
+
+
+  |  F1=0.8336  AUC=0.9168  MCC=0.6382  PR-AUC=0.9237
+  |  Acc=0.8155  Prec=0.7753  Rec=0.9014
+  |  Benign-F1=0.7930  Attack-F1=0.8336  FPR@TPR99=0.5872  FPR@TPR95=0.3891
+  -> F1=0.8362 ± 0.0033
+  [saved tch_net_v2_results/partA_results.json — DeepDefense]  elapsed 1.69 h
+
+  IoT-DNN
+  -- Seed 42 [1/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1144  valF1=0.7404  valAUC=0.8098  valMCC=0.4402  BenF1=0.6951  AtkF1=0.7404 ★
+
+
+
+  Ep   2/30  Loss=0.0965  valF1=0.7499  valAUC=0.8392  valMCC=0.4840  BenF1=0.7340  AtkF1=0.7499 ★
+
+
+
+  Ep   3/30  Loss=0.0915  valF1=0.7656  valAUC=0.8493  valMCC=0.5099  BenF1=0.7437  AtkF1=0.7656 ★
+
+
+
+  Ep   4/30  Loss=0.0872  valF1=0.7758  valAUC=0.8538  valMCC=0.5295  BenF1=0.7527  AtkF1=0.7758 ★
+
+
+
+  Ep   5/30  Loss=0.0844  valF1=0.7742  valAUC=0.8600  valMCC=0.5357  BenF1=0.7615  AtkF1=0.7742
+
+
+
+  Ep   6/30  Loss=0.0821  valF1=0.7758  valAUC=0.8662  valMCC=0.5459  BenF1=0.7699  AtkF1=0.7758
+
+
+
+  Ep   7/30  Loss=0.0798  valF1=0.7704  valAUC=0.8658  valMCC=0.5316  BenF1=0.7611  AtkF1=0.7704
+
+
+
+  Ep   8/30  Loss=0.0782  valF1=0.7913  valAUC=0.8702  valMCC=0.5680  BenF1=0.7766  AtkF1=0.7913 ★
+
+
+
+  Ep   9/30  Loss=0.0759  valF1=0.7844  valAUC=0.8693  valMCC=0.5540  BenF1=0.7695  AtkF1=0.7844
+
+
+
+  Ep  10/30  Loss=0.0741  valF1=0.7801  valAUC=0.8709  valMCC=0.5432  BenF1=0.7629  AtkF1=0.7801
+
+
+
+  Ep  11/30  Loss=0.0723  valF1=0.7921  valAUC=0.8741  valMCC=0.5681  BenF1=0.7756  AtkF1=0.7921 ★
+
+
+
+  Ep  12/30  Loss=0.0708  valF1=0.7946  valAUC=0.8726  valMCC=0.5724  BenF1=0.7773  AtkF1=0.7946 ★
+
+
+
+  Ep  13/30  Loss=0.0686  valF1=0.7894  valAUC=0.8707  valMCC=0.5627  BenF1=0.7729  AtkF1=0.7894
+
+
+
+  Ep  14/30  Loss=0.0674  valF1=0.7844  valAUC=0.8735  valMCC=0.5667  BenF1=0.7818  AtkF1=0.7844
+
+
+
+  Ep  15/30  Loss=0.0656  valF1=0.7800  valAUC=0.8722  valMCC=0.5498  BenF1=0.7698  AtkF1=0.7800
+
+
+
+  Ep  16/30  Loss=0.0639  valF1=0.7926  valAUC=0.8734  valMCC=0.5804  BenF1=0.7876  AtkF1=0.7926
+
+
+
+  Ep  17/30  Loss=0.0621  valF1=0.7827  valAUC=0.8701  valMCC=0.5519  BenF1=0.7691  AtkF1=0.7827
+
+
+
+  Ep  18/30  Loss=0.0603  valF1=0.7876  valAUC=0.8675  valMCC=0.5584  BenF1=0.7704  AtkF1=0.7876
+
+
+
+  Ep  19/30  Loss=0.0586  valF1=0.7789  valAUC=0.8673  valMCC=0.5535  BenF1=0.7743  AtkF1=0.7789
+  ⏹ Early stop at epoch 19  |  Best val score=0.7946
+
+
+  |  F1=0.7922  AUC=0.8729  MCC=0.5607  PR-AUC=0.8802
+  |  Acc=0.7803  Prec=0.7689  Rec=0.8169
+  |  Benign-F1=0.7669  Attack-F1=0.7922  FPR@TPR99=0.7086  FPR@TPR95=0.5210
+  -- Seed 123 [2/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1143  valF1=0.7545  valAUC=0.8121  valMCC=0.4621  BenF1=0.6983  AtkF1=0.7545 ★
+
+
+
+  Ep   2/30  Loss=0.0967  valF1=0.7652  valAUC=0.8378  valMCC=0.5009  BenF1=0.7333  AtkF1=0.7652 ★
+
+
+
+  Ep   3/30  Loss=0.0911  valF1=0.7713  valAUC=0.8481  valMCC=0.5130  BenF1=0.7389  AtkF1=0.7713 ★
+
+
+
+  Ep   4/30  Loss=0.0874  valF1=0.7723  valAUC=0.8573  valMCC=0.5219  BenF1=0.7486  AtkF1=0.7723 ★
+
+
+
+  Ep   5/30  Loss=0.0845  valF1=0.7713  valAUC=0.8527  valMCC=0.5130  BenF1=0.7389  AtkF1=0.7713
+
+
+
+  Ep   6/30  Loss=0.0822  valF1=0.7786  valAUC=0.8651  valMCC=0.5455  BenF1=0.7669  AtkF1=0.7786 ★
+
+
+
+  Ep   7/30  Loss=0.0800  valF1=0.7866  valAUC=0.8682  valMCC=0.5605  BenF1=0.7738  AtkF1=0.7866 ★
+
+
+
+  Ep   8/30  Loss=0.0779  valF1=0.7852  valAUC=0.8686  valMCC=0.5551  BenF1=0.7697  AtkF1=0.7852
+
+
+
+  Ep   9/30  Loss=0.0766  valF1=0.7885  valAUC=0.8638  valMCC=0.5554  BenF1=0.7657  AtkF1=0.7885 ★
+
+
+
+  Ep  10/30  Loss=0.0741  valF1=0.7930  valAUC=0.8721  valMCC=0.5661  BenF1=0.7722  AtkF1=0.7930 ★
+
+
+
+  Ep  11/30  Loss=0.0724  valF1=0.7791  valAUC=0.8677  valMCC=0.5499  BenF1=0.7708  AtkF1=0.7791
+
+
+
+  Ep  12/30  Loss=0.0710  valF1=0.7935  valAUC=0.8732  valMCC=0.5767  BenF1=0.7832  AtkF1=0.7935 ★
+
+
+
+  Ep  13/30  Loss=0.0690  valF1=0.7893  valAUC=0.8727  valMCC=0.5692  BenF1=0.7800  AtkF1=0.7893
+
+
+
+  Ep  14/30  Loss=0.0674  valF1=0.7894  valAUC=0.8747  valMCC=0.5627  BenF1=0.7729  AtkF1=0.7894
+
+
+
+  Ep  15/30  Loss=0.0656  valF1=0.7842  valAUC=0.8721  valMCC=0.5596  BenF1=0.7754  AtkF1=0.7842
+
+
+
+  Ep  16/30  Loss=0.0637  valF1=0.7947  valAUC=0.8709  valMCC=0.5684  BenF1=0.7725  AtkF1=0.7947 ★
+
+
+
+  Ep  17/30  Loss=0.0621  valF1=0.7918  valAUC=0.8758  valMCC=0.5724  BenF1=0.7805  AtkF1=0.7918
+
+
+
+  Ep  18/30  Loss=0.0609  valF1=0.7859  valAUC=0.8720  valMCC=0.5628  BenF1=0.7769  AtkF1=0.7859
+
+
+
+  Ep  19/30  Loss=0.0588  valF1=0.7896  valAUC=0.8745  valMCC=0.5727  BenF1=0.7829  AtkF1=0.7896
+
+
+
+  Ep  20/30  Loss=0.0577  valF1=0.7865  valAUC=0.8699  valMCC=0.5627  BenF1=0.7762  AtkF1=0.7865
+
+
+
+  Ep  21/30  Loss=0.0558  valF1=0.7888  valAUC=0.8722  valMCC=0.5681  BenF1=0.7793  AtkF1=0.7888
+
+
+
+  Ep  22/30  Loss=0.0546  valF1=0.7895  valAUC=0.8739  valMCC=0.5692  BenF1=0.7797  AtkF1=0.7895
+
+
+
+  Ep  23/30  Loss=0.0539  valF1=0.7932  valAUC=0.8756  valMCC=0.5790  BenF1=0.7858  AtkF1=0.7932
+  ⏹ Early stop at epoch 23  |  Best val score=0.7947
+
+
+  |  F1=0.7932  AUC=0.8712  MCC=0.5643  PR-AUC=0.8776
+  |  Acc=0.7821  Prec=0.7726  Rec=0.8148
+  |  Benign-F1=0.7699  Attack-F1=0.7932  FPR@TPR99=0.6998  FPR@TPR95=0.5281
+  -- Seed 456 [3/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1132  valF1=0.7471  valAUC=0.8130  valMCC=0.4473  BenF1=0.6921  AtkF1=0.7471 ★
+
+
+
+  Ep   2/30  Loss=0.0962  valF1=0.7530  valAUC=0.8352  valMCC=0.4840  BenF1=0.7304  AtkF1=0.7530 ★
+
+
+
+  Ep   3/30  Loss=0.0909  valF1=0.7566  valAUC=0.8506  valMCC=0.5131  BenF1=0.7558  AtkF1=0.7566 ★
+
+
+
+  Ep   4/30  Loss=0.0870  valF1=0.7659  valAUC=0.8585  valMCC=0.5301  BenF1=0.7637  AtkF1=0.7659 ★
+
+
+
+  Ep   5/30  Loss=0.0840  valF1=0.7707  valAUC=0.8583  valMCC=0.5282  BenF1=0.7575  AtkF1=0.7707 ★
+
+
+
+  Ep   6/30  Loss=0.0818  valF1=0.7705  valAUC=0.8649  valMCC=0.5304  BenF1=0.7599  AtkF1=0.7705
+
+
+
+  Ep   7/30  Loss=0.0793  valF1=0.7901  valAUC=0.8684  valMCC=0.5540  BenF1=0.7614  AtkF1=0.7901 ★
+
+
+
+  Ep   8/30  Loss=0.0780  valF1=0.7791  valAUC=0.8713  valMCC=0.5596  BenF1=0.7796  AtkF1=0.7791
+
+
+
+  Ep   9/30  Loss=0.0757  valF1=0.7912  valAUC=0.8669  valMCC=0.5609  BenF1=0.7684  AtkF1=0.7912 ★
+
+
+
+  Ep  10/30  Loss=0.0738  valF1=0.7712  valAUC=0.8692  valMCC=0.5385  BenF1=0.7670  AtkF1=0.7712
+
+
+
+  Ep  11/30  Loss=0.0718  valF1=0.7877  valAUC=0.8718  valMCC=0.5695  BenF1=0.7817  AtkF1=0.7877
+
+
+
+  Ep  12/30  Loss=0.0705  valF1=0.7865  valAUC=0.8671  valMCC=0.5562  BenF1=0.7693  AtkF1=0.7865
+
+
+
+  Ep  13/30  Loss=0.0683  valF1=0.7924  valAUC=0.8662  valMCC=0.5660  BenF1=0.7730  AtkF1=0.7924 ★
+
+
+
+  Ep  14/30  Loss=0.0667  valF1=0.7718  valAUC=0.8677  valMCC=0.5445  BenF1=0.7718  AtkF1=0.7718
+
+
+
+  Ep  15/30  Loss=0.0652  valF1=0.7756  valAUC=0.8681  valMCC=0.5447  BenF1=0.7690  AtkF1=0.7756
+
+
+
+  Ep  16/30  Loss=0.0632  valF1=0.7824  valAUC=0.8669  valMCC=0.5575  BenF1=0.7750  AtkF1=0.7824
+
+
+
+  Ep  17/30  Loss=0.0615  valF1=0.7874  valAUC=0.8708  valMCC=0.5707  BenF1=0.7830  AtkF1=0.7874
+
+
+
+  Ep  18/30  Loss=0.0600  valF1=0.7811  valAUC=0.8676  valMCC=0.5465  BenF1=0.7652  AtkF1=0.7811
+
+
+
+  Ep  19/30  Loss=0.0582  valF1=0.7790  valAUC=0.8700  valMCC=0.5572  BenF1=0.7775  AtkF1=0.7790
+
+
+
+  Ep  20/30  Loss=0.0569  valF1=0.7824  valAUC=0.8669  valMCC=0.5530  BenF1=0.7706  AtkF1=0.7824
+  ⏹ Early stop at epoch 20  |  Best val score=0.7924
+
+
+  |  F1=0.7950  AUC=0.8707  MCC=0.5662  PR-AUC=0.8760
+  |  Acc=0.7829  Prec=0.7706  Rec=0.8211
+  |  Benign-F1=0.7694  Attack-F1=0.7950  FPR@TPR99=0.7169  FPR@TPR95=0.4851
+  -- Seed 789 [4/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1121  valF1=0.7325  valAUC=0.8160  valMCC=0.4367  BenF1=0.7030  AtkF1=0.7325 ★
+
+
+
+  Ep   2/30  Loss=0.0961  valF1=0.7560  valAUC=0.8418  valMCC=0.4958  BenF1=0.7397  AtkF1=0.7560 ★
+
+
+
+  Ep   3/30  Loss=0.0909  valF1=0.7606  valAUC=0.8498  valMCC=0.5134  BenF1=0.7527  AtkF1=0.7606 ★
+
+
+
+  Ep   4/30  Loss=0.0870  valF1=0.7754  valAUC=0.8528  valMCC=0.5284  BenF1=0.7520  AtkF1=0.7754 ★
+
+
+
+  Ep   5/30  Loss=0.0841  valF1=0.7763  valAUC=0.8618  valMCC=0.5357  BenF1=0.7591  AtkF1=0.7763 ★
+
+
+
+  Ep   6/30  Loss=0.0820  valF1=0.7662  valAUC=0.8578  valMCC=0.5141  BenF1=0.7476  AtkF1=0.7662
+
+
+
+  Ep   7/30  Loss=0.0794  valF1=0.7803  valAUC=0.8665  valMCC=0.5392  BenF1=0.7579  AtkF1=0.7803 ★
+
+
+
+  Ep   8/30  Loss=0.0777  valF1=0.7807  valAUC=0.8657  valMCC=0.5486  BenF1=0.7679  AtkF1=0.7807 ★
+
+
+
+  Ep   9/30  Loss=0.0757  valF1=0.8014  valAUC=0.8714  valMCC=0.5788  BenF1=0.7750  AtkF1=0.8014 ★
+
+
+
+  Ep  10/30  Loss=0.0740  valF1=0.7813  valAUC=0.8674  valMCC=0.5508  BenF1=0.7695  AtkF1=0.7813
+
+
+
+  Ep  11/30  Loss=0.0720  valF1=0.7832  valAUC=0.8730  valMCC=0.5670  BenF1=0.7830  AtkF1=0.7832
+
+
+
+  Ep  12/30  Loss=0.0705  valF1=0.7852  valAUC=0.8692  valMCC=0.5617  BenF1=0.7765  AtkF1=0.7852
+
+
+
+  Ep  13/30  Loss=0.0685  valF1=0.7768  valAUC=0.8704  valMCC=0.5480  BenF1=0.7710  AtkF1=0.7768
+
+
+
+  Ep  14/30  Loss=0.0668  valF1=0.7988  valAUC=0.8724  valMCC=0.5831  BenF1=0.7842  AtkF1=0.7988
+
+
+
+  Ep  15/30  Loss=0.0652  valF1=0.7907  valAUC=0.8735  valMCC=0.5736  BenF1=0.7829  AtkF1=0.7907
+
+
+
+  Ep  16/30  Loss=0.0633  valF1=0.7879  valAUC=0.8704  valMCC=0.5626  BenF1=0.7747  AtkF1=0.7879
+  ⏹ Early stop at epoch 16  |  Best val score=0.8014
+
+
+  |  F1=0.7959  AUC=0.8761  MCC=0.5613  PR-AUC=0.8850
+  |  Acc=0.7797  Prec=0.7579  Rec=0.8379
+  |  Benign-F1=0.7607  Attack-F1=0.7959  FPR@TPR99=0.6882  FPR@TPR95=0.4862
+  -- Seed 2024 [5/5] --
+
+
+
+
+  Ep   1/30  Loss=0.1132  valF1=0.7424  valAUC=0.8183  valMCC=0.4624  BenF1=0.7195  AtkF1=0.7424 ★
+
+
+
+  Ep   2/30  Loss=0.0962  valF1=0.7440  valAUC=0.8390  valMCC=0.4934  BenF1=0.7479  AtkF1=0.7440 ★
+
+
+
+  Ep   3/30  Loss=0.0909  valF1=0.7368  valAUC=0.8445  valMCC=0.4884  BenF1=0.7484  AtkF1=0.7368
+
+
+
+  Ep   4/30  Loss=0.0868  valF1=0.7597  valAUC=0.8561  valMCC=0.5124  BenF1=0.7526  AtkF1=0.7597 ★
+
+
+
+  Ep   5/30  Loss=0.0842  valF1=0.7690  valAUC=0.8533  valMCC=0.5318  BenF1=0.7627  AtkF1=0.7690 ★
+
+
+
+  Ep   6/30  Loss=0.0819  valF1=0.7665  valAUC=0.8626  valMCC=0.5324  BenF1=0.7652  AtkF1=0.7665
+
+
+
+  Ep   7/30  Loss=0.0794  valF1=0.7879  valAUC=0.8659  valMCC=0.5683  BenF1=0.7803  AtkF1=0.7879 ★
+
+
+
+  Ep   8/30  Loss=0.0776  valF1=0.7788  valAUC=0.8660  valMCC=0.5466  BenF1=0.7678  AtkF1=0.7788
+
+
+
+  Ep   9/30  Loss=0.0758  valF1=0.7890  valAUC=0.8730  valMCC=0.5716  BenF1=0.7825  AtkF1=0.7890 ★
+
+
+
+  Ep  10/30  Loss=0.0740  valF1=0.7817  valAUC=0.8661  valMCC=0.5530  BenF1=0.7713  AtkF1=0.7817
+
+
+
+  Ep  11/30  Loss=0.0721  valF1=0.7814  valAUC=0.8684  valMCC=0.5486  BenF1=0.7671  AtkF1=0.7814
+
+
+
+  Ep  12/30  Loss=0.0705  valF1=0.7804  valAUC=0.8672  valMCC=0.5617  BenF1=0.7804  AtkF1=0.7804
+
+
+
+  Ep  13/30  Loss=0.0686  valF1=0.7928  valAUC=0.8767  valMCC=0.5791  BenF1=0.7862  AtkF1=0.7928 ★
+
+
+
+  Ep  14/30  Loss=0.0666  valF1=0.7776  valAUC=0.8692  valMCC=0.5514  BenF1=0.7735  AtkF1=0.7776
+
+
+
+  Ep  15/30  Loss=0.0650  valF1=0.7752  valAUC=0.8642  valMCC=0.5472  BenF1=0.7716  AtkF1=0.7752
+
+
+
+  Ep  16/30  Loss=0.0630  valF1=0.7849  valAUC=0.8656  valMCC=0.5584  BenF1=0.7735  AtkF1=0.7849
+
+
+
+  Ep  17/30  Loss=0.0616  valF1=0.7836  valAUC=0.8650  valMCC=0.5620  BenF1=0.7782  AtkF1=0.7836
+
+
+
+  Ep  18/30  Loss=0.0603  valF1=0.7769  valAUC=0.8657  valMCC=0.5566  BenF1=0.7786  AtkF1=0.7769
+
+
+
+  Ep  19/30  Loss=0.0586  valF1=0.7737  valAUC=0.8644  valMCC=0.5527  BenF1=0.7774  AtkF1=0.7737
+
+
+
+  Ep  20/30  Loss=0.0566  valF1=0.7792  valAUC=0.8680  valMCC=0.5571  BenF1=0.7773  AtkF1=0.7792
+  ⏹ Early stop at epoch 20  |  Best val score=0.7928
+
+
+  |  F1=0.7894  AUC=0.8731  MCC=0.5672  PR-AUC=0.8824
+  |  Acc=0.7838  Prec=0.7882  Rec=0.7907
+  |  Benign-F1=0.7778  Attack-F1=0.7894  FPR@TPR99=0.7163  FPR@TPR95=0.5055
+  -> F1=0.7931 ± 0.0026
+  [saved tch_net_v2_results/partA_results.json — IoT-DNN]  elapsed 1.76 h
+
+======================================================================
+CLASSICAL BASELINES (flattened windows)
+======================================================================
+  Random-Forest seed 42: F1=0.8052
+  Random-Forest seed 123: F1=0.8154
+  Random-Forest seed 456: F1=0.8109
+  Random-Forest seed 789: F1=0.8058
+  Random-Forest seed 2024: F1=0.8068
+  XGBoost seed 42: F1=0.8326
+  XGBoost seed 123: F1=0.8399
+  XGBoost seed 456: F1=0.8404
+  XGBoost seed 789: F1=0.8396
+  XGBoost seed 2024: F1=0.8372
+  [saved tch_net_v2_results/partA_results.json — classical]  elapsed 2.63 h
+
+======================================================================
+SEED-MATCHED COMPARISON (effect sizes first; tests secondary)
+======================================================================
+  vs BiLSTM-IDS         dF1=+0.0452 [+0.0336,+0.0567] dz=+4.84 ahead 5/5 p_bonf=0.0041
+  vs BiGRU-IDS          dF1=+0.0403 [+0.0259,+0.0548] dz=+3.47 ahead 5/5 p_bonf=0.0149
+  vs 1D-CNN-IDS         dF1=+0.0268 [+0.0160,+0.0376] dz=+3.09 ahead 5/5 p_bonf=0.0231
+  vs Transformer-IDS    dF1=-0.0001 [-0.0100,+0.0099] dz=-0.01 ahead 2/5 p_bonf=1.0000
+  vs MLP-IDS            dF1=+0.1132 [+0.1044,+0.1219] dz=+16.08 ahead 5/5 p_bonf=0.0000
+  vs CNN-LSTM           dF1=+0.0382 [+0.0310,+0.0454] dz=+6.61 ahead 5/5 p_bonf=0.0012
+  vs DeepDefense        dF1=+0.0627 [+0.0544,+0.0710] dz=+9.41 ahead 5/5 p_bonf=0.0003
+  vs IoT-DNN            dF1=+0.1058 [+0.0998,+0.1118] dz=+21.93 ahead 5/5 p_bonf=0.0000
+  vs Random-Forest      dF1=+0.0901 [+0.0795,+0.1007] dz=+10.57 ahead 5/5 p_bonf=0.0002
+  vs XGBoost            dF1=+0.0610 [+0.0528,+0.0692] dz=+9.27 ahead 5/5 p_bonf=0.0003
+  [saved tch_net_v2_results/partA_results.json — paired comparison]  elapsed 2.63 h
+
+======================================================================
+OPERATING POINTS AT DEPLOYMENT PRIORS (all models, all seeds)
+======================================================================
+  TCH-Net            TPR=0.947 FPR=0.1968  prec@0.01=0.047  prec@0.05=0.203  prec@0.1=0.350
+  BiLSTM-IDS         TPR=0.945 FPR=0.3106  prec@0.01=0.030  prec@0.05=0.138  prec@0.1=0.253
+  BiGRU-IDS          TPR=0.948 FPR=0.3050  prec@0.01=0.031  prec@0.05=0.141  prec@0.1=0.258
+  1D-CNN-IDS         TPR=0.953 FPR=0.2808  prec@0.01=0.033  prec@0.05=0.152  prec@0.1=0.274
+  Transformer-IDS    TPR=0.948 FPR=0.1912  prec@0.01=0.048  prec@0.05=0.208  prec@0.1=0.356
+  MLP-IDS            TPR=0.954 FPR=0.5372  prec@0.01=0.018  prec@0.05=0.086  prec@0.1=0.165
+  CNN-LSTM           TPR=0.951 FPR=0.3008  prec@0.01=0.031  prec@0.05=0.143  prec@0.1=0.260
+  DeepDefense        TPR=0.951 FPR=0.3818  prec@0.01=0.025  prec@0.05=0.116  prec@0.1=0.217
+  IoT-DNN            TPR=0.954 FPR=0.5255  prec@0.01=0.018  prec@0.05=0.087  prec@0.1=0.168
+  Random-Forest      TPR=0.945 FPR=0.4373  prec@0.01=0.021  prec@0.05=0.102  prec@0.1=0.194
+  XGBoost            TPR=0.947 FPR=0.3446  prec@0.01=0.027  prec@0.05=0.127  prec@0.1=0.234
+  [saved tch_net_v2_results/partA_results.json — operating points]  elapsed 2.63 h
+
+======================================================================
+PER-DATASET BREAKDOWN (TCH-Net, all 5 seeds)
+======================================================================
+                                    n_test_windows      f1_shared_0.5         f1_own_val_thr             auc         fpr_0.5        
+                                              mean  std          mean     std           mean     std    mean     std    mean     std
+dataset                                                                                                                             
+CIC-BCCC-NRC-TabularIoTAttacks-2024          390.0  0.0        0.9154  0.0092         0.9085  0.0088  0.9689  0.0034  0.0917  0.0141
+CICIDS-2017                                 1029.0  0.0        0.9528  0.0037         0.9523  0.0049  0.9877  0.0035  0.0460  0.0138
+CICIoMT-2024                                1629.0  0.0        0.9412  0.0109         0.9413  0.0106  0.9866  0.0042  0.0651  0.0292
+UNSW-NB15                                    670.0  0.0        0.6898  0.0148         0.7179  0.0131  0.7790  0.0143  0.2825  0.0451
+  [saved tch_net_v2_results/partA_results.json — per-dataset]  elapsed 2.63 h
+
+======================================================================
+COMPUTATIONAL COST
+======================================================================
+          model  params_M  latency_ms
+        TCH-Net     2.386       8.151
+  H-branch only     0.071       1.514
+     BiLSTM-IDS     0.609       1.664
+      BiGRU-IDS     0.465       0.910
+     1D-CNN-IDS     0.068       0.772
+Transformer-IDS     0.618       1.518
+        MLP-IDS     0.944       0.496
+       CNN-LSTM     0.142       0.980
+    DeepDefense     0.312       1.067
+        IoT-DNN     0.952       0.554
+  [saved tch_net_v2_results/partA_results.json — cost]  elapsed 2.63 h
+
+======================================================================
+LEAKAGE AUDIT: full-row hashes across partitions
+======================================================================
+{
+ "train_rows": 429624,
+ "val_rows": 61374,
+ "test_rows": 122750,
+ "test_in_train": 55,
+ "val_in_train": 35,
+ "test_in_val": 7,
+ "note": "exact matches of scaled+clipped canonical rows; de-duplication ran before splitting"
+}
+  [saved tch_net_v2_results/partA_results.json — leakage]  elapsed 2.63 h
+
+  [saved tch_net_v2_results/partA_results.json — final]  elapsed 2.63 h
+Total elapsed: 2.63 h
+['missingness_analysis.json', 'partA_results.json']
+

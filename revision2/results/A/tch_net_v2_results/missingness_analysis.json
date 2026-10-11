@@ -1,0 +1,27 @@
+{
+  "n_non_neutral_after_scaling": 7,
+  "n_total_features": 46,
+  "non_neutral_feature_names": [
+    "pkt_count_fwd",
+    "pkt_count_bwd",
+    "pkt_count_total",
+    "byte_count_total",
+    "pkt_len_min",
+    "pkt_len_max",
+    "pkt_len_mean"
+  ],
+  "non_neutral_scaled_values": [
+    -0.05,
+    -0.0294,
+    -0.1571,
+    -0.0327,
+    -0.5255,
+    -0.0113,
+    -0.0612
+  ],
+  "mask_to_label_acc": 0.5061000217303573,
+  "majority_baseline_label": 0.5061000217303573,
+  "label_gap_pct": 0.0,
+  "label_pass": true,
+  "note": "Zero-filled features are NOT neutral after RobustScaler: scaled value = clip((0 - center_) / scale_, -10, 10). The hard clip at \u00b110 bounds worst-case displacement. Shortcut test confirms missingness pattern carries no label signal beyond majority-class baseline."
+}
